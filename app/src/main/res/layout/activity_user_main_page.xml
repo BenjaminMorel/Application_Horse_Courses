@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserMainPage">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/buttonEditProfile"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="150dp"
+        android:text="edit profile"
+        android:onClick="editProfile"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.loginpage.NewCourseIcone"
+        android:layout_below="@id/buttonEditProfile"
+        android:layout_marginBottom="25dp"
+        android:layout_width="275dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"/>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView2"
+        android:name="com.example.loginpage.NewCourseIcone"
+        android:layout_below="@id/fragmentContainerView"
+        android:layout_marginBottom="25dp"
+        android:layout_width="275dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
