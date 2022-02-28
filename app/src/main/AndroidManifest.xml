@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginPage">
         <activity
+            android:name=".EditProfile"
+            android:exported="false" />
+        <activity
             android:name=".UserMainPage"
             android:exported="false" />
         <activity
