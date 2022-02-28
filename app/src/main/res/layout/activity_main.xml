@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="125pt"
@@ -11,84 +11,87 @@
 
     <EditText
         android:id="@+id/email_login"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="42dp"
+        android:layout_width="200dp"
+        android:layout_height="47dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20pt"
         android:background="@color/text_edit"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="6pt" />
 
     <EditText
         android:id="@+id/password_login"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="335dp"
+        android:layout_width="180dp"
+        android:layout_height="46dp"
+        android:layout_below="@id/email_login"
+        android:layout_alignLeft="@id/email_login"
+        android:layout_alignRight="@id/email_login"
         android:background="@color/text_edit"
         android:ems="10"
+        android:textSize="6pt"
         android:hint="Password"
         android:inputType="textPassword"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="198dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSignin"
         android:layout_width="128dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="19dp"
+        android:layout_height="47dp"
+        android:layout_below="@id/password_login"
+        android:layout_alignLeft="@id/imageUser"
+        android:layout_alignRight="@id/email_login"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="0dp"
         android:onClick="logIn"
         android:text="Sign in"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="316dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonSignup"
         android:layout_width="128dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="154dp"
+        android:layout_height="47dp"
+        android:layout_below="@id/buttonSignin"
+        android:layout_alignLeft="@id/imageUser"
+        android:layout_alignRight="@id/email_login"
+
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="-1dp"
         android:onClick="loadRegisterPage"
         android:text="Sign up"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        tools:layout_editor_absoluteX="82dp"
+        tools:layout_editor_absoluteY="382dp" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/password_login"
-        app:layout_constraintTop_toBottomOf="@+id/email_login"
-        app:srcCompat="@drawable/lock" />
+        android:id="@+id/imageUser"
+        android:layout_width="41dp"
+        android:layout_height="47dp"
+        android:layout_marginLeft="12pt"
+        android:layout_alignTop="@id/password_login"
+        android:layout_alignBottom="@id/password_login"
+        app:srcCompat="@drawable/lock"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="199dp"
+        android:background="@color/text_edit"/>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageLock"
         android:layout_width="46dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="110dp"
-        android:layout_marginBottom="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/password_login"
-        app:layout_constraintStart_toStartOf="@+id/email_login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/user" />
+        android:layout_height="48dp"
+        android:layout_alignLeft="@id/imageUser"
+        android:layout_alignTop="@id/email_login"
+        android:layout_alignBottom="@id/email_login"
+        app:srcCompat="@drawable/user"
+        tools:layout_editor_absoluteX="32dp"
+        tools:layout_editor_absoluteY="109dp"
+        android:background="@color/text_edit"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

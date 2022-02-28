@@ -1,5 +1,6 @@
 package com.example.loginpage;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -21,18 +22,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logIn(View view){
+
         EditText editEmail = findViewById(R.id.email_login);
         EditText editPassword = findViewById(R.id.password_login);
 
-        String email = editEmail.toString();
-        String password = editPassword.toString();
+        String email = editEmail.getText().toString();
+        String password = editPassword.getText().toString();
 
-        System.out.println("#############################################");
-        System.out.println("email : " + email + " password : " + password);
 
         if(email.equals("admin") && password.equals("123")){
             Intent intent = new Intent(this, UserMainPage.class);
             startActivity(intent);
+        }else{
+            editEmail.setError("Wrong Credentials");
+            editPassword.setError("Wrong Credentials");
         }
     }
 }
