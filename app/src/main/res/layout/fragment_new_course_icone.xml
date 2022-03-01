@@ -10,6 +10,7 @@
 
 
     <TextView
+        android:id="@+id/textNewCourse"
         android:layout_width="140dp"
     android:layout_height="60dp"
         android:layout_marginLeft="100dp"

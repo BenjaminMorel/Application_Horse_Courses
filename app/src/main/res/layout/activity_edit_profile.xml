@@ -176,7 +176,7 @@
         android:id="@+id/button_save_edit"
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:layout_below="@id/confirm_new_password_edit"
+        android:layout_below="@id/darkMode"
         android:layout_alignLeft="@id/new_password_edit"
         android:backgroundTint="@color/button"
         android:text="Save changes"
@@ -185,6 +185,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_password_edit" />
 
+    <Switch
+        android:id="@+id/darkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirm_new_password_edit"
+        android:layout_marginBottom="@dimen/editPage_bottom_margin"
+        android:layout_centerHorizontal="true"
+        android:text="Dark mode" />
 
 
 </RelativeLayout>

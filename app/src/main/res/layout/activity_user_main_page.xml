@@ -16,23 +16,13 @@
         android:text="edit profile"
         android:onClick="editProfile"/>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.loginpage.NewCourseIcone"
-        android:layout_below="@id/buttonEditProfile"
-        android:layout_marginBottom="25dp"
-        android:layout_width="275dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"/>
+    <ListView
+        android:id="@+id/course_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></ListView>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
-        android:name="com.example.loginpage.NewCourseIcone"
-        android:layout_below="@id/fragmentContainerView"
-        android:layout_marginBottom="25dp"
-        android:layout_width="275dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true" />
+
 
 
 </RelativeLayout>
