@@ -17,6 +17,7 @@ public class UserMainPage extends AppCompatActivity {
 
     private List course = new ArrayList<Course>();
     private List course2 = new ArrayList<NewCourseIcone>();
+    private List str = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +25,7 @@ public class UserMainPage extends AppCompatActivity {
 
         generateCourse();
         ListView listView = findViewById(R.id.course_list);
-        ArrayAdapter adapter = new ArrayAdapter<NewCourseIcone>(this,android.R.layout.simple_list_item_1,course2);
+        ArrayAdapter adapter = new ArrayAdapter<NewCourseIcone>(this,android.R.layout.simple_list_item_1,str);
         listView.setAdapter(adapter);
 
     }
@@ -41,13 +42,16 @@ public class UserMainPage extends AppCompatActivity {
 
     public void generateCourse(){
         for(int i = 0; i< 10; i++){
-            Course cours = new Course(i,20, "Nice ride on Benou");
+            Course cours = new Course(i,20, i+" Nice ride on Benou");
             course.add(cours);
+            str.add(cours.getDescription());
         }
+
+
     }
 
     public void generateCourse2(){
-        for(int i = 0; i< 10; i++){
+        for(int i = 0; i< 20; i++){
           NewCourseIcone var = new NewCourseIcone() ;
             course2.add(var);
         }

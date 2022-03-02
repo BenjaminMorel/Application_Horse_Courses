@@ -2,24 +2,34 @@ package com.example.loginpage;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
+
+    private boolean IsLoginPageActive = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_login_);
     }
 
-    public void loadRegisterPage(View view){
-        Intent intent = new Intent(this, RegisterPage.class);
-        startActivity(intent);
+    public void switchFragment(View view){
+
+        if(IsLoginPageActive) {
+            setContentView(R.layout.fragment_register);
+            IsLoginPageActive=false;
+        }else{
+            setContentView(R.layout.fragment_login_);
+            IsLoginPageActive=true;
+        }
     }
+
 
     public void logIn(View view){
 
