@@ -19,16 +19,11 @@
         android:onClick="editProfile"/>
 
 
-    <ListView
-        android:id="@+id/list_Course"
-        android:layout_width="300dp"
-        android:layout_height="600dp"
-        android:layout_below="@id/buttonEditProfile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
-        android:background="@color/background"
-        android:fadingEdgeLength="50dp"
-        android:dividerHeight="30dp"
-        android:divider="@color/white"/>
+        <include
+            layout="@layout/fragment_list__courses_"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/buttonEditProfile"/>
 
 </RelativeLayout>

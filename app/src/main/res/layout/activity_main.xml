@@ -8,9 +8,9 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
-    <fragment
+    <include
+        layout="@layout/fragment_login_"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.example.loginpage.Login_Fragment"
-        />
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

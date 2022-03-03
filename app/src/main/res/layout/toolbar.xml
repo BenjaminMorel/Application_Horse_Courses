@@ -21,13 +21,16 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="150dp"
         android:background="@color/transparent"
-        app:icon="@drawable/ic_account" />
+        app:icon="@drawable/ic_account"
+        android:onClick="editProfile"
+        />
 
     <Button
         android:id="@+id/toolbar_logout"
         android:layout_width="55dp"
         android:layout_height="wrap_content"
         android:background="@color/transparent"
-        app:icon="@drawable/ic_logout"/>
+        app:icon="@drawable/ic_logout"
+        android:onClick="editProfile"/>
 
 </androidx.appcompat.widget.Toolbar>

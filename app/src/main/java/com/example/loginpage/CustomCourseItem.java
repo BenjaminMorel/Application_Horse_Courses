@@ -25,6 +25,7 @@ public class CustomCourseItem extends ArrayAdapter {
         this.definition = definition;
     }
 
+    @Override
     public View getView(int position, View convertView, ViewGroup parent){
         View row = convertView;
         LayoutInflater inflater = context.getLayoutInflater();

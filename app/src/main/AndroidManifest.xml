@@ -18,11 +18,12 @@
             android:name=".EditProfile"
             android:exported="false" />
         <activity
-            android:name=".UserMainPage"
+
+            android:name=".MainActivity"
 
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".UserMainPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
