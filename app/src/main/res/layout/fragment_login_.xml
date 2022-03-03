@@ -6,6 +6,7 @@
     android:layout_height="250pt"
     android:layout_gravity="center"
     android:background="@color/background"
+    android:id="@+id/fragment_Login"
     tools:context=".Login_Fragment">
 
     <EditText
@@ -74,13 +75,13 @@
         android:id="@+id/imageUser"
         android:layout_width="41dp"
         android:layout_height="47dp"
-        android:layout_marginLeft="12pt"
         android:layout_alignTop="@id/password_login"
         android:layout_alignBottom="@id/password_login"
+        android:layout_marginLeft="12pt"
+        android:background="@color/text_edit"
         app:srcCompat="@drawable/lock"
         tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="199dp"
-        android:background="@color/text_edit"/>
+        tools:layout_editor_absoluteY="199dp" />
 
     <ImageView
         android:id="@+id/imageLock"
@@ -89,10 +90,10 @@
         android:layout_alignLeft="@id/imageUser"
         android:layout_alignTop="@id/email_login"
         android:layout_alignBottom="@id/email_login"
+        android:background="@color/text_edit"
         app:srcCompat="@drawable/user"
         tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="109dp"
-        android:background="@color/text_edit"/>
+        tools:layout_editor_absoluteY="109dp" />
 
 
 </RelativeLayout>

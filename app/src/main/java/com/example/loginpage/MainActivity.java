@@ -2,16 +2,23 @@ package com.example.loginpage;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
     private boolean IsLoginPageActive = true;
+    private View loginFragment;
+    private View registerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +29,29 @@ public class MainActivity extends FragmentActivity {
     public void switchFragment(View view){
 
         if(IsLoginPageActive) {
+
+            loginFragment = findViewById(R.id.fragment_Login);
+
+            Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.enter_right_to_left);
+           loginFragment.startAnimation(animation);
+
             setContentView(R.layout.fragment_register);
             IsLoginPageActive=false;
         }else{
+
+            registerFragment = findViewById(R.id.fragment_Register);
+
+            Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.exit_left_to_right);
+            registerFragment.startAnimation(animation);
+
             setContentView(R.layout.fragment_login_);
             IsLoginPageActive=true;
         }
+    }
+
+    public void register(View view){
+        Toast toast = Toast.makeText(this,"Account created", Toast.LENGTH_LONG );
+        toast.show();
     }
 
 

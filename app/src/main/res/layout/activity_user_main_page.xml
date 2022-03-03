@@ -16,19 +16,17 @@
         android:text="edit profile"
         android:onClick="editProfile"/>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ListView
+        android:id="@+id/list_Course"
+        android:layout_width="300dp"
+        android:layout_height="600dp"
         android:layout_below="@id/buttonEditProfile"
-        android:layout_centerHorizontal="true">
-
-        <ListView
-            android:id="@+id/course_list"
-            android:layout_width="200dp"
-            android:layout_height="600dp"
-            android:layout_centerHorizontal="true"></ListView>
-
-    </ScrollView>
-
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:background="@color/background"
+        android:fadingEdgeLength="50dp"
+        android:dividerHeight="30dp"
+        android:divider="@color/white"/>
 
 </RelativeLayout>

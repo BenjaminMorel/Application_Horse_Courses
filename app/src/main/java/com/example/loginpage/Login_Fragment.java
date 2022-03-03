@@ -4,12 +4,15 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -19,6 +22,8 @@ import android.widget.ImageView;
  * create an instance of this fragment.
  */
 public class Login_Fragment extends Fragment {
+
+    private Button signUpButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +63,16 @@ public class Login_Fragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+//        getView().findViewById(R.id.buttonSignup).setOnClickListener((view -> {
+//            FragmentManager manager = getActivity().getSupportFragmentManager();
+//            RegisterFragment registerFragment = new RegisterFragment();
+//            manager.beginTransaction().replace(R.id.fragment_Login,registerFragment)
+//                    .setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
+//                    .addToBackStack(null)
+//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                    .commit();
+//        }));
     }
 
     @Override
@@ -66,4 +81,5 @@ public class Login_Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login_, container, false);
     }
+
 }

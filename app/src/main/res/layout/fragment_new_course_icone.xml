@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="105pt"
-    android:layout_height="55pt"
+    android:layout_width="300dp"
+    android:layout_height="150dp"
     android:layout_gravity="center"
     android:background="@color/background"
     tools:context=".NewCourseIcone">
@@ -12,9 +12,9 @@
     <TextView
         android:id="@+id/textNewCourse"
         android:layout_width="140dp"
-    android:layout_height="60dp"
-        android:layout_marginLeft="100dp"
+         android:layout_height="60dp"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="100dp"
         android:text="Nice ride with benou"></TextView>
 
     <ImageView
@@ -28,9 +28,6 @@
         android:id="@+id/buttonSelectCourse"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="80dp"
-        android:text="50 CHF"
-        android:onClick="purchaseCourse"/>
+        android:text="50 CHF" />
 
 </RelativeLayout>

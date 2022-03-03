@@ -19,9 +19,7 @@
             android:exported="false" />
         <activity
             android:name=".UserMainPage"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterPage"
+
             android:exported="false" />
         <activity
             android:name=".MainActivity"
