@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.loginpage.DBObject.Course;
@@ -17,10 +18,20 @@ public class UserMainPage extends AppCompatActivity {
 
     private List course = new ArrayList<Course>();
     private List course2 = new ArrayList<NewCourseIcone>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_page);
+
+        Button accountButton = (Button) findViewById(R.id.toolbar_edit_profile);
+        accountButton.setOnClickListener(new View.OnClickListener() {
+            // Lambda ?
+            @Override
+            public void onClick(View view) {
+                editProfile(view);
+            }
+        });
 
         generateCourse();
         ListView listView = findViewById(R.id.course_list);

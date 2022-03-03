@@ -1,19 +1,8 @@
 package com.example.loginpage;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
-
-import com.example.loginpage.DataBase.AppDatabase;
-import com.example.loginpage.DataBase.User;
-import com.example.loginpage.DataBase.UserDao;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
 
 public class EditProfile extends AppCompatActivity {
 
