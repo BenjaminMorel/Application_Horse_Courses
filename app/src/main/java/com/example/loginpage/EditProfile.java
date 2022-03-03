@@ -17,7 +17,7 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-       setTextValue();
+        setTextValue();
     }
 
     public void setTextValue(){

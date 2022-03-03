@@ -16,7 +16,7 @@ import com.example.loginpage.DBObject.Course;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserMainPage extends FragmentActivity {
+public class UserMainPage extends AppCompatActivity {
 
 
     private List definitions = new ArrayList<String>();
@@ -55,7 +55,5 @@ public class UserMainPage extends FragmentActivity {
             prices.add(price + " CHF");
         }
     }
-
-
 
 }

@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
 
     private boolean IsLoginPageActive = true;
     private View loginFragment;
@@ -32,11 +32,12 @@ public class MainActivity extends FragmentActivity {
             loginFragment = findViewById(R.id.fragment_Login);
 
             Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.enter_right_to_left);
-           loginFragment.startAnimation(animation);
+            loginFragment.startAnimation(animation);
 
             setContentView(R.layout.fragment_register);
             IsLoginPageActive=false;
-        }else{
+
+        } else{
 
             registerFragment = findViewById(R.id.fragment_Register);
 
@@ -63,10 +64,10 @@ public class MainActivity extends FragmentActivity {
         String password = editPassword.getText().toString();
 
 
-        if(email.equals("admin") && password.equals("123")){
+        if (email.equals("admin") && password.equals("123")){
             Intent intent = new Intent(this, UserMainPage.class);
             startActivity(intent);
-        }else{
+        } else{
             editEmail.setError("Wrong Credentials");
             editPassword.setError("Wrong Credentials");
         }
