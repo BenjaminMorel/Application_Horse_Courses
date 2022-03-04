@@ -3,8 +3,11 @@
     <rotate
         android:fromDegrees="0"
         android:toDegrees="180"
-        android:duration="2000"
+        android:duration="1500"
         />
-
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.1"
+        android:duration="1000"></alpha>
 
 </set>

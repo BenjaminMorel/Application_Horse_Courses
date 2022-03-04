@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ public class CustomCourseItem extends ArrayAdapter {
     private Activity context ;
     private List<String> definition;
     private List<String> price;
+    private UserMainPage userMainPage;
 
     public CustomCourseItem(Activity context, List<String> definition, List<String> price){
         super(context,R.layout.fragment_new_course_icone,definition);
@@ -38,7 +40,17 @@ public class CustomCourseItem extends ArrayAdapter {
         textViewDescription.setText(definition.get(position));
         buttonSelectCourse.setText(price.get(position));
 
-        return row;
+        buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userMainPage.purchaseCourse(view,position);
+            }
+        });
 
+        return row;
+    }
+
+    public void setUserMainPage(UserMainPage userMainPage){
+        this.userMainPage = userMainPage;
     }
 }

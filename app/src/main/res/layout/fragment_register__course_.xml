@@ -3,23 +3,82 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/trip1"
     tools:context=".Register_Course_Fragment">
 
+
     <TextView
-        android:id="@+id/testCoursInfo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:id="@+id/purchaseCourse_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textAlignment="center"
-        android:text="Super cours"/>
+        android:text="Purchase a ride"
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
+
+    <ImageView
+        android:id="@+id/purchaseCourse_container"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="30dp"
+        android:background="@color/whiteT"/>
+
+
+    <TextView
+        android:id="@+id/purchaseCourse_length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="470dp"
+        android:layout_marginLeft="50dp"
+        android:text="Length: "
+        android:textColor="@color/black"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/purchaseCourse_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="50dp"
+        android:text="Duration: "
+        android:textColor="@color/black"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/purchaseCourse_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="530dp"
+        android:layout_marginLeft="50dp"
+        android:text="Difficulty: "
+        android:textColor="@color/black"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/purchaseCourse_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="560dp"
+        android:layout_marginLeft="50dp"
+        android:text="Price: "
+        android:textColor="@color/button2"
+        android:textSize="15dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="47dp"
+        android:text="Purchase"/>
+
 
     <Button
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:text="Back"
-        android:layout_below="@id/testCoursInfo"
-        android:layout_centerHorizontal="true"
+                android:layout_centerHorizontal="true"
         android:onClick="backToMainPage"
         ></Button>
 

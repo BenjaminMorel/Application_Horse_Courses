@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
             loginFragment = findViewById(R.id.fragment_Login);
 
-       //     Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.enter_right_to_left);
-            Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotation_left_to_right);
+            Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.enter_right_to_left);
+       //     Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotation_left_to_right);
             loginFragment.startAnimation(animation);
 
             setContentView(R.layout.fragment_register);
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
             registerFragment = findViewById(R.id.fragment_Register);
 
-      //      Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.exit_left_to_right);
-            Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotation_left_to_right);
+            Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.exit_left_to_right);
+        //    Animation animation = AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotation_left_to_right);
             registerFragment.startAnimation(animation);
 
             setContentView(R.layout.fragment_login_);
