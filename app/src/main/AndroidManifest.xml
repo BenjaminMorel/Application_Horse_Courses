@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".admin.AdminMainPage"
+            android:exported="false" />
         <activity
             android:name=".PurchaseCourse"
             android:exported="false" />

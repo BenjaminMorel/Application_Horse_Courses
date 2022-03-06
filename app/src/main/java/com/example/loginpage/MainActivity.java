@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.loginpage.admin.AdminMainPage;
+
 public class MainActivity extends AppCompatActivity {
 
     private boolean IsLoginPageActive = true;
@@ -66,10 +68,15 @@ public class MainActivity extends AppCompatActivity {
         String password = editPassword.getText().toString();
 
 
-        if (email.equals("admin") && password.equals("123")){
-            Intent intent = new Intent(this, UserMainPage.class);
-            startActivity(intent);
-        } else{
+        if (email.equals("user") && password.equals("123")) {
+            Intent intentUser = new Intent(this, UserMainPage.class);
+            startActivity(intentUser);
+        }
+        if (email.equals("admin") && password.equals("123")) {
+                Intent intentAdmin = new Intent(this, AdminMainPage.class);
+                startActivity(intentAdmin);
+        }
+        else {
             editEmail.setError("Wrong Credentials");
             editPassword.setError("Wrong Credentials");
         }
