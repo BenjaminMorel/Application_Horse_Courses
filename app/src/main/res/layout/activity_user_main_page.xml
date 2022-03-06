@@ -4,26 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".UserMainPage">
 
     <include layout="@layout/toolbar"/>
 
-    <Button
-        android:id="@+id/buttonEditProfile"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="25dp"
-        android:text="edit profile"
-        android:onClick="editProfile"/>
 
 
         <include
             layout="@layout/fragment_list__courses_"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/buttonEditProfile"/>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="55dp"
+
+            android:layout_marginBottom="60dp"
+            android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

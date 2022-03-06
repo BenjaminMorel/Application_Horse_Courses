@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.loginpage.DBObject.Course;
+
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -16,15 +18,13 @@ import java.util.List;
 public class CustomCourseItem extends ArrayAdapter {
 
     private Activity context ;
-    private List<String> definition;
-    private List<String> price;
     private UserMainPage userMainPage;
+    private List<Course> allCourses;
 
-    public CustomCourseItem(Activity context, List<String> definition, List<String> price){
-        super(context,R.layout.fragment_new_course_icone,definition);
+    public CustomCourseItem(Activity context, List<Course> allCourses){
+        super(context,R.layout.fragment_new_course_icone,allCourses);
         this.context = context;
-        this.price = price;
-        this.definition = definition;
+        this.allCourses = allCourses;
     }
 
     @Override
@@ -37,8 +37,8 @@ public class CustomCourseItem extends ArrayAdapter {
         TextView textViewDescription = (TextView)  row.findViewById(R.id.textNewCourse);
         Button buttonSelectCourse = (Button)   row.findViewById(R.id.buttonSelectCourse);
 
-        textViewDescription.setText(definition.get(position));
-        buttonSelectCourse.setText(price.get(position));
+        textViewDescription.setText(allCourses.get(position).getCity());
+        buttonSelectCourse.setText(String.valueOf(allCourses.get(position).getPrice()) + " CHF");
 
         buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,5 +52,9 @@ public class CustomCourseItem extends ArrayAdapter {
 
     public void setUserMainPage(UserMainPage userMainPage){
         this.userMainPage = userMainPage;
+    }
+
+    public List<Course> getAllCourses() {
+        return allCourses;
     }
 }

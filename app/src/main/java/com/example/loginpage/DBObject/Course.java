@@ -1,37 +1,70 @@
 package com.example.loginpage.DBObject;
 
 public class Course {
-    private int ID_COURSE;
+
+    private String city;
+    private int difficulty;
+    private double duration;
+    private double length;
     private double price;
     private String description;
 
-    public int getID_COURSE() {
-        return ID_COURSE;
+
+    public Course(String city, int difficulty, double duration, double length, double price, String description) {
+        this.city = city;
+        this.difficulty = difficulty;
+        this.duration = duration;
+        this.length = length;
+        this.price = price;
+        this.description = description;
     }
 
-    public void setID_COURSE(int ID_COURSE) {
-        this.ID_COURSE = ID_COURSE;
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public double getLength() {
+        return length;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public Course(int ID_COURSE, double price, String description) {
-        this.ID_COURSE = ID_COURSE;
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
     }
 }
