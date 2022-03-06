@@ -7,6 +7,7 @@
     android:background="@drawable/trip1"
     tools:context=".PurchaseCourse">
 
+
    <TextView
        android:id="@+id/purchaseCourse_title"
        android:layout_width="wrap_content"
@@ -24,7 +25,6 @@
         android:layout_marginTop="450dp"
         android:layout_marginLeft="30dp"
         android:background="@color/whiteT"/>
-
 
     <TextView
         android:id="@+id/purchaseCourse_length"

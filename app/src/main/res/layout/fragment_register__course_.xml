@@ -6,6 +6,14 @@
     android:background="@drawable/trip1"
     tools:context=".Register_Course_Fragment">
 
+    <Button
+        android:id="@+id/button_maps"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:text="oups j'ai dingué"
+        android:onClick="loadMap"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/purchaseCourse_title"

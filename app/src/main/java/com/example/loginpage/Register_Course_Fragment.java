@@ -1,5 +1,6 @@
 package com.example.loginpage;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -54,6 +55,8 @@ public class Register_Course_Fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
+
     }
 
     @Override
@@ -62,4 +65,6 @@ public class Register_Course_Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register__course_, container, false);
     }
+
+
 }

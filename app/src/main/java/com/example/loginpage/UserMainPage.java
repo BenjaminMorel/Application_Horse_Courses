@@ -84,4 +84,9 @@ public class UserMainPage extends AppCompatActivity {
 
     }
 
+    public void loadMap(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
 }
