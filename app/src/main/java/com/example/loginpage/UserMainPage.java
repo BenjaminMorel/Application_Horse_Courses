@@ -1,6 +1,8 @@
 package com.example.loginpage;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.loginpage.DBObject.Course;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import org.w3c.dom.Text;
 
@@ -25,6 +30,25 @@ public class UserMainPage extends AppCompatActivity {
 
     private CustomCourseItem customCourseItem;
 
+    private MapsFragment map_fragment;
+
+    private View map_Container;
+
+    private GoogleMapOptions optionsMap = new GoogleMapOptions();
+
+    private GoogleMap mMap;
+
+
+    private MapsFragment mapsFragment;
+
+    private void initializeMapsFragment() {
+        FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
+        mapsFragment = new MapsFragment();
+        SupportMapFragment supportMapFragment = mapsFragment;
+        mTransaction.add(R.id.fragment_maps_container, supportMapFragment);
+        mTransaction.commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +63,7 @@ public class UserMainPage extends AppCompatActivity {
         customCourseItem = new CustomCourseItem(this, allCourses);
         customCourseItem.setUserMainPage(this);
         listView.setAdapter(customCourseItem);
+
     }
 
     public void editProfile(View view){
@@ -47,8 +72,10 @@ public class UserMainPage extends AppCompatActivity {
     }
 
     public void purchaseCourse(View view, int position){
+        customCourseItem.setUserMainPage(this);
         setContentView(R.layout.fragment_register__course_);
         setValueOnInfoPage(position);
+        initializeMapsFragment();
     }
 
     public void backToMainPage(View view){
@@ -81,6 +108,7 @@ public class UserMainPage extends AppCompatActivity {
         duration.setText("Duration : " +String.valueOf(customCourseItem.getAllCourses().get(position).getDuration()) + " Heure");
         difficulty.setText("Difficulty : " + String.valueOf(customCourseItem.getAllCourses().get(position).getDifficulty()) + "/5");
         price.setText("Price : " + String.valueOf(customCourseItem.getAllCourses().get(position).getPrice()) + " CHF");
+
 
     }
 

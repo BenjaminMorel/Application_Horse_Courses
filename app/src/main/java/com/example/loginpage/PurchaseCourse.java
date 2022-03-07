@@ -13,15 +13,6 @@ public class PurchaseCourse extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase_course);
-
-        Button buttonMaps = findViewById(R.id.button_maps);
-
-        buttonMaps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               loadMap(view);
-            }
-        });
     }
 
     public void loadMap(View view){

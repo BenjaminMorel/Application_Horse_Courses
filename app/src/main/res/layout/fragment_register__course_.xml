@@ -6,14 +6,33 @@
     android:background="@drawable/trip1"
     tools:context=".Register_Course_Fragment">
 
-    <Button
-        android:id="@+id/button_maps"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerVertical="true"
-        android:text="oups j'ai dingué"
-        android:onClick="loadMap"
-        android:textAlignment="center" />
+<!--    <Button-->
+<!--        android:id="@+id/button_maps"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:text="show map"-->
+<!--        android:onClick="loadMap"-->
+<!--        android:textAlignment="center" />-->
+
+    <include
+        android:id="@+id/fragment_maps_container"
+        layout="@layout/fragment_maps"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/shape_round"
+        />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="100dp"
+        android:layout_alignBottom="@id/fragment_maps_container"
+        android:background="@drawable/circle"/>
+
+
 
     <TextView
         android:id="@+id/purchaseCourse_title"
@@ -23,6 +42,7 @@
         android:layout_centerHorizontal="true"
         android:text="Purchase a ride"
         android:textColor="@color/white"
+
         android:textSize="20dp"/>
 
     <ImageView
@@ -83,11 +103,13 @@
 
 
     <Button
-        android:layout_width="40dp"
+        android:layout_width="80dp"
         android:layout_height="40dp"
         android:text="Back"
-                android:layout_centerHorizontal="true"
+        android:layout_centerHorizontal="true"
         android:onClick="backToMainPage"
+        android:layout_alignBottom="@id/purchaseCourse_container"
+        android:layout_alignRight="@id/fragment_maps_container"
         ></Button>
 
 
