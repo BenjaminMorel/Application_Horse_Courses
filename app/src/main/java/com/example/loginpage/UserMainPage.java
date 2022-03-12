@@ -7,11 +7,15 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginpage.DBObject.AppDatabase;
 import com.example.loginpage.DBObject.Course;
+import com.example.loginpage.DBObject.User;
+import com.example.loginpage.DBObject.UserDao;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -116,5 +120,7 @@ public class UserMainPage extends AppCompatActivity {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
+
+
 
 }

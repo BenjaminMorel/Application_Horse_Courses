@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.loginpage.DBObject.AppDatabase;
+import com.example.loginpage.DBObject.Ride;
+import com.example.loginpage.DBObject.RideDao;
 import com.example.loginpage.DBObject.User;
 import com.example.loginpage.DBObject.UserDao;
 import com.example.loginpage.admin.AdminMainPage;
@@ -26,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean IsLoginPageActive = true;
     private View loginFragment;
     private View registerFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,13 +76,28 @@ public class MainActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
 
-//        AppDatabase db = Room.databaseBuilder(getApplicationContext(),AppDatabase.class, "AppDatabase").build();
         AppDatabase db = AppDatabase.getAppDateBase(this);
         UserDao userDao = db.userDao();
-        User hugo = new User("email","123","hugo","Vouillamoz")  ;
-   //     userDao.instert(hugo);
+        RideDao rideDao = db.rideDao();
+        User hugo = new User("admin","123","hugo","vouillamoz","rue lalalal","liddes",1945)  ;
+        Ride ride1 = new Ride("Super balade avec mon bon gros étalon",2.5,1.5,4,"Martigny");
+        Ride ride2 = new Ride("Enorme balade avec beaucoup de caillou partout youhou",3.4,2.7,1,"Sierre");
+        Ride ride3 = new Ride("Wouhou le cheval c'est génial on va si vite aller huuuuuuuu petit tonnerre",48,24,19,"Liddes");
 
+        List<Ride> rides = rideDao.getAll();
+        if(rides.size() == 0){
+            rideDao.instert(ride1);
+            rideDao.instert(ride2);
+            rideDao.instert(ride3);
+        }
         List<User> users = userDao.getAll();
+        if(users.size() == 0){
+            userDao.instert(hugo);
+            users = userDao.getAll();
+        }
+
+
+
         for(int i = 0; i < users.size(); i++){
             if(email.equals(users.get(i).email) && password.equals(users.get(i).password)){
                 Intent intentUser = new Intent(this, UserMainPage.class);

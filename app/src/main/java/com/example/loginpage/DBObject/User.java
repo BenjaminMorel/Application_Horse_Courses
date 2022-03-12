@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user")
 public class User {
+
     @PrimaryKey(autoGenerate = true)
     public int userID;
 
@@ -21,11 +22,47 @@ public class User {
     @ColumnInfo(name ="last_name")
     public String lastName;
 
-    public User( String email, String password, String firstName, String lastName) {
+    @ColumnInfo(name = "Address")
+    public String address;
+
+    @ColumnInfo(name = "city")
+    public String city;
+
+    @ColumnInfo(name = "npa")
+    public int npa;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getNpa() {
+        return npa;
+    }
+
+    public void setNpa(int npa) {
+        this.npa = npa;
+    }
+
+    public User(String email, String password, String firstName, String lastName, String address, String city, int npa) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.npa = npa;
     }
 
     public int getUserID() {
