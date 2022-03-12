@@ -1,5 +1,7 @@
 package com.example.loginpage.DBObject;
 
+import androidx.room.Entity;
+
 public class Course {
 
     private String city;
