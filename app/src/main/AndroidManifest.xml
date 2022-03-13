@@ -37,6 +37,7 @@
             android:name=".EditProfile"
             android:exported="false" />
         <activity
+
             android:name=".UserMainPage"
             android:exported="false" />
         <activity

@@ -1,25 +1,23 @@
 package com.example.loginpage;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.room.Room;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.loginpage.DBObject.AppDatabase;
+import com.example.loginpage.DBObject.Course;
 import com.example.loginpage.DBObject.Ride;
 import com.example.loginpage.DBObject.RideDao;
 import com.example.loginpage.DBObject.User;
 import com.example.loginpage.DBObject.UserDao;
-import com.example.loginpage.admin.AdminMainPage;
 
 import java.util.List;
 
@@ -84,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
         Ride ride2 = new Ride("Enorme balade avec beaucoup de caillou partout youhou",3.4,2.7,1,"Sierre");
         Ride ride3 = new Ride("Wouhou le cheval c'est génial on va si vite aller huuuuuuuu petit tonnerre",48,24,19,"Liddes");
 
+        Course course1 = new Course(1,"02/02/22 11:00:00", 20.5);
+        Course course2 = new Course(1,"02/02/22 11:00:00", 20.5);
+        Course course3 = new Course(1,"02/02/22 11:00:00", 20.5);
+        List courses = db.courseDao().getAllCourse();
+        if(courses.size() == 0){
+            db.courseDao().instert(course1);
+            db.courseDao().instert(course2);
+            db.courseDao().instert(course3);
+        }
         List<Ride> rides = rideDao.getAll();
         if(rides.size() == 0){
             rideDao.instert(ride1);
@@ -92,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         }
         List<User> users = userDao.getAll();
         if(users.size() == 0){
-            userDao.instert(hugo);
+            userDao.insert(hugo);
             users = userDao.getAll();
         }
 
@@ -102,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
             if(email.equals(users.get(i).email) && password.equals(users.get(i).password)){
                 Intent intentUser = new Intent(this, UserMainPage.class);
                 startActivity(intentUser);
+                Toast toast = Toast.makeText(this,"Login successful", Toast.LENGTH_LONG );
+                toast.show();
             }else{
                 editEmail.setError("Wrong Credentials");
                 editPassword.setError("Wrong Credentials");

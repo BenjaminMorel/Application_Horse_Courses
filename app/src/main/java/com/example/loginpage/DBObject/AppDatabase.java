@@ -7,13 +7,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 
-@Database(entities = {User.class ,Ride.class}, version=3)
+@Database(entities = {User.class ,Ride.class,Course.class}, version=5,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
     public abstract UserDao userDao() ;
     public abstract RideDao rideDao();
+    public abstract CourseDao courseDao();
 
     public static  AppDatabase getAppDateBase(Context context){
         if(INSTANCE == null){
