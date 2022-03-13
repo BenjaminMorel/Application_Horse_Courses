@@ -1,70 +1,62 @@
 package com.example.loginpage.DBObject;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
+@Entity(tableName = "course", foreignKeys = @ForeignKey(entity=Ride.class, parentColumns = "rideID", childColumns = "rideID"))
 public class Course {
 
-    private String city;
-    private int difficulty;
-    private double duration;
-    private double length;
-    private double price;
-    private String description;
+    @PrimaryKey(autoGenerate = true)
+    public int courseID;
 
-    public Course(String city, int difficulty, double duration, double length, double price, String description) {
-        this.city = city;
-        this.difficulty = difficulty;
-        this.duration = duration;
-        this.length = length;
+    @ColumnInfo(name = "rideID")
+    public int rideID;
+
+    @ColumnInfo(name = "date")
+    public String date;
+
+    @ColumnInfo(name = "price")
+    public double price;
+
+    public Course(int rideID, String date, double price) {
+        this.rideID = rideID;
+        this.date = date;
         this.price = price;
-        this.description = description;
     }
 
-    public String getCity() {
-        return city;
+    public int getCourseID() {
+        return courseID;
     }
 
-    public int getDifficulty() {
-        return difficulty;
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
-    public double getDuration() {
-        return duration;
+    public int getRideID() {
+        return rideID;
     }
 
-    public double getLength() {
-        return length;
+    public void setRideID(int rideID) {
+        this.rideID = rideID;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public void setDuration(double duration) {
-        this.duration = duration;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

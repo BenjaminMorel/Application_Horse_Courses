@@ -22,7 +22,7 @@ public class User {
     @ColumnInfo(name ="last_name")
     public String lastName;
 
-    @ColumnInfo(name = "Address")
+    @ColumnInfo(name = "address")
     public String address;
 
     @ColumnInfo(name = "city")

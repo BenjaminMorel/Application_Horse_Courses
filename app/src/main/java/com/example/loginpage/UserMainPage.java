@@ -3,9 +3,11 @@ package com.example.loginpage;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.room.Database;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -57,10 +59,8 @@ public class UserMainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_page);
 
-        Toast toast = Toast.makeText(this,"Login successful", Toast.LENGTH_LONG );
-        toast.show();
-
-        generateList();
+        AppDatabase db = AppDatabase.getAppDateBase(this);
+        allCourses = db.courseDao().getAllCourse();
         listView = (ListView) findViewById(R.id.list_Course);
 
         customCourseItem = new CustomCourseItem(this, allCourses);
@@ -91,34 +91,31 @@ public class UserMainPage extends AppCompatActivity {
     }
 
     public void generateList(){
-        Course course1 = new Course("Martigny",4,2.0,5.6,60.00,"Super balade au bord de la Dranse");
-        Course course2 = new Course("Sion", 1, 1.0, 2.4,25.00,"Balade jusqu'au chateau et vue sur la ville");
-        Course course3 = new Course("Sierre", 1, 1.5, 3.2,32.50,"Super promenade au bord du Rhone");
-        allCourses.add(course1);
-        allCourses.add(course2);
-        allCourses.add(course3);
+//        Course course1 = new Course("Martigny",4,2.0,5.6,60.00,"Super balade au bord de la Dranse");
+//        Course course2 = new Course("Sion", 1, 1.0, 2.4,25.00,"Balade jusqu'au chateau et vue sur la ville");
+//        Course course3 = new Course("Sierre", 1, 1.5, 3.2,32.50,"Super promenade au bord du Rhone");
+//        allCourses.add(course1);
+//        allCourses.add(course2);
+//        allCourses.add(course3);
     }
 
     public void setValueOnInfoPage(int position){
-        TextView description = findViewById(R.id.purchaseCourse_title);
-        TextView length = findViewById(R.id.purchaseCourse_length);
-        TextView duration = findViewById(R.id.purchaseCourse_duration);
-        TextView difficulty = findViewById(R.id.purchaseCourse_difficulty);
-        TextView price = findViewById(R.id.purchaseCourse_price);
 
-        description.setText(customCourseItem.getAllCourses().get(position).getDescription());
-        length.setText("Lenght : " + String.valueOf(customCourseItem.getAllCourses().get(position).getLength()) + " KM");
-        duration.setText("Duration : " +String.valueOf(customCourseItem.getAllCourses().get(position).getDuration()) + " Heure");
-        difficulty.setText("Difficulty : " + String.valueOf(customCourseItem.getAllCourses().get(position).getDifficulty()) + "/5");
-        price.setText("Price : " + String.valueOf(customCourseItem.getAllCourses().get(position).getPrice()) + " CHF");
+//        TextView description = findViewById(R.id.purchaseCourse_title);
+//        TextView length = findViewById(R.id.purchaseCourse_length);
+//        TextView duration = findViewById(R.id.purchaseCourse_duration);
+//        TextView difficulty = findViewById(R.id.purchaseCourse_difficulty);
+//        TextView price = findViewById(R.id.purchaseCourse_price);
+//
+//        description.setText(customCourseItem.getAllCourses().get(position).getDescription());
+//        length.setText("Lenght : " + String.valueOf(customCourseItem.getAllCourses().get(position).getLength()) + " KM");
+//        duration.setText("Duration : " +String.valueOf(customCourseItem.getAllCourses().get(position).getDuration()) + " Heure");
+//        difficulty.setText("Difficulty : " + String.valueOf(customCourseItem.getAllCourses().get(position).getDifficulty()) + "/5");
+//        price.setText("Price : " + String.valueOf(customCourseItem.getAllCourses().get(position).getPrice()) + " CHF");
 
 
     }
 
-    public void loadMap(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
-    }
 
 
 

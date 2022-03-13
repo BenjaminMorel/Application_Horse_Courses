@@ -37,7 +37,7 @@ public class CustomCourseItem extends ArrayAdapter {
         TextView textViewDescription = (TextView)  row.findViewById(R.id.textNewCourse);
         Button buttonSelectCourse = (Button)   row.findViewById(R.id.buttonSelectCourse);
 
-        textViewDescription.setText(allCourses.get(position).getCity());
+        textViewDescription.setText(String.valueOf(allCourses.get(position).courseID));
         buttonSelectCourse.setText(String.valueOf(allCourses.get(position).getPrice()) + " CHF");
 
         buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
