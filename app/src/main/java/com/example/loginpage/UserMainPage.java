@@ -27,7 +27,6 @@ import java.util.List;
 
 public class UserMainPage extends AppCompatActivity {
 
-
     private ListView listView;
 
     private List allCourses = new ArrayList<Course>();

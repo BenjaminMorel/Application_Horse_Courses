@@ -11,7 +11,6 @@ public class Course {
     private double price;
     private String description;
 
-
     public Course(String city, int difficulty, double duration, double length, double price, String description) {
         this.city = city;
         this.difficulty = difficulty;
@@ -20,7 +19,6 @@ public class Course {
         this.price = price;
         this.description = description;
     }
-
 
     public String getCity() {
         return city;

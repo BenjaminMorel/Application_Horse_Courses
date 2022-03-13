@@ -76,8 +76,6 @@ public class EditProfile extends AppCompatActivity {
 
         userDao.update(user);
 
-
     }
-
 
 }

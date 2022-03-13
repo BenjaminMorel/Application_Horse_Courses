@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@drawable/paysage"
+    android:background="@drawable/trip1"
     tools:context=".NewCourseIcone"
     android:layout_marginTop="20dp"
     android:layout_marginBottom="60dp"
@@ -22,7 +22,7 @@
         android:layout_centerVertical="true"
         android:text="20.02.2022"
         android:textAlignment="center"
-        android:textSize="30dp"></TextView>
+        android:textSize="30dp"/>
 
     <Button
         android:id="@+id/buttonSelectCourse"
