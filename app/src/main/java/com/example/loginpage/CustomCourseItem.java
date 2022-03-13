@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.loginpage.DBObject.Course;
+import com.example.loginpage.DBObject.Ride;
 
 import org.w3c.dom.Text;
 
@@ -20,11 +21,13 @@ public class CustomCourseItem extends ArrayAdapter {
     private Activity context ;
     private UserMainPage userMainPage;
     private List<Course> allCourses;
+    private List<Ride> rides;
 
-    public CustomCourseItem(Activity context, List<Course> allCourses){
+    public CustomCourseItem(Activity context, List<Course> allCourses, List<Ride> rides){
         super(context,R.layout.fragment_new_course_icone,allCourses);
         this.context = context;
         this.allCourses = allCourses;
+        this.rides = rides;
     }
 
     @Override
@@ -37,7 +40,15 @@ public class CustomCourseItem extends ArrayAdapter {
         TextView textViewDescription = (TextView)  row.findViewById(R.id.textNewCourse);
         Button buttonSelectCourse = (Button)   row.findViewById(R.id.buttonSelectCourse);
 
-        textViewDescription.setText(String.valueOf(allCourses.get(position).courseID));
+        int rideID = allCourses.get(position).getRideID();
+        Ride ride = null;
+        for(Ride r : rides){
+            if(r.getRideID() == rideID){
+                ride = r;
+                break;
+            }
+        }
+        textViewDescription.setText(ride.getLocation());
         buttonSelectCourse.setText(String.valueOf(allCourses.get(position).getPrice()) + " CHF");
 
         buttonSelectCourse.setOnClickListener(new View.OnClickListener() {

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.loginpage.DBObject.AppDatabase;
 import com.example.loginpage.DBObject.Course;
+import com.example.loginpage.DBObject.Ride;
+import com.example.loginpage.DBObject.RideDao;
 import com.example.loginpage.DBObject.User;
 import com.example.loginpage.DBObject.UserDao;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,17 +35,8 @@ public class UserMainPage extends AppCompatActivity {
     private ListView listView;
 
     private List allCourses = new ArrayList<Course>();
-
+    private List rides = new ArrayList<Ride>();
     private CustomCourseItem customCourseItem;
-
-    private MapsFragment map_fragment;
-
-    private View map_Container;
-
-    private GoogleMapOptions optionsMap = new GoogleMapOptions();
-
-    private GoogleMap mMap;
-
 
     private MapsFragment mapsFragment;
 
@@ -62,9 +55,10 @@ public class UserMainPage extends AppCompatActivity {
 
         AppDatabase db = AppDatabase.getAppDateBase(this);
         allCourses = db.courseDao().getAllCourse();
+        rides = db.rideDao().getAll();
         listView = (ListView) findViewById(R.id.list_Course);
 
-        customCourseItem = new CustomCourseItem(this, allCourses);
+        customCourseItem = new CustomCourseItem(this, allCourses,rides);
         customCourseItem.setUserMainPage(this);
         listView.setAdapter(customCourseItem);
 
@@ -86,7 +80,7 @@ public class UserMainPage extends AppCompatActivity {
 
         setContentView(R.layout.activity_user_main_page);
         listView = (ListView) findViewById(R.id.list_Course);
-        CustomCourseItem customCourseItem = new CustomCourseItem(this, allCourses);
+        CustomCourseItem customCourseItem = new CustomCourseItem(this, allCourses,rides);
         listView.setAdapter(customCourseItem);
         customCourseItem.setUserMainPage(this);
     }
