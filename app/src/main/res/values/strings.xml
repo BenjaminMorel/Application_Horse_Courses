@@ -14,7 +14,7 @@
 
     <!-- Actions -->
     <string name="action_create">Create</string>
-    <string name="action_create_account">Create an account</string>
+    <string name="action_create_account">Create an account!</string>
     <string name="action_register">Register</string>
     <string name="action_update">Save Changes</string>
     <string name="action_edit">Edit</string>
