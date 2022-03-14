@@ -10,7 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".MainPage"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".EditAccount"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -27,20 +35,20 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name="com.example.Horse_App.MapsActivity"
+            android:name=".OLD.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name="com.example.Horse_App.PurchaseCourse"
+            android:name=".OLD.PurchaseCourse"
             android:exported="false" />
         <activity
-            android:name="com.example.Horse_App.EditProfile"
+            android:name=".OLD.EditProfile"
             android:exported="false" />
         <activity
-            android:name="com.example.Horse_App.UserMainPage"
+            android:name=".OLD.UserMainPage"
             android:exported="false" />
         <activity
-            android:name="com.example.Horse_App.MainActivity"
+            android:name=".OLD.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

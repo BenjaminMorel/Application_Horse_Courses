@@ -1,4 +1,4 @@
-package com.example.Horse_App;
+package com.example.Horse_App.OLD;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import com.example.Horse_App.CustomCourseItem;
 import com.example.Horse_App.Database.Entity.Course;
 import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.ViewModel.RideListViewModel;

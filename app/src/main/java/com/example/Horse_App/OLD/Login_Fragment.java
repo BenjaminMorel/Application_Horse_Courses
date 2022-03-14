@@ -1,4 +1,4 @@
-package com.example.Horse_App;
+package com.example.Horse_App.OLD;
 
 import android.os.Bundle;
 
@@ -7,13 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link RegisterFragment#newInstance} factory method to
+ * Use the {@link Login_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RegisterFragment extends Fragment {
+public class Login_Fragment extends Fragment {
+
+    private Button signUpButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +27,7 @@ public class RegisterFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public RegisterFragment() {
+    public Login_Fragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +37,11 @@ public class RegisterFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment RegisterFragment.
+     * @return A new instance of fragment Login_Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RegisterFragment newInstance(String param1, String param2) {
-        RegisterFragment fragment = new RegisterFragment();
+    public static Login_Fragment newInstance(String param1, String param2) {
+        Login_Fragment fragment = new Login_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,12 +56,25 @@ public class RegisterFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+//        getView().findViewById(R.id.buttonSignup).setOnClickListener((view -> {
+//            FragmentManager manager = getActivity().getSupportFragmentManager();
+//            RegisterFragment registerFragment = new RegisterFragment();
+//            manager.beginTransaction().replace(R.id.fragment_Login,registerFragment)
+//                    .setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
+//                    .addToBackStack(null)
+//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                    .commit();
+//        }));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        return inflater.inflate(R.layout.fragment_login_page, container, false);
     }
+
+
+
 }

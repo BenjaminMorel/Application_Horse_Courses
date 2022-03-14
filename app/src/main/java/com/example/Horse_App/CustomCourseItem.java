@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.Horse_App.Database.Entity.Course;
 import com.example.Horse_App.Database.Entity.Ride;
+import com.example.Horse_App.OLD.UserMainPage;
 
 import java.util.List;
 

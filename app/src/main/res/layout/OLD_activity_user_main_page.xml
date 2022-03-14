@@ -7,12 +7,12 @@
     android:background="@color/black"
     tools:context=".UserMainPage">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/OLD_toolbar"/>
 
 
 
         <include
-            layout="@layout/fragment_list__courses_"
+            layout="@layout/OLD_fragment_list__courses_"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
