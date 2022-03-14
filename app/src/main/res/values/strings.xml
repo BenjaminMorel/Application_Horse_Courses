@@ -4,6 +4,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">mapTitle</string>
 
+
+    <!-- Strings related to the app -->
+
+    <string name="AppTitle">Horse Course</string>
+
+    <!-- Strings related to the button -->
+
+    <string name="sign_in">Log in</string>
+    <string name="sign_up">Log up</string>
+
+
     <!-- Strings related to User -->
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>

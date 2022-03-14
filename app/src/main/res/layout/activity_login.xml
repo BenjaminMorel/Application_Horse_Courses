@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Horse courses"
+        android:text="@string/AppTitle"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -37,7 +37,7 @@
         android:drawableLeft="@drawable/ic_account"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:textColorHint="@color/white"
         android:textColorHighlight="@color/white"
         android:inputType="textEmailAddress"
@@ -55,7 +55,7 @@
         android:ems="10"
         android:textSize="7pt"
         android:textStyle="bold"
-        android:hint="Password"
+        android:hint="@string/password"
         android:drawableLeft="@drawable/ic_lock"
         android:drawablePadding="10dp"
         android:textColorHint="@color/white"
@@ -75,7 +75,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="0dp"
-        android:text="Log in"
+        android:text="@string/sign_in"
         tools:layout_editor_absoluteX="82dp"
         tools:layout_editor_absoluteY="316dp" />
 
@@ -91,7 +91,7 @@
         android:layout_marginRight="1dp"
         android:backgroundTint="@color/button"
         android:shadowColor="@android:color/transparent"
-        android:text="Sign up"
+        android:text="@string/sign_up"
         android:textColor="@color/white"
         tools:layout_editor_absoluteX="82dp"
         tools:layout_editor_absoluteY="382dp" />
