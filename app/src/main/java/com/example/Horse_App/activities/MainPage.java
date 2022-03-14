@@ -6,11 +6,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ListView;
 
+import com.example.Horse_App.BaseApp;
+import com.example.Horse_App.CustomCourseItem;
+import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 
 public class MainPage extends AppCompatActivity {
 
+    private RideRepository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,19 +36,8 @@ public class MainPage extends AppCompatActivity {
     private void startMainPage(){
 
         repository = ((BaseApp) getApplication()).getRideRepository();
-//        RideListViewModel.Factory factory = new RideListViewModel.Factory(getApplication());
-//        RideListViewModel viewModel = new ViewModelProvider(this, factory).get(RideListViewModel.class);
 
-//        RideListViewModel rideListViewModel = new RideListViewModel(getApplication(),repository);
-//        rideListViewModel.getRides().observe(this, ridesEntities -> {
-//            if(ridesEntities != null){
-//                System.out.println(ridesEntities.size());
-//                for(Ride ride : ridesEntities){
-//                    rides.add(ride);
-//                    System.out.println("SALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLUT");
-//                }
-//            }
-//        });
+
 
         ListView listView = findViewById(R.id.ListRideToChoose);
         repository.getRides(getApplication()).observe(this, ridesEntities -> {

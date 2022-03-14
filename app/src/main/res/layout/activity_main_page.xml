@@ -16,9 +16,6 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingConstraints" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
     <ListView
         android:id="@+id/ListRideToChoose"
         android:layout_width="match_parent"
@@ -26,4 +23,7 @@
         android:dividerHeight="80dp"
         ></ListView>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
