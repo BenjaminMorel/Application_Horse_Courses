@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         EditText editText_city = findViewById(R.id.city_register);
         String city = editText_city.getText().toString();
 
-        EditText editText_npa = findViewById(R.id.npa_register);
+        EditText editText_npa = findViewById(R.id.post_code_register);
         String str_npa = editText_npa.getText().toString();
         int npa;
         if (!str_npa.isEmpty())
@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logIn(View view) {
-
 
         EditText editEmail = findViewById(R.id.email_login);
         EditText editPassword = findViewById(R.id.password_login);
