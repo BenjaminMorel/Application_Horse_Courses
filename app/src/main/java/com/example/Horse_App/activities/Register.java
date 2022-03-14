@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity {
         etEmail = findViewById(R.id.email_register);
         etPassword = findViewById(R.id.password_register);
         etPassword2 = findViewById(R.id.confirm_password_register);
-        Button registerButton = findViewById(R.id.registerSaveButton);
+        Button registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(view -> registerNewUser(etFirstname.getText().toString(),etLastname.getText().toString(),
                 etPhonenumber.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
     }

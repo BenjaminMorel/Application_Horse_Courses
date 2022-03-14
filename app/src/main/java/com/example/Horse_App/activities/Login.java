@@ -39,7 +39,7 @@ public class Login extends AppCompatActivity {
         emailView = findViewById(R.id.email_login);
         passwordView = findViewById(R.id.password_login);
 
-        Button registerButton = findViewById(R.id.buttonSignup);
+        Button registerButton = findViewById(R.id.button_register);
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        Button logInButton = findViewById(R.id.buttonLogin);
+        Button logInButton = findViewById(R.id.button_login);
         logInButton.setOnClickListener(view -> attemptLogin());
 
 
