@@ -21,7 +21,4 @@ public class BaseApp extends Application {
 
     public RideRepository getRideRepository(){ return RideRepository.getInstance();
     }
-
-
-
 }

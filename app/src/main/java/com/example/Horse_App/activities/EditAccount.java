@@ -1,8 +1,10 @@
-package com.example.Horse_App;
+package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.Horse_App.R;
 
 public class EditAccount extends AppCompatActivity {
 
