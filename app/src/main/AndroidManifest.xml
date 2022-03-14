@@ -11,17 +11,17 @@
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MainPage"
+            android:name=".activities.MainPage"
             android:exported="false" />
         <activity
-            android:name=".Register"
+            android:name=".activities.Register"
             android:exported="false" />
         <activity
-            android:name=".EditAccount"
+            android:name=".activities.EditAccount"
             android:exported="false" />
 
         <activity
-            android:name=".Login"
+            android:name=".activities.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
