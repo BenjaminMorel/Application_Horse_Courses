@@ -1,6 +1,7 @@
 package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,6 @@ import com.example.Horse_App.Database.async.User.CreateUser;
 import com.example.Horse_App.R;
 
 public class Register extends AppCompatActivity {
-
 
     private static final String TAG = "RegisterActivity";
 
@@ -42,7 +42,6 @@ public class Register extends AppCompatActivity {
         registerButton.setOnClickListener(view -> registerNewUser(etFirstname.getText().toString(),etLastname.getText().toString(),
                 etPhonenumber.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
     }
-
 
     private void registerNewUser(String firstname, String lastname, String phonenumber, String email, String password){
         User newUser = new User(email,password,firstname,lastname,phonenumber);

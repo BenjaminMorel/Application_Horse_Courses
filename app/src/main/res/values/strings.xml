@@ -6,15 +6,9 @@
 
 
     <!-- Strings related to the app -->
-
     <string name="AppTitle">Horse Course</string>
 
-    <!-- Strings related to the button -->
-
-
-
-    <!-- Strings related to input texte -->
-
+    <!-- Strings related to input text -->
     <string name="ErrorLoginMessage">Wrong credentials</string>
     <string name="FieldRequired">This field is required</string>
 
@@ -28,6 +22,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="disconnect">Disconnect</string>
 
     <!-- Actions -->
     <string name="action_create">Create</string>
