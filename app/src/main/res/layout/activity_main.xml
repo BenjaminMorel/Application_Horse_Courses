@@ -9,7 +9,8 @@
     tools:context=".MainActivity">
 
     <include
-        layout="@layout/fragment_login_"
+        android:id="@+id/login_page_fragment_container"
+        layout="@layout/fragment_login_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

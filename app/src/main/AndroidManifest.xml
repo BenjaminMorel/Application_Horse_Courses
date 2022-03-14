@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.loginpage">
+    package="com.example.Horse_App">
 
     <application
         android:allowBackup="true"
@@ -27,21 +27,20 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.example.Horse_App.MapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".PurchaseCourse"
+            android:name="com.example.Horse_App.PurchaseCourse"
             android:exported="false" />
         <activity
-            android:name=".EditProfile"
+            android:name="com.example.Horse_App.EditProfile"
             android:exported="false" />
         <activity
-
-            android:name=".UserMainPage"
+            android:name="com.example.Horse_App.UserMainPage"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.Horse_App.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
