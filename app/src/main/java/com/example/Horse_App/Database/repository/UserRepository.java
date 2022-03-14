@@ -33,7 +33,13 @@ public class UserRepository {
         return ((BaseApp) application).getDatabase().userDao().getAll();
     }
 
-    public LiveData<User> getUser(final int userID, Application application){
+    public LiveData<User> getUserByID(final int userID, Application application){
         return ((BaseApp) application).getDatabase().userDao().getByID(userID);
     }
+
+    public LiveData<User> getUserByEmail(final String email, Application application){
+        return ((BaseApp) application).getDatabase().userDao().getByEmail(email);
+    }
+
+
 }

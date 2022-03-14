@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.AppDatabase;
 import com.example.Horse_App.Database.DatabaseInitializer;
+import com.example.Horse_App.Database.Entity.User;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
 
@@ -29,28 +31,26 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO mettre dan sles strins
-        setTitle("Login");
+
         setContentView(R.layout.activity_login);
 
-        repository = ((BaseApp) getApplication()).getUserRepository();
+        repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
         emailView = findViewById(R.id.email_login);
         passwordView = findViewById(R.id.password_login);
 
         Button registerButton = findViewById(R.id.buttonSignup);
-        registerButton.setOnClickListener(view -> startActivity(
-                new Intent(this, Register.class)
-        ));
 
-        Button logInButton = findViewById(R.id.buttonLogin);
-     //   logInButton.setOnClickListener(view -> attemptLogin());
-        logInButton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 reinitializeDatabase();
             }
         });
+
+        Button logInButton = findViewById(R.id.buttonLogin);
+        logInButton.setOnClickListener(view -> attemptLogin());
+
 
     }
 
@@ -61,22 +61,34 @@ public class Login extends AppCompatActivity {
         passwordView.setError(null);
 
         String email = emailView.getText().toString();
-        String password = emailView.getText().toString();
+        String password = passwordView.getText().toString();
 
 
         if(email.isEmpty()){
-            emailView.setError("This field is required");
+            emailView.setError(getString(R.string.FieldRequired));
             cancel = true;
         }else if(password.isEmpty()){
-            passwordView.setError("This field is required");
+            passwordView.setError(getString(R.string.FieldRequired));
             cancel = true;
         }
 
         if(!cancel){
-            repository = ((BaseApp) getApplication()).getUserRepository();
+            repository.getUserByEmail(email,getApplication()).observe(Login.this, user -> {
+                if (user != null) {
+                    if (user.getPassword().equals(password)) {
+                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_ID, 0).edit();
+                        editor.putInt(BaseActivity.PREFS_ID, user.userID);
+                        editor.apply();
+                        Intent intent = new Intent(this, MainPage.class);
+                        startActivity(intent);
+                    }
+            }else {
+                    emailView.setError(getString(R.string.ErrorLoginMessage));
+                    passwordView.setError(getString(R.string.ErrorLoginMessage));
+                }
+            });
         }
     }
-
 
     private void reinitializeDatabase() {
         DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));

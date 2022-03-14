@@ -29,10 +29,10 @@ public class DatabaseInitializer {
 
 
     private static void populateWithTestData(AppDatabase db) {
-        db.userDao().deleteAll();
 
+        db.userDao().deleteAll();
         addUser(db, "admin","123","Hugo","Vouillamoz", "075248621");
-        addUser(db, "admin","123","Benjmain","Morel", "078689289");
+        addUser(db, "admin","123","Benjamin","Morel", "078689289");
 
         try {
             Thread.sleep(1000);
@@ -41,7 +41,6 @@ public class DatabaseInitializer {
         }
 
         db.rideDao().deleteAll();
-
         addRide(db, "Super balade", 10.2, 3.5, 4, "Martigny");
         addRide(db, "Super promenade", 9.8, 4.8, 3, "Sierre");
         addRide(db, "Super excursion", 7.8, 2.5, 1, "Sion");

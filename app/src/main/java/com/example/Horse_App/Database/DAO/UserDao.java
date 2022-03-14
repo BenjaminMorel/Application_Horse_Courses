@@ -20,6 +20,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE userID = :id")
     LiveData<User> getByID(int id);
 
+    @Query("SELECT * FROM user WHERE email = :email")
+    LiveData<User> getByEmail(String email);
+
     @Query(("UPDATE user SET email = :email, first_name = :firstname, last_name = :lastname, phoneNumber = :phoneNumber WHERE userID = :ID "))
     void updateSpecificRow(int ID, String email, String firstname, String lastname, String phoneNumber);
 
