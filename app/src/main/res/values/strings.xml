@@ -11,14 +11,15 @@
 
     <!-- Strings related to the button -->
 
-    <string name="sign_in">Log in</string>
-    <string name="sign_up">Log up</string>
+
 
     <!-- Strings related to input texte -->
 
     <string name="ErrorLoginMessage">Wrong credentials</string>
     <string name="FieldRequired">This field is required</string>
 
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign Up</string>
 
     <!-- Strings related to User -->
     <string name="firstname">First Name</string>

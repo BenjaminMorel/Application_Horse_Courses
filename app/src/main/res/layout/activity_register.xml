@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Register">
+    tools:context=".RegisterActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical"
         android:background="@drawable/wallpaper"
         tools:context=".RegisterFragment"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="serif-monospace"
-            android:text="@string/action_create_account"
+            android:text="@string/action_account_create"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:layout_marginLeft="20dp"
@@ -149,12 +149,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/registerSaveButton"
+            android:id="@+id/register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_register"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/background"
+            android:backgroundTint="@color/button"
             android:layout_margin="10dp"/>
 
     </LinearLayout>
