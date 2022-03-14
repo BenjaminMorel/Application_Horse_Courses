@@ -4,16 +4,12 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">mapTitle</string>
 
-
     <!-- Strings related to the app -->
-
     <string name="AppTitle">Horse Course</string>
 
     <!-- Strings related to the button -->
-
-    <string name="sign_in">Log in</string>
-    <string name="sign_up">Log up</string>
-
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign Up</string>
 
     <!-- Strings related to User -->
     <string name="firstname">First Name</string>
@@ -25,7 +21,7 @@
 
     <!-- Actions -->
     <string name="action_create">Create</string>
-    <string name="action_create_account">Create an account!</string>
+    <string name="action_account_create">Create an account</string>
     <string name="action_register">Register</string>
     <string name="action_update">Save Changes</string>
     <string name="action_edit">Edit</string>
