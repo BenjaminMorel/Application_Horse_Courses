@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.Horse_App">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:name=".BaseApp"
         android:allowBackup="true"
@@ -11,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".CreateNewCourse"
+            android:exported="false" />
         <activity
             android:name=".activities.MainPage"
             android:exported="false" />

@@ -29,8 +29,8 @@ public class RideListViewModel extends AndroidViewModel {
         observableRides = new MediatorLiveData<>();
         observableRides.setValue(null);
 
-        LiveData<List<Ride>> rideList = repository.getRides(application );
-        observableRides.addSource(rideList, observableRides::setValue);
+       // LiveData<List<Ride>> rideList = repository.getRides(application );
+      //observableRides.addSource(rideList, observableRides::setValue);
 
     }
 

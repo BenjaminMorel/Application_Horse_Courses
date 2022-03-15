@@ -27,11 +27,11 @@ public class RideRepository {
         return instance;
     }
 
-    public LiveData<List<Ride>> getRides(Application application){
+    public List<Ride> getRides(Application application){
         return ((BaseApp) application).getDatabase().rideDao().getAll();
     }
 
-    public LiveData<Ride> getRide(final int id, Application application){
+    public Ride getRide(final int id, Application application){
         return ((BaseApp) application).getDatabase().rideDao().getByID(id);
     }
 }

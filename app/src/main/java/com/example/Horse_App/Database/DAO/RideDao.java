@@ -14,10 +14,10 @@ import java.util.List;
 public interface RideDao {
 
     @Query("SELECT * FROM ride")
-    LiveData<List<Ride>> getAll();
+    List<Ride> getAll();
 
     @Query("SELECT * FROM ride WHERE rideID = :id")
-    LiveData<Ride> getByID(int id);
+    Ride getByID(int id);
 
     @Insert()
     void instert(Ride ride);

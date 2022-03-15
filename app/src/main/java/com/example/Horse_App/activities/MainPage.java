@@ -3,19 +3,28 @@ package com.example.Horse_App.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
 
 import com.example.Horse_App.BaseApp;
+import com.example.Horse_App.CreateNewCourse;
 import com.example.Horse_App.CustomCourseItem;
+import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.Database.repository.RideRepository;
+import com.example.Horse_App.Fragments.Show_Ride;
 import com.example.Horse_App.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainPage extends AppCompatActivity {
 
     private RideRepository repository;
+    private List rides;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +46,13 @@ public class MainPage extends AppCompatActivity {
 
         repository = ((BaseApp) getApplication()).getRideRepository();
 
+        rides = repository.getRides(getApplication());
 
-
+        CustomCourseItem customCourseItem = new CustomCourseItem(this, rides);
+        customCourseItem.setMainPage(this);
         ListView listView = findViewById(R.id.ListRideToChoose);
-        repository.getRides(getApplication()).observe(this, ridesEntities -> {
-            if(ridesEntities != null){
+        listView.setAdapter(customCourseItem);
 
-                    CustomCourseItem customCourseItem = new CustomCourseItem(this, ridesEntities);
-                    listView.setAdapter(customCourseItem);
-
-
-            }
-        });
 
     }
     @Override
@@ -56,5 +60,10 @@ public class MainPage extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+    }
+
+    public void generateCreateCoursePage(){
+        Intent intent = new Intent(this, CreateNewCourse.class);
+        startActivity(intent);
     }
 }
