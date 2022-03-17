@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditActivity">
+    tools:context=".activities.EditAccount">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/first_name_register"
+                android:id="@+id/first_name_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/last_name_register"
+                android:id="@+id/last_name_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/phone_number_register"
+                android:id="@+id/phone_number_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/email_register"
+                android:id="@+id/email_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -99,7 +99,24 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/password_register"
+                android:id="@+id/old_password_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/old_password"
+                android:inputType="textPassword"
+                android:background="@drawable/shape_mail"
+                android:backgroundTint="@color/white"
+                android:textColorHint="@color/white"
+                android:layout_margin="10dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/password_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -116,7 +133,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/confirm_password_register"
+                android:id="@+id/confirm_password_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

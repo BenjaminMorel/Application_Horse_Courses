@@ -22,8 +22,9 @@ public class DatabaseInitializer {
         db.userDao().insert(user);
     }
 
-    private static void addRide(final AppDatabase db, final String description, final double lenght, final double duration, final int difficulty, final String location){
-        Ride ride = new Ride(description,lenght,duration,difficulty,location);
+    private static void addRide(final AppDatabase db, final String description, final double lenght, final double duration, final int difficulty,
+                                final String location,final String positions,final String time,final double price){
+        Ride ride = new Ride(description,lenght,duration,difficulty,location, positions,time,price);
         db.rideDao().instert(ride);
     }
 
@@ -32,7 +33,7 @@ public class DatabaseInitializer {
 
         db.userDao().deleteAll();
         addUser(db, "admin","123","Hugo","Vouillamoz", "075248621");
-        addUser(db, "admin","123","Benjamin","Morel", "078689289");
+        addUser(db, "admin2","123","Benjamin","Morel", "078689289");
 
         try {
             Thread.sleep(1000);
@@ -41,9 +42,9 @@ public class DatabaseInitializer {
         }
 
         db.rideDao().deleteAll();
-        addRide(db, "Super balade", 10.2, 3.5, 4, "Martigny");
-        addRide(db, "Super promenade", 9.8, 4.8, 3, "Sierre");
-        addRide(db, "Super excursion", 7.8, 2.5, 1, "Sion");
+        addRide(db, "Super balade", 10.2, 3.5, 4, "Martigny", "46.109987/7.102460/46.122314/7.129649/46.119117/7.132502/46.107869/7.103133","13:30/16:30",45.50);
+        addRide(db, "Super promenade", 9.8, 4.8, 3, "Liddes","45.981136/7.189659/45.972979/7.202241/45.973308/7.207658/45.987731/7.189178","11:00/14:15",32.50);
+        addRide(db, "Super excursion", 7.8, 2.5, 1, "Saillon","46.168166/7.177144/46.167106/7.171189/46.161594/7.165012/46.157026/7.155829/46.164446/7.180595","12:00/15:00",40.00);
 
         try {
             Thread.sleep(1000);

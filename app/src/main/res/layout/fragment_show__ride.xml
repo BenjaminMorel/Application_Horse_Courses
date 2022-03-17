@@ -17,6 +17,7 @@
         android:textStyle="bold"
         android:text="Test" />
 
+
     <Button
         android:id="@+id/buttonSelectCourse"
         android:layout_width="100dp"
@@ -24,6 +25,7 @@
         android:background="@drawable/shape_round"
         android:backgroundTint="@color/button"
         android:onClick="purchaseCourse"
+        android:layout_marginTop="100dp"
         android:text="50 CHF"/>
 
 

@@ -21,7 +21,7 @@ import com.example.Horse_App.Database.Entity.User;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {User.class , Ride.class, Course.class}, version=7,exportSchema = false)
+@Database(entities = {User.class , Ride.class, Course.class}, version=9,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
@@ -74,7 +74,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 Log.i(TAG, "Wipe database.");
                 database.userDao().deleteAll();
                 database.rideDao().deleteAll();
-                //TODO add course delete all
+                database.courseDao().deleteAll();
 
                 DatabaseInitializer.populateDatabase(database);
             });

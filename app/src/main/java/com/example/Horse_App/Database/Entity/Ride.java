@@ -25,15 +25,25 @@ public class Ride {
     @ColumnInfo(name = "location")
     public String location;
 
-    //TODO ajouter les coordonés latLong pour le départ et la fin
+    @ColumnInfo(name = "positions")
+    public String positions;
+
+    @ColumnInfo(name = "time")
+    public String time;
+
+    @ColumnInfo(name = "price")
+    public double price;
 
 
-    public Ride(String description, double lenght, double duration, int difficulty, String location) {
+    public Ride(String description, double lenght, double duration, int difficulty, String location, String positions,String time,double price) {
         this.description = description;
         this.lenght = lenght;
         this.duration = duration;
         this.difficulty = difficulty;
         this.location = location;
+        this.positions = positions;
+        this.time = time;
+        this.price = price;
     }
 
     public int getRideID() {
@@ -84,5 +94,27 @@ public class Ride {
         this.location = location;
     }
 
+    public String getPositions() {
+        return positions;
+    }
 
+    public void setPositions(String positions) {
+        this.positions = positions;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 }

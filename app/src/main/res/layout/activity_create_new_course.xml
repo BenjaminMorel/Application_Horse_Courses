@@ -1,13 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateNewCourse">
+    tools:context=".activities.CreateNewCourse">
 
-    <CalendarView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/courseTitleLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:text="test"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    android:textStyle="bold"></TextView>
+                <include
+                    android:id="@+id/mapFragment"
+                    layout="@layout/fragment_maps"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_centerHorizontal="true"/>
+
+                <CalendarView
+                    android:id="@+id/calendarNewCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_below="@id/mapFragment"
+                    android:layout_marginTop="100dp"
+                 />
+
+            <TextView
+                android:id="@+id/StartHour"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/mapFragment"
+                android:layout_alignLeft="@id/mapFragment"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                ></TextView>
+
+            <TextView
+                android:id="@+id/FinishHour"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/mapFragment"
+                android:layout_alignRight="@id/mapFragment"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                ></TextView>
+
+
+            <TextView
+                android:id="@+id/course_price"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/calendarNewCourse"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:background="@color/background"
+                ></TextView>
+
+            <Button
+                android:id="@+id/ButtonConfirmNewCourse"
+                android:layout_marginTop="30dp"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_below="@id/course_price"
+                android:layout_centerHorizontal="true"
+                android:text="Confirme new Course"/>
+        </RelativeLayout>
+</ScrollView>
+</RelativeLayout>

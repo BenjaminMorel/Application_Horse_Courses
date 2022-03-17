@@ -3,6 +3,7 @@
     package="com.example.Horse_App">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:name=".BaseApp"
@@ -13,8 +14,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".SMSReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
         <activity
-            android:name=".CreateNewCourse"
+            android:name=".activities.CreateNewCourse"
             android:exported="false" />
         <activity
             android:name=".activities.MainPage"

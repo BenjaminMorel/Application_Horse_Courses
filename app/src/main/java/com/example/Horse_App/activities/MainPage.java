@@ -3,22 +3,18 @@ package com.example.Horse_App.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.ListView;
 
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.CreateNewCourse;
 import com.example.Horse_App.CustomCourseItem;
-import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.Database.repository.RideRepository;
-import com.example.Horse_App.Fragments.Show_Ride;
 import com.example.Horse_App.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainPage extends AppCompatActivity {
@@ -62,8 +58,14 @@ public class MainPage extends AppCompatActivity {
         return true;
     }
 
-    public void generateCreateCoursePage(){
+    public void generateCreateCoursePage(int rideID){
+
+        // We used the position of the button that was pressed to stored the ride ID in shared Preferences to retreive it later
+        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0).edit();
+        editor.putInt(BaseActivity.PREFS_USERID, rideID);
+        editor.apply();
         Intent intent = new Intent(this, CreateNewCourse.class);
+      //  Intent intent = new Intent(this, EditAccount.class);
         startActivity(intent);
     }
 }

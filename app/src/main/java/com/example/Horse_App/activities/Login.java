@@ -1,20 +1,15 @@
 package com.example.Horse_App.activities;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 
-import android.app.Application;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.AppDatabase;
@@ -32,11 +27,15 @@ public class Login extends AppCompatActivity {
 
     private User newUser;
 
+    private static final int PERMISSION_REQUEST_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+
+        logout();
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
@@ -82,8 +81,8 @@ public class Login extends AppCompatActivity {
             repository.getUserByEmail(email,getApplication()).observe(Login.this, user -> {
                 if (user != null) {
                     if (user.getPassword().equals(password)) {
-                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_ID, 0).edit();
-                        editor.putInt(BaseActivity.PREFS_ID, user.userID);
+                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
+                        editor.putInt(BaseActivity.PREFS_USERID, user.userID);
                         editor.apply();
                        Intent intent = new Intent(this, MainPage.class);
                         startActivity(intent);
@@ -102,8 +101,16 @@ public class Login extends AppCompatActivity {
         DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
     }
 
-    private void setUserValue(User user){
-        newUser = user;
+    private void sendSMS() {
+        Intent intent = new Intent(getApplicationContext(), MainPage.class);
+        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,intent,0);
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage("000", null, "you acces code is 4444", pi, null);
     }
 
+    private void logout(){
+        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
+        editor.remove(BaseActivity.PREFS_USERID);
+        editor.apply();
+    }
 }

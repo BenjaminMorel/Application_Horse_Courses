@@ -9,8 +9,8 @@ import com.example.Horse_App.R;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public static final String PREFS_ID = "SharedPrefs";
-    public static final String PREFS_USER = "LoggedIn";
+    public static final String PREFS_USERID = "SharedPrefs";
+    public static final String PREFS_RIDEID = "SharedPrefs";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
