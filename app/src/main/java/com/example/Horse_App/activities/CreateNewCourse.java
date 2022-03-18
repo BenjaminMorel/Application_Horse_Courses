@@ -77,11 +77,6 @@ public class CreateNewCourse extends AppCompatActivity {
 
         setTextViewValue();
 
-
-
-
-
-
         initializeMapsFragment();
         confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
 

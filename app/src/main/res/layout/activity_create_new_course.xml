@@ -27,8 +27,8 @@
                 <include
                     android:id="@+id/mapFragment"
                     layout="@layout/fragment_maps"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
                     android:layout_marginTop="100dp"
                     android:layout_centerHorizontal="true"/>
 

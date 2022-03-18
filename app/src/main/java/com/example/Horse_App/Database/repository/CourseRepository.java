@@ -28,8 +28,16 @@ public class CourseRepository {
         return instance;
     }
 
-    public LiveData<List<Course>> getCourse(Application application){
-        return ((BaseApp) application).getDatabase().courseDao().getAllCourse();
+    public LiveData<List<Course>> getCourses(Application application){
+        return ((BaseApp) application).getDatabase().courseDao().getAllCourses();
+    }
+
+    public LiveData<List<Course>> getCoursesByUser(Application application,int id){
+        return ((BaseApp) application).getDatabase().courseDao().getAllcourseByUser(id);
+    }
+
+    public void deleteByID(Application application,int id){
+         ((BaseApp) application).getDatabase().courseDao().deleteByID(id);
     }
 
 }

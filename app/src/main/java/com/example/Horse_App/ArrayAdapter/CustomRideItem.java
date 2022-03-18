@@ -1,4 +1,4 @@
-package com.example.Horse_App;
+package com.example.Horse_App.ArrayAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,20 +12,21 @@ import android.widget.TextView;
 
 import com.example.Horse_App.Database.Entity.Course;
 import com.example.Horse_App.Database.Entity.Ride;
+import com.example.Horse_App.R;
 import com.example.Horse_App.activities.BaseActivity;
 import com.example.Horse_App.activities.MainPage;
 
 import java.util.List;
 
-public class CustomCourseItem extends ArrayAdapter {
+public class CustomRideItem extends ArrayAdapter {
 
     private Activity context ;
     private List<Ride> rides;
     private MainPage mainPage;
     private int rideID;
 
-    public CustomCourseItem(Activity context,  List<Ride> rides){
-        super(context,R.layout.fragment_show__ride,rides);
+    public CustomRideItem(Activity context, List<Ride> rides){
+        super(context, R.layout.fragment_show__ride,rides);
         this.context = context;
         this.rides = rides;
     }

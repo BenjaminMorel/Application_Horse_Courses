@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.CustomCourseItem;
+import com.example.Horse_App.ArrayAdapter.CustomRideItem;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 
@@ -21,6 +23,7 @@ public class MainPage extends AppCompatActivity {
 
     private RideRepository repository;
     private List rides;
+    private Button showCourses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +47,18 @@ public class MainPage extends AppCompatActivity {
 
         rides = repository.getRides(getApplication());
 
-        CustomCourseItem customCourseItem = new CustomCourseItem(this, rides);
+        CustomRideItem customCourseItem = new CustomRideItem(this, rides);
         customCourseItem.setMainPage(this);
         ListView listView = findViewById(R.id.ListRideToChoose);
         listView.setAdapter(customCourseItem);
+
+        showCourses = findViewById(R.id.showMyCourse);
+        showCourses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                generateAllCoursesPage();
+            }
+        });
 
 
     }
@@ -66,6 +77,11 @@ public class MainPage extends AppCompatActivity {
         editor.apply();
         Intent intent = new Intent(this, CreateNewCourse.class);
       //  Intent intent = new Intent(this, EditAccount.class);
+        startActivity(intent);
+    }
+
+    public void generateAllCoursesPage(){
+        Intent intent = new Intent(this, DisplayAllCourses.class);
         startActivity(intent);
     }
 }

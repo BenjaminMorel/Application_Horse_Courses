@@ -14,13 +14,19 @@ import java.util.List;
 public interface CourseDao {
 
     @Query("SELECT * FROM course")
-    LiveData<List<Course>> getAllCourse();
+    LiveData<List<Course>> getAllCourses();
+
+    @Query("SELECT * FROM course WHERE userID= :id")
+    LiveData<List<Course>> getAllcourseByUser(int id);
 
     @Insert()
     void instert(Course course);
 
     @Query("DELETE FROM course")
     void deleteAll();
+
+    @Query("DELETE FROM course WHERE courseID=:id")
+    void deleteByID(int id);
 
     @Insert
     void insert(Course course);
