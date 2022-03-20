@@ -25,13 +25,13 @@ public class EditAccount extends AppCompatActivity {
 
     private UserRepository userRepository;
 
-    EditText edFirstname ;
-    EditText edLastname ;
-    EditText edPhoneNumber ;
-    EditText edEmail ;
+    EditText edFirstname;
+    EditText edLastname;
+    EditText edPhoneNumber;
+    EditText edEmail;
 
-    EditText edOldPassword ;
-    EditText edPassword ;
+    EditText edOldPassword;
+    EditText edPassword;
     EditText edConfirmPassword;
 
     @Override
@@ -39,37 +39,37 @@ public class EditAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
-        userRepository =  ((BaseApp) getApplicationContext()).getUserRepository();
+        userRepository = ((BaseApp) getApplicationContext()).getUserRepository();
         displayUserInfo();
     }
 
 
-    private void displayUserInfo(){
+    private void displayUserInfo() {
 
-         edFirstname = findViewById(R.id.first_name_edit);
-         edLastname = findViewById(R.id.last_name_edit);
-         edPhoneNumber = findViewById(R.id.phone_number_edit);
-         edEmail = findViewById(R.id.email_edit);
+        edFirstname = findViewById(R.id.first_name_edit);
+        edLastname = findViewById(R.id.last_name_edit);
+        edPhoneNumber = findViewById(R.id.phone_number_edit);
+        edEmail = findViewById(R.id.email_edit);
 
-         edOldPassword = findViewById(R.id.old_password_edit);
-         edPassword = findViewById(R.id.password_edit);
-         edConfirmPassword = findViewById(R.id.confirm_password_edit);
+        edOldPassword = findViewById(R.id.old_password_edit);
+        edPassword = findViewById(R.id.password_edit);
+        edConfirmPassword = findViewById(R.id.confirm_password_edit);
 
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
 
-        userID = preferences.getInt(BaseActivity.PREFS_USERID,1);
+        userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
 
-       userRepository.getUserByID(userID,getApplication()).observe(EditAccount.this, user -> {
-           edFirstname.setText(user.firstName);
-           edLastname.setText(user.lastName);
-           edPhoneNumber.setText(user.phoneNumber);
-           edEmail.setText(user.email);
-       });
+        userRepository.getUserByID(userID, getApplication()).observe(EditAccount.this, user -> {
+            edFirstname.setText(user.firstName);
+            edLastname.setText(user.lastName);
+            edPhoneNumber.setText(user.phoneNumber);
+            edEmail.setText(user.email);
+        });
 
         Button saveModificationButton = findViewById(R.id.button_save_changes);
         saveModificationButton.setOnClickListener(view -> saveModification(edFirstname.getText().toString(), edLastname.getText().toString(),
-                                                        edPhoneNumber.getText().toString(), edEmail.getText().toString(),
-                                                        edOldPassword.getText().toString(), edPassword.getText().toString(), edConfirmPassword.getText().toString()));
+                edPhoneNumber.getText().toString(), edEmail.getText().toString(),
+                edOldPassword.getText().toString(), edPassword.getText().toString(), edConfirmPassword.getText().toString()));
     }
 
     private void saveModification(String firstname, String lastname, String phonenumber, String email, String oldPassword, String password, String confirmPassword) {
@@ -101,13 +101,15 @@ public class EditAccount extends AppCompatActivity {
                         public void onSuccess() {
                             Log.d(TAG, "Edit user: success");
                         }
+
                         @Override
                         public void onFailure(Exception e) {
-                            Log.d(TAG, "Edit user: failure", e); }
+                            Log.d(TAG, "Edit user: failure", e);
+                        }
                     }).execute(editUser);
                     Intent intent = new Intent(this, MainPage.class);
                     startActivity(intent);
-                }else{
+                } else {
                     edOldPassword.setError(getString(R.string.error_login_message));
                 }
             });
@@ -115,7 +117,7 @@ public class EditAccount extends AppCompatActivity {
         }
     }
 
-    public void loadPage(View view){
+    public void loadPage(View view) {
         Intent intent = new Intent(this, EditAccount.class);
         startActivity(intent);
     }

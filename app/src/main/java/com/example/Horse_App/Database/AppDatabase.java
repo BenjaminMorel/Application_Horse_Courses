@@ -21,26 +21,26 @@ import com.example.Horse_App.Database.Entity.User;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {User.class , Ride.class, Course.class}, version=9,exportSchema = false)
+@Database(entities = {User.class, Ride.class, Course.class}, version = 11, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
     private static AppDatabase INSTANCE;
     private static final String DATABASE_NAME = "Horse-App";
 
-    public abstract UserDao userDao() ;
+    public abstract UserDao userDao();
+
     public abstract RideDao rideDao();
+
     public abstract CourseDao courseDao();
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
 
-
-
-    public static  AppDatabase getAppDateBase(Context context){
-        if(INSTANCE == null){
-            synchronized (AppDatabase.class){
-                if(INSTANCE==null){
+    public static AppDatabase getAppDateBase(Context context) {
+        if (INSTANCE == null) {
+            synchronized (AppDatabase.class) {
+                if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "AppDatabase")
                             .allowMainThreadQueries()
                             .fallbackToDestructiveMigration()
@@ -88,7 +88,7 @@ public abstract class AppDatabase extends RoomDatabase {
         }
     }
 
-    private void setDatabaseCreated(){
+    private void setDatabaseCreated() {
         mIsDatabaseCreated.postValue(true);
     }
 

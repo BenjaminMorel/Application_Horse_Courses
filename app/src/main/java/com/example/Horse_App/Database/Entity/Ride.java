@@ -13,13 +13,13 @@ public class Ride {
     @ColumnInfo(name = "description")
     public String description;
 
-    @ColumnInfo(name ="lenght")
-    public double lenght;
+    @ColumnInfo(name = "length")
+    public double length;
 
-    @ColumnInfo(name ="duration")
+    @ColumnInfo(name = "duration")
     public double duration;
 
-    @ColumnInfo(name =  "difficulty")
+    @ColumnInfo(name = "difficulty")
     public int difficulty;
 
     @ColumnInfo(name = "location")
@@ -35,9 +35,9 @@ public class Ride {
     public double price;
 
 
-    public Ride(String description, double lenght, double duration, int difficulty, String location, String positions,String time,double price) {
+    public Ride(String description, double length, double duration, int difficulty, String location, String positions, String time, double price) {
         this.description = description;
-        this.lenght = lenght;
+        this.length = length;
         this.duration = duration;
         this.difficulty = difficulty;
         this.location = location;
@@ -62,12 +62,12 @@ public class Ride {
         this.description = description;
     }
 
-    public double getLenght() {
-        return lenght;
+    public double getLength() {
+        return length;
     }
 
-    public void setLenght(double lenght) {
-        this.lenght = lenght;
+    public void setLength(double length) {
+        this.length = length;
     }
 
     public double getDuration() {

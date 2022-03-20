@@ -26,6 +26,7 @@ public class MainPage extends AppCompatActivity {
     private RideRepository repository;
     private List rides;
     private Button showCourses;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class MainPage extends AppCompatActivity {
         startMainPage();
     }
 
-    private void startMainPage(){
+    private void startMainPage() {
 
         repository = ((BaseApp) getApplication()).getRideRepository();
 
@@ -65,6 +66,7 @@ public class MainPage extends AppCompatActivity {
 
     /**
      * Inflates the menu and add items to the toolbar
+     *
      * @param menu
      * @return
      */
@@ -77,6 +79,7 @@ public class MainPage extends AppCompatActivity {
 
     /**
      * Manages the dropdown menu in the toolbar
+     *
      * @param item
      * @return
      */
@@ -97,18 +100,17 @@ public class MainPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void generateCreateCoursePage(int rideID){
+    public void generateCreateCoursePage(int rideID) {
 
         // We used the position of the button that was pressed to stored the ride ID in shared Preferences to retreive it later
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0).edit();
         editor.putInt(BaseActivity.PREFS_USERID, rideID);
         editor.apply();
         Intent intent = new Intent(this, CreateNewCourse.class);
-      //  Intent intent = new Intent(this, EditAccount.class);
         startActivity(intent);
     }
 
-    public void generateAllCoursesPage(){
+    public void generateAllCoursesPage() {
         Intent intent = new Intent(this, DisplayAllCourses.class);
         startActivity(intent);
     }

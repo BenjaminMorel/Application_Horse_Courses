@@ -11,8 +11,8 @@ import androidx.room.util.TableInfo;
 import java.util.Date;
 
 @Entity(tableName = "course",
-        foreignKeys = {@ForeignKey(entity=Ride.class, parentColumns = "rideID", childColumns = "rideID", onDelete = ForeignKey.CASCADE),
-                      @ForeignKey(entity=User.class, parentColumns =  "userID", childColumns ="userID", onDelete = ForeignKey.CASCADE)})
+        foreignKeys = {@ForeignKey(entity = Ride.class, parentColumns = "rideID", childColumns = "rideID", onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = User.class, parentColumns = "userID", childColumns = "userID", onDelete = ForeignKey.CASCADE)})
 public class Course {
 
     @PrimaryKey(autoGenerate = true)
@@ -28,7 +28,7 @@ public class Course {
     public String date;
 
 
-    public Course(int rideID,int userID, String date) {
+    public Course(int rideID, int userID, String date) {
         this.rideID = rideID;
         this.userID = userID;
         this.date = date;

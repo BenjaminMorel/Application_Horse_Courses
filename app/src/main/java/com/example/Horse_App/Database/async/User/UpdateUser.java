@@ -7,7 +7,7 @@ import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.User;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 
-public class UpdateUser extends AsyncTask<User,Void,Void> {
+public class UpdateUser extends AsyncTask<User, Void, Void> {
 
     private Application application;
     private OnAsyncEventListener callback;

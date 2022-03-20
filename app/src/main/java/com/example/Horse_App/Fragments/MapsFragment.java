@@ -18,15 +18,15 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback{
+public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
 
     private View fragmentView;
     private GoogleMap mMap;
     private String positions;
     private String newPoints;
-    private String [] pointLocation;
+    private String[] pointLocation;
 
-    public MapsFragment(String positions){
+    public MapsFragment(String positions) {
         this.positions = positions;
     }
 
@@ -37,18 +37,17 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 pointLocation = null;
                 mMap = googleMap;
                 List<LatLng> path = new ArrayList<LatLng>();
-                pointLocation = positions.split("/" );
+                pointLocation = positions.split("/");
 
 
-
-                for(int i = 0; i < pointLocation.length-1; i+=2){
-                    LatLng newPoint = new LatLng(Double.parseDouble(pointLocation[i]),Double.parseDouble(pointLocation[i+1]));
+                for (int i = 0; i < pointLocation.length - 1; i += 2) {
+                    LatLng newPoint = new LatLng(Double.parseDouble(pointLocation[i]), Double.parseDouble(pointLocation[i + 1]));
                     path.add(newPoint);
                 }
 
                 mMap.addMarker(new MarkerOptions().position(path.get(0)).title("Start"));
-                mMap.addMarker(new MarkerOptions().position(path.get(path.size()-1)).title("End"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(path.get(0),13.0f));
+                mMap.addMarker(new MarkerOptions().position(path.get(path.size() - 1)).title("End"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(path.get(0), 13.0f));
                 mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
                 PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(7);
@@ -68,6 +67,6 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onMapReady(@NonNull GoogleMap googleMap) {
     }
 
-    public void stringParser(){
+    public void stringParser() {
     }
 }

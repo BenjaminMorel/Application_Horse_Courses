@@ -14,7 +14,7 @@ public class CreateCourse extends AsyncTask<Course, Void, Void> {
     private OnAsyncEventListener callback;
     private Exception exception;
 
-    public CreateCourse(Application application, OnAsyncEventListener callback){
+    public CreateCourse(Application application, OnAsyncEventListener callback) {
         this.application = application;
         this.callback = callback;
     }

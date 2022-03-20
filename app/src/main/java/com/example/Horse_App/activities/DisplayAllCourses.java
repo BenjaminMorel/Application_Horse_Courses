@@ -21,6 +21,7 @@ public class DisplayAllCourses extends AppCompatActivity {
     private List<Course> courses;
     private ListView listView;
     private int userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,19 +30,17 @@ public class DisplayAllCourses extends AppCompatActivity {
         generatePage();
     }
 
-    private void generatePage(){
+    private void generatePage() {
         courseRepository = ((BaseApp) getApplication()).getCourseRepository();
 
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
-        userID = preferences.getInt(BaseActivity.PREFS_USERID,1);
+        userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
 
         listView = findViewById(R.id.allCourses);
 
-        courseRepository.getCoursesByUser(getApplication(),userID).observe(this,  allCourse ->{
+        courseRepository.getCoursesByUser(getApplication(), userID).observe(this, allCourse -> {
             CustomeCourseItem customeCourseItem = new CustomeCourseItem(this, allCourse);
             listView.setAdapter(customeCourseItem);
-        } );
+        });
     }
-
-
 }

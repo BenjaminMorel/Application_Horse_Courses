@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/shape_round.xml" value="0.181" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_about.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_base.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_course_historique.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_create_new_course.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_main_page.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_register.xml" value="0.25" />
@@ -11,6 +15,7 @@
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/fragment_course_display.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/fragment_maps.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/fragment_show__ride.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/fragment_show_ride.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/toolbar.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/menu/menu.xml" value="0.24444444444444444" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1805" />

@@ -13,14 +13,14 @@ public class UserRepository {
 
     private static UserRepository instance;
 
-    private UserRepository(){
+    private UserRepository() {
 
     }
 
-    public static UserRepository getInstance(){
-        if(instance == null){
-            synchronized (UserRepository.class){
-                if(instance == null){
+    public static UserRepository getInstance() {
+        if (instance == null) {
+            synchronized (UserRepository.class) {
+                if (instance == null) {
                     instance = new UserRepository();
                 }
             }
@@ -29,15 +29,15 @@ public class UserRepository {
     }
 
 
-    public LiveData<List<User>> getUsers(Application application){
+    public LiveData<List<User>> getUsers(Application application) {
         return ((BaseApp) application).getDatabase().userDao().getAll();
     }
 
-    public LiveData<User> getUserByID(final int userID, Application application){
+    public LiveData<User> getUserByID(final int userID, Application application) {
         return ((BaseApp) application).getDatabase().userDao().getByID(userID);
     }
 
-    public LiveData<User> getUserByEmail(final String email, Application application){
+    public LiveData<User> getUserByEmail(final String email, Application application) {
         return ((BaseApp) application).getDatabase().userDao().getByEmail(email);
     }
 

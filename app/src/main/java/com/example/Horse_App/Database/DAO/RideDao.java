@@ -20,7 +20,7 @@ public interface RideDao {
     Ride getByID(int id);
 
     @Insert()
-    void instert(Ride ride);
+    void insert(Ride ride);
 
     @Query("DELETE FROM ride")
     void deleteAll();

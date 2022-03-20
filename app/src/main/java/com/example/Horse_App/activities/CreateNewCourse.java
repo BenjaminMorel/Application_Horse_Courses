@@ -54,7 +54,6 @@ public class CreateNewCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_course);
 
-
         createPage();
 
     }
@@ -74,7 +73,6 @@ public class CreateNewCourse extends AppCompatActivity {
 
         ride = rideRepository.getRide(rideID,getApplication());
 
-
         setTextViewValue();
 
         initializeMapsFragment();
@@ -87,7 +85,10 @@ public class CreateNewCourse extends AppCompatActivity {
             }
         });
 
+        // Disable past days
         calendarView = findViewById(R.id.calendarNewCourse);
+        long now = calendarView.getDate();
+        calendarView.setMinDate(now);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -122,7 +123,6 @@ public class CreateNewCourse extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainPage.class);
         startActivity(intent);
-
 
     }
 

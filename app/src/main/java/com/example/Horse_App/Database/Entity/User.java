@@ -19,14 +19,14 @@ public class User {
     @ColumnInfo(name = "first_name")
     public String firstName;
 
-    @ColumnInfo(name ="last_name")
+    @ColumnInfo(name = "last_name")
     public String lastName;
 
-    @ColumnInfo(name ="phoneNumber")
+    @ColumnInfo(name = "phoneNumber")
     public String phoneNumber;
 
 
-    public User(String email, String password, String firstName, String lastName,String phoneNumber) {
+    public User(String email, String password, String firstName, String lastName, String phoneNumber) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;

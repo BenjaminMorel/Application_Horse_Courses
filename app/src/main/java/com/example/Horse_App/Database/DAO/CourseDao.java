@@ -17,10 +17,10 @@ public interface CourseDao {
     LiveData<List<Course>> getAllCourses();
 
     @Query("SELECT * FROM course WHERE userID= :id")
-    LiveData<List<Course>> getAllcourseByUser(int id);
+    LiveData<List<Course>> getAllCoursesByUser(int id);
 
     @Insert()
-    void instert(Course course);
+    void insert(Course course);
 
     @Query("DELETE FROM course")
     void deleteAll();
@@ -28,6 +28,4 @@ public interface CourseDao {
     @Query("DELETE FROM course WHERE courseID=:id")
     void deleteByID(int id);
 
-    @Insert
-    void insert(Course course);
 }

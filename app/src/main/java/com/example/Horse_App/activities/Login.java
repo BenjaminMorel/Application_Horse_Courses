@@ -20,11 +20,8 @@ import com.example.Horse_App.R;
 
 public class Login extends AppCompatActivity {
 
-    private EditText emailView;
-    private EditText passwordView;
-
+    private EditText emailView, passwordView;
     private UserRepository repository;
-
     private User newUser;
 
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -32,32 +29,43 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
         logout();
+        reinitializeDatabase();
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
         emailView = findViewById(R.id.email_login);
         passwordView = findViewById(R.id.password_login);
 
+        // Add the register button with listener
         Button registerButton = findViewById(R.id.button_register);
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reinitializeDatabase();
+                register();
+                //reinitializeDatabase();
             }
         });
 
+        // Add the login button with listener
         Button logInButton = findViewById(R.id.button_login);
         logInButton.setOnClickListener(view -> attemptLogin());
 
 
     }
 
-    private void attemptLogin(){
+    /**
+     * Method called by the register button to redirect to register page with an intent
+     */
+    private void register() {
+        Intent intent = new Intent(this, Register.class);
+        startActivity(intent);
+    }
+
+
+    private void attemptLogin() {
 
         boolean cancel = false;
         emailView.setError(null);
@@ -67,35 +75,34 @@ public class Login extends AppCompatActivity {
         String password = passwordView.getText().toString();
 
 
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             emailView.setError(getString(R.string.field_required));
             cancel = true;
-        }else if(password.isEmpty()){
+        } else if (password.isEmpty()) {
             passwordView.setError(getString(R.string.field_required));
             cancel = true;
         }
 
-        if(!cancel){
-
-        //    repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> setUserValue(user));
-            repository.getUserByEmail(email,getApplication()).observe(Login.this, user -> {
+        if (!cancel) {
+            //    repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> setUserValue(user));
+            repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> {
                 if (user != null) {
                     if (user.getPassword().equals(password)) {
                         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
                         editor.putInt(BaseActivity.PREFS_USERID, user.userID);
                         editor.apply();
-                       Intent intent = new Intent(this, MainPage.class);
+                        Intent intent = new Intent(this, MainPage.class);
                         startActivity(intent);
 
                     }
-            }else {
+                } else {
                     emailView.setError(getString(R.string.error_login_message));
                     passwordView.setError(getString(R.string.error_login_message));
                 }
             });
-
         }
     }
+
 
     private void reinitializeDatabase() {
         DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
@@ -103,12 +110,15 @@ public class Login extends AppCompatActivity {
 
     private void sendSMS() {
         Intent intent = new Intent(getApplicationContext(), MainPage.class);
-        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(),0,intent,0);
+        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage("000", null, "you acces code is 4444", pi, null);
+        sms.sendTextMessage("000", null, "you access code is 4444", pi, null);
     }
 
-    private void logout(){
+    /**
+     * Method to clear the prefs id of the user and redirect to login page
+     */
+    private void logout() {
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
         editor.remove(BaseActivity.PREFS_USERID);
         editor.apply();
