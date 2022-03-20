@@ -68,10 +68,10 @@ public class Login extends AppCompatActivity {
 
 
         if(email.isEmpty()){
-            emailView.setError(getString(R.string.FieldRequired));
+            emailView.setError(getString(R.string.field_required));
             cancel = true;
         }else if(password.isEmpty()){
-            passwordView.setError(getString(R.string.FieldRequired));
+            passwordView.setError(getString(R.string.field_required));
             cancel = true;
         }
 
@@ -89,8 +89,8 @@ public class Login extends AppCompatActivity {
 
                     }
             }else {
-                    emailView.setError(getString(R.string.ErrorLoginMessage));
-                    passwordView.setError(getString(R.string.ErrorLoginMessage));
+                    emailView.setError(getString(R.string.error_login_message));
+                    passwordView.setError(getString(R.string.error_login_message));
                 }
             });
 

@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.ArrayAdapter.CustomRideItem;
@@ -59,14 +61,40 @@ public class MainPage extends AppCompatActivity {
                 generateAllCoursesPage();
             }
         });
-
-
     }
+
+    /**
+     * Inflates the menu and add items to the toolbar
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
+    }
+
+    /**
+     * Manages the dropdown menu in the toolbar
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_edit_profile) {
+            Intent intent = new Intent(this, EditAccount.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.menu_disconnect) {
+            logout();
+        }
+        if (item.getItemId() == R.id.menu_about) {
+            Intent intent = new Intent(this, About.class);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void generateCreateCoursePage(int rideID){
@@ -82,6 +110,17 @@ public class MainPage extends AppCompatActivity {
 
     public void generateAllCoursesPage(){
         Intent intent = new Intent(this, DisplayAllCourses.class);
+        startActivity(intent);
+    }
+
+    public void logout() {
+        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
+        editor.remove(BaseActivity.PREFS_USERID);
+        editor.apply();
+
+        Intent intent = new Intent(this, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 }

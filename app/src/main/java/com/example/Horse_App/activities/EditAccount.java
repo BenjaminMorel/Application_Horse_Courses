@@ -78,15 +78,15 @@ public class EditAccount extends AppCompatActivity {
 
         if (oldPassword.isEmpty()) {
             cancel = true;
-            edOldPassword.setError(getString(R.string.FieldRequired));
+            edOldPassword.setError(getString(R.string.field_required));
         }
         if (password.isEmpty()) {
             cancel = true;
-            edPassword.setError(getString(R.string.FieldRequired));
+            edPassword.setError(getString(R.string.field_required));
         }
         if (confirmPassword.isEmpty()) {
             cancel = true;
-            edConfirmPassword.setError(getString(R.string.FieldRequired));
+            edConfirmPassword.setError(getString(R.string.field_required));
         }
 
         if (!cancel) {
@@ -108,7 +108,7 @@ public class EditAccount extends AppCompatActivity {
                     Intent intent = new Intent(this, MainPage.class);
                     startActivity(intent);
                 }else{
-                    edOldPassword.setError(getString(R.string.ErrorLoginMessage));
+                    edOldPassword.setError(getString(R.string.error_login_message));
                 }
             });
 

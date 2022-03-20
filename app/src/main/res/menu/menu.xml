@@ -2,13 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_show"
+        android:id="@+id/menu_edit_profile"
         android:icon="@drawable/ic_account"
         android:title="@string/edit_profile" />
     <item
-        android:id="@+id/action_about"
+        android:id="@+id/menu_disconnect"
         android:icon="@drawable/ic_account"
         android:title="@string/disconnect" />
-
+    <item
+        android:id="@+id/menu_about"
+        android:icon="@drawable/ic_account"
+        android:title="@string/about" />
 
 </menu>

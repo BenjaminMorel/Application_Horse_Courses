@@ -15,9 +15,12 @@
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.About"
+            android:label="About"
+            android:exported="false" />
+        <activity
             android:name=".activities.DisplayAllCourses"
             android:exported="false" />
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

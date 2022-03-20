@@ -15,16 +15,15 @@
         android:layout_gravity="center"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:text="Test" />
-
+        android:text="@string/info_course" />
 
     <Button
         android:id="@+id/buttonSelectCourse"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/shape_round"
-        android:backgroundTint="@color/button"
         android:onClick="purchaseCourse"
+        android:backgroundTint="@color/button2"
         android:layout_marginTop="100dp"
         android:text="50 CHF"/>
 

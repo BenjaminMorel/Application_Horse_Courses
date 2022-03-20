@@ -10,14 +10,15 @@
         android:id="@+id/infoCourse"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:text="hello les salopes" />
+        android:text="@string/info_course"/>
 
     <Button
         android:id="@+id/cancelCourseButton"
         android:layout_width="150dp"
         android:layout_height="60dp"
+        android:backgroundTint="@color/button2"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:text="Cancel"/>
+        android:text="@string/action_cancel"/>
 
 </RelativeLayout>
