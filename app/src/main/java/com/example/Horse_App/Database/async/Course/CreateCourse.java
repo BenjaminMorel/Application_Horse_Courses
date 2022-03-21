@@ -10,8 +10,8 @@ import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 
 public class CreateCourse extends AsyncTask<Course, Void, Void> {
 
-    private Application application;
-    private OnAsyncEventListener callback;
+    private final Application application;
+    private final OnAsyncEventListener callback;
     private Exception exception;
 
     public CreateCourse(Application application, OnAsyncEventListener callback) {
@@ -21,11 +21,10 @@ public class CreateCourse extends AsyncTask<Course, Void, Void> {
 
 
     @Override
-    protected Void doInBackground(Course... params) {
+    protected Void doInBackground(Course... courses) {
         try {
-            for (Course course : params)
-                ((BaseApp) application).getDatabase().courseDao()
-                        .insert(course);
+            for (Course course : courses)
+                ((BaseApp) application).getDatabase().courseDao().insert(course);
         } catch (Exception e) {
             exception = e;
         }

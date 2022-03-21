@@ -13,15 +13,16 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
+        <include layout="@layout/app_bar_main"/>
+
         <TextView
             android:id="@+id/title_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="About\n\nThis app is a property of Benjamin Morel, Hugo Vouillamoz"
             android:textAlignment="center"
-            android:textSize="20dp"
             android:textColor="@color/black"
-            android:background="@color/background"
-            android:text="about\n\nthis app is a property of Benjamin Morel, Hugo Vouillamoz"
+            android:textSize="15sp"
             tools:layout_editor_absoluteX="143dp"
             tools:layout_editor_absoluteY="106dp" />
 

@@ -27,7 +27,6 @@ public class Course {
     @ColumnInfo(name = "date")
     public String date;
 
-
     public Course(int rideID, int userID, String date) {
         this.rideID = rideID;
         this.userID = userID;

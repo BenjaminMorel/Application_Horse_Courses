@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,13 +43,13 @@ public class CreateNewCourse extends AppCompatActivity {
     private RideRepository rideRepository;
     private CourseRepository courseRepository;
 
-
     private TextView startHour;
     private TextView finishHour;
     private TextView titleLocation;
     private TextView coursePrice;
 
     private Date selectedDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,6 @@ public class CreateNewCourse extends AppCompatActivity {
         createPage();
 
     }
-
 
     private void createPage(){
 
@@ -104,8 +104,10 @@ public class CreateNewCourse extends AppCompatActivity {
 
         userID = userPreferences.getInt(BaseActivity.PREFS_USERID,1);
 
+//        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String courseDate = sdf.format(selectedDate);
+//        String courseDate = sdf.format(selectedDate);
+        String courseDate = "22/03/2022";
 
         Course newCourse = new Course(ride.rideID, userID , courseDate);
 
@@ -134,18 +136,17 @@ public class CreateNewCourse extends AppCompatActivity {
         mTransaction.commit();
     }
 
+    @SuppressLint("SetTextI18n")
     private void setTextViewValue(){
 
         startHour = findViewById(R.id.StartHour);
         finishHour = findViewById(R.id.FinishHour);
-        titleLocation = findViewById(R.id.courseTitleLocation);
         coursePrice = findViewById(R.id.course_price);
 
         String [] hours = ride.time.split("/");
 
-        startHour.setText("Starting hours : " + hours[0]);
-        finishHour.setText("Ending hours : " + hours[1]);
-        titleLocation.setText(ride.location);
+        startHour.setText("Starts at: " + hours[0]);
+        finishHour.setText("Ends at: " + hours[1]);
         coursePrice.setText(String.valueOf(ride.price) + " CHF");
     }
 }

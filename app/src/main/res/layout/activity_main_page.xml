@@ -20,6 +20,7 @@
         android:id="@+id/ListRideToChoose"
         android:layout_width="411dp"
         android:layout_height="731dp"
+        android:layout_marginTop="55dp"
         android:dividerHeight="80dp"></ListView>
 
     <Button

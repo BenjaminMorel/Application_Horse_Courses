@@ -53,7 +53,6 @@ public class Login extends AppCompatActivity {
         Button logInButton = findViewById(R.id.button_login);
         logInButton.setOnClickListener(view -> attemptLogin());
 
-
     }
 
     /**

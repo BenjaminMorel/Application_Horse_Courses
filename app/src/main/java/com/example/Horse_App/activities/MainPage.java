@@ -39,7 +39,8 @@ public class MainPage extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         // Enable the Up button
-        ab.setDisplayHomeAsUpEnabled(true);
+        assert ab != null;
+        ab.setDisplayHomeAsUpEnabled(false);
 
         startMainPage();
     }

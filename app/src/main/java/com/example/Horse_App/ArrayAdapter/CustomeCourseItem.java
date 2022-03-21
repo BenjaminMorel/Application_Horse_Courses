@@ -32,17 +32,17 @@ public class CustomeCourseItem extends ArrayAdapter {
 
     private DisplayAllCourses displayAllCourses;
 
-    public CustomeCourseItem(Activity context, List<Course> courses){
+    public CustomeCourseItem(Activity context, List<Course> courses) {
         super(context, R.layout.fragment_course_display, courses);
         this.context = context;
         this.courses = courses;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         LayoutInflater inflater = context.getLayoutInflater();
-        if(convertView==null) {
+        if (convertView == null) {
             row = inflater.inflate(R.layout.fragment_course_display, null, true);
         }
         courseID = courses.get(position).courseID;
@@ -53,11 +53,11 @@ public class CustomeCourseItem extends ArrayAdapter {
             Date courseDate = new SimpleDateFormat("dd/MM/yyyy").parse(courses.get(position).getDate());
             Date actualDate = new Date();
             System.out.println(courseDate.compareTo(actualDate));
-            if(courseDate.compareTo(actualDate) < 0){
+            if (courseDate.compareTo(actualDate) < 0) {
                 cancelCourse.setText("super fun");
 
                 cancelCourse.setVisibility(View.INVISIBLE);
-            }else{
+            } else {
                 cancelCourse.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -66,7 +66,7 @@ public class CustomeCourseItem extends ArrayAdapter {
                 });
             }
             Log.d("Get the courses date", "parse the date of the course: Succes");
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("Get the courses date", "parse the date of the course: Failed");
         }
 
@@ -75,7 +75,7 @@ public class CustomeCourseItem extends ArrayAdapter {
     }
 
 
-    private void deleteCourse(){
-        CourseRepository.getInstance().deleteByID(context.getApplication(),courseID);
+    private void deleteCourse() {
+        CourseRepository.getInstance().deleteByID(context.getApplication(), courseID);
     }
 }

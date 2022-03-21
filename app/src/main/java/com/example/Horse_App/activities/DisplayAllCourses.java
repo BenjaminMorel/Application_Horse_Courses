@@ -16,7 +16,6 @@ import java.util.List;
 
 public class DisplayAllCourses extends AppCompatActivity {
 
-
     private CourseRepository courseRepository;
     private List<Course> courses;
     private ListView listView;
