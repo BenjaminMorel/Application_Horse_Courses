@@ -17,6 +17,7 @@ import com.example.Horse_App.Database.DatabaseInitializer;
 import com.example.Horse_App.Database.Entity.User;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
+import com.example.Horse_App.encryption.Encrypt;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -88,7 +89,10 @@ public class Login extends AppCompatActivity {
             //    repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> setUserValue(user));
             repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> {
                 if (user != null) {
-                    if (user.getPassword().equals(password)) {
+
+                    String encryptedPwd = Encrypt.md5(password);
+
+                    if (user.getPassword().equals(encryptedPwd)) {
                         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
                         editor.putInt(BaseActivity.PREFS_USERID, user.userID);
                         editor.apply();
@@ -124,27 +128,4 @@ public class Login extends AppCompatActivity {
         editor.apply();
     }
 
-    public static final String md5(final String s) {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
 }

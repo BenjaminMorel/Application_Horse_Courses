@@ -13,6 +13,7 @@ import com.example.Horse_App.Database.Entity.User;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.async.User.CreateUser;
 import com.example.Horse_App.R;
+import com.example.Horse_App.encryption.Encrypt;
 
 public class Register extends AppCompatActivity {
 
@@ -46,7 +47,7 @@ public class Register extends AppCompatActivity {
 
     private void registerNewUser(String firstname, String lastname, String phonenumber, String email, String password) {
 
-        String encryptedPwd = Login.md5(password);
+        String encryptedPwd = Encrypt.md5(password);
         User newUser = new User(email, encryptedPwd, firstname, lastname, phonenumber);
 
         new CreateUser(getApplication(), new OnAsyncEventListener() {

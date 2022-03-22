@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.Database.Entity.User;
+import com.example.Horse_App.encryption.Encrypt;
 
 public class DatabaseInitializer {
 
@@ -18,7 +19,9 @@ public class DatabaseInitializer {
 
     private static void addUser(final AppDatabase db, final String email, final String password, final String firstname,
                                 final String lastname, final String phoneNumber) {
-        User user = new User(email, password, firstname, lastname, phoneNumber);
+
+        String encryptedPwd = Encrypt.md5(password);
+        User user = new User(email, encryptedPwd, firstname, lastname, phoneNumber);
         db.userDao().insert(user);
     }
 
