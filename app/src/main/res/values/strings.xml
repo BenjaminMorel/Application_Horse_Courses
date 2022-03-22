@@ -1,3 +1,38 @@
 <resources>
-    <string name="app_name">LoginPage</string>
+
+    <!-- Strings related to the app -->
+    <string name="app_name">Horse Courses</string>
+    <string name="app_title">Horse Courses</string>
+    <string name="info_course">Info course</string>
+    <string name="about">About</string>
+
+    <!-- Strings related to input text -->
+    <string name="error_login_message">Wrong credentials</string>
+    <string name="field_required">This field is required</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign Up</string>
+
+    <!-- Strings related to User -->
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="old_password">Old Password</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="my_courses">My courses</string>
+
+
+    <!-- Actions -->
+    <string name="action_create">Create</string>
+    <string name="action_create_account">Create an account</string>
+    <string name="action_register">Register</string>
+    <string name="action_update">Save Changes</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="confirm_new_course">Confirm course reservation</string>
+
 </resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400dp"
+    android:layout_height="400dp"
+    android:layout_gravity="center"
+    android:background="@drawable/liddes"
+    tools:context=".Fragments.Show_Ride">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/descriptionShowCourse"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+        android:background="@color/whiteT1"
+        android:text="@string/info_course"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/buttonSelectCourse"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/shape_round"
+        android:onClick="purchaseCourse"
+        android:text="Select"
+        android:textColor="@color/button2"
+        android:textStyle="bold
+" />
+
+
+</RelativeLayout>
