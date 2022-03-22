@@ -13,7 +13,7 @@
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".splash_screen"
+            android:name=".activities.Login"
             android:exported="false" />
         <activity
             android:name=".activities.About"
@@ -41,7 +41,7 @@
             android:name=".activities.EditAccount"
             android:exported="false" />
         <activity
-            android:name=".activities.Login"
+            android:name=".activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

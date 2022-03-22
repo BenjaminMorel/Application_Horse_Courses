@@ -9,4 +9,6 @@
     <color name="text_edit">#EDCA82</color>
     <color name="button">#A2A595</color>
     <color name="button2">#63655C</color>
+    <color name="splashBackground">#A78D56</color>
+
 </resources>

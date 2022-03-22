@@ -5,6 +5,7 @@
     <string name="app_title">Horse Courses</string>
     <string name="info_course">Info course</string>
     <string name="about">About</string>
+    <string name="developped">App developped by Benjamin and Hugo</string>
 
     <!-- Strings related to input text -->
     <string name="error_login_message">Wrong credentials</string>
@@ -34,5 +35,6 @@
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
     <string name="confirm_new_course">Confirm course reservation</string>
+
 
 </resources>
