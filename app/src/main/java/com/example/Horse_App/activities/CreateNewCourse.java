@@ -26,6 +26,7 @@ import com.example.Horse_App.R;
 import com.google.android.gms.maps.SupportMapFragment;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -89,6 +90,9 @@ public class CreateNewCourse extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarNewCourse);
         long now = calendarView.getDate();
         calendarView.setMinDate(now);
+        Calendar calendar = Calendar.getInstance();
+        now += (60*1000L * 60 * 60 * 24);
+        calendarView.setMaxDate(now);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -106,8 +110,8 @@ public class CreateNewCourse extends AppCompatActivity {
 
 //        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        String courseDate = sdf.format(selectedDate);
-        String courseDate = "22/03/2022";
+        String courseDate = sdf.format(selectedDate);
+     //   String courseDate = "22/03/2022";
 
         Course newCourse = new Course(ride.rideID, userID , courseDate);
 

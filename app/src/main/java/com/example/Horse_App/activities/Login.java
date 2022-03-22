@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         logout();
-        reinitializeDatabase();
+      //  reinitializeDatabase();
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
@@ -44,8 +44,9 @@ public class Login extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                reinitializeDatabase();
                 register();
-                //reinitializeDatabase();
+
             }
         });
 

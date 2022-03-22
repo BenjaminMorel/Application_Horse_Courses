@@ -62,6 +62,7 @@
                 android:layout_below="@id/mapFragment"
                 android:layout_marginTop="60dp" />
 
+
             <Button
                 android:id="@+id/ButtonConfirmNewCourse"
                 android:layout_width="wrap_content"
