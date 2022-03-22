@@ -18,6 +18,9 @@ import com.example.Horse_App.Database.Entity.User;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Login extends AppCompatActivity {
 
     private EditText emailView, passwordView;
@@ -64,7 +67,6 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     private void attemptLogin() {
 
         boolean cancel = false;
@@ -73,7 +75,6 @@ public class Login extends AppCompatActivity {
 
         String email = emailView.getText().toString();
         String password = passwordView.getText().toString();
-
 
         if (email.isEmpty()) {
             emailView.setError(getString(R.string.field_required));
@@ -103,7 +104,6 @@ public class Login extends AppCompatActivity {
         }
     }
 
-
     private void reinitializeDatabase() {
         DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
     }
@@ -122,5 +122,29 @@ public class Login extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
         editor.remove(BaseActivity.PREFS_USERID);
         editor.apply();
+    }
+
+    public static final String md5(final String s) {
+        final String MD5 = "MD5";
+        try {
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(s.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

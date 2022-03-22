@@ -28,7 +28,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="serif-monospace"
             android:text="@string/action_create_account"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -88,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/phone_number"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:background="@drawable/shape_mail"
                 android:backgroundTint="@color/white"
                 android:textColorHint="@color/white"
