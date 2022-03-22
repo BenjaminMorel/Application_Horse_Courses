@@ -23,8 +23,8 @@ public class DatabaseInitializer {
     }
 
     private static void addRide(final AppDatabase db, final String description, final double length, final double duration, final int difficulty,
-                                final String location, final String positions, final String time, final double price) {
-        Ride ride = new Ride(description, length, duration, difficulty, location, positions, time, price);
+                                final String location, final String positions, final String time, final double price,final String path) {
+        Ride ride = new Ride(description, length, duration, difficulty, location, positions, time, price,path);
         db.rideDao().insert(ride);
     }
 
@@ -42,10 +42,10 @@ public class DatabaseInitializer {
         }
 
         db.rideDao().deleteAll();
-        addRide(db, "Super balade", 10.2, 3.5, 4, "Martigny", "46.109987/7.102460/46.122314/7.129649/46.119117/7.132502/46.107869/7.103133", "13:30/16:30", 45.50);
-        addRide(db, "Super promenade", 9.8, 4.8, 3, "Liddes", "45.981136/7.189659/45.972979/7.202241/45.973308/7.207658/45.987731/7.189178", "11:00/14:15", 32.50);
-        addRide(db, "Super excursion", 7.8, 2.5, 1, "Saillon", "46.168166/7.177144/46.167106/7.171189/46.161594/7.165012/46.157026/7.155829/46.164446/7.180595", "12:00/15:00", 40.00);
-
+        addRide(db, "Super balade", 10.2, 3.5, 4, "Martigny", "46.109987/7.102460/46.122314/7.129649/46.119117/7.132502/46.107869/7.103133", "13:30/16:30", 45.50,"@drawable/martigny");
+        addRide(db, "Super promenade", 9.8, 4.8, 3, "Liddes", "45.981136/7.189659/45.972979/7.202241/45.973308/7.207658/45.987731/7.189178", "11:00/14:15", 32.50,"@drawable/liddes");
+        addRide(db, "Super excursion", 7.8, 2.5, 1, "Saillon", "46.168166/7.177144/46.167106/7.171189/46.161594/7.165012/46.157026/7.155829/46.164446/7.180595", "12:00/15:00", 40.00,"@drawable/saillon");
+        addRide(db, "Balade au bord du Rhone", 7.6, 2.5, 2, "Sierre", "46.3011113/7.565139/46.304852/7.578500/46.307543/7.579149/46.304661/7.567815", "14:30/16:30", 25.60, "");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

@@ -34,8 +34,11 @@ public class Ride {
     @ColumnInfo(name = "price")
     public double price;
 
+    @ColumnInfo(name = "picturePath")
+    public String picturePath;
 
-    public Ride(String description, double length, double duration, int difficulty, String location, String positions, String time, double price) {
+
+    public Ride(String description, double length, double duration, int difficulty, String location, String positions, String time, double price,String picturePath) {
         this.description = description;
         this.length = length;
         this.duration = duration;
@@ -44,6 +47,7 @@ public class Ride {
         this.positions = positions;
         this.time = time;
         this.price = price;
+        this.picturePath = picturePath;
     }
 
     public int getRideID() {
@@ -116,5 +120,13 @@ public class Ride {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 }

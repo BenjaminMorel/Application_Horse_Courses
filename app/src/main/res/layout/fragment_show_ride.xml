@@ -4,7 +4,7 @@
     android:layout_width="400dp"
     android:layout_height="400dp"
     android:layout_gravity="center"
-    android:background="@drawable/paysage"
+    android:background="@drawable/liddes"
     tools:context=".Fragments.Show_Ride">
 
     <!-- TODO: Update blank fragment layout -->

@@ -21,7 +21,7 @@ import com.example.Horse_App.Database.Entity.User;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {User.class, Ride.class, Course.class}, version = 11, exportSchema = false)
+@Database(entities = {User.class, Ride.class, Course.class}, version = 12, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
