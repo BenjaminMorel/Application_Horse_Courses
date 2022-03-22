@@ -20,7 +20,7 @@ public class Register extends AppCompatActivity {
 
     private EditText etFirstname;
     private EditText etLastname;
-    private EditText etPhonenumber ;
+    private EditText etPhonenumber;
     private EditText etEmail;
     private EditText etPassword;
     private EditText etPassword2;
@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
         startPage();
     }
 
-    private void startPage(){
+    private void startPage() {
         etFirstname = findViewById(R.id.first_name_register);
         etLastname = findViewById(R.id.last_name_register);
         etPhonenumber = findViewById(R.id.phone_number_register);
@@ -40,12 +40,14 @@ public class Register extends AppCompatActivity {
         etPassword = findViewById(R.id.password_register);
         etPassword2 = findViewById(R.id.confirm_password_register);
         Button registerButton = findViewById(R.id.register_button);
-        registerButton.setOnClickListener(view -> registerNewUser(etFirstname.getText().toString(),etLastname.getText().toString(),
+        registerButton.setOnClickListener(view -> registerNewUser(etFirstname.getText().toString(), etLastname.getText().toString(),
                 etPhonenumber.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
     }
 
-    private void registerNewUser(String firstname, String lastname, String phonenumber, String email, String password){
-        User newUser = new User(email,password,firstname,lastname,phonenumber);
+    private void registerNewUser(String firstname, String lastname, String phonenumber, String email, String password) {
+
+        String encryptedPwd = Login.md5(password);
+        User newUser = new User(email, encryptedPwd, firstname, lastname, phonenumber);
 
         new CreateUser(getApplication(), new OnAsyncEventListener() {
             @Override

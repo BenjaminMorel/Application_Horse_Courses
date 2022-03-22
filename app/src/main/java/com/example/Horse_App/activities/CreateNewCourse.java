@@ -106,8 +106,7 @@ public class CreateNewCourse extends AppCompatActivity {
 
 //        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        String courseDate = sdf.format(selectedDate);
-        String courseDate = "22/03/2022";
+        String courseDate = sdf.format(selectedDate);
 
         Course newCourse = new Course(ride.rideID, userID , courseDate);
 

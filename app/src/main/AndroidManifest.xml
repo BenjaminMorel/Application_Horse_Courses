@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LoginPage"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".splash_screen"
+            android:exported="false" />
+        <activity
             android:name=".activities.About"
             android:exported="true"
             android:label="About"
@@ -30,7 +33,6 @@
             android:exported="false" />
         <activity
             android:name=".activities.MainPage"
-
             android:exported="false" />
         <activity
             android:name=".activities.Register"
@@ -43,6 +45,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
