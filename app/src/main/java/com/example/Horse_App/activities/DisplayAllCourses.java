@@ -16,10 +16,7 @@ import java.util.List;
 
 public class DisplayAllCourses extends AppCompatActivity {
 
-    private CourseRepository courseRepository;
-    private List<Course> courses;
     private ListView listView;
-    private int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +27,10 @@ public class DisplayAllCourses extends AppCompatActivity {
     }
 
     private void generatePage() {
-        courseRepository = ((BaseApp) getApplication()).getCourseRepository();
+        CourseRepository courseRepository = ((BaseApp) getApplication()).getCourseRepository();
 
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
-        userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
 
         listView = findViewById(R.id.allCourses);
 

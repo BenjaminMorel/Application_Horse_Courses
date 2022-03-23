@@ -86,7 +86,6 @@ public class Login extends AppCompatActivity {
         }
 
         if (!cancel) {
-            //    repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> setUserValue(user));
             repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> {
                 if (user != null) {
 

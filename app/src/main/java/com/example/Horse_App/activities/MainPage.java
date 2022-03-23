@@ -12,20 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.ArrayAdapter.CustomRideItem;
+import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 
 import java.util.List;
 
 public class MainPage extends AppCompatActivity {
-
-    private RideRepository repository;
-    private List rides;
-    private Button showCourses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +43,16 @@ public class MainPage extends AppCompatActivity {
 
     private void startMainPage() {
 
-        repository = ((BaseApp) getApplication()).getRideRepository();
+        RideRepository repository = ((BaseApp) getApplication()).getRideRepository();
 
-        rides = repository.getRides(getApplication());
+        List<Ride> rides = repository.getRides(getApplication());
 
         CustomRideItem customCourseItem = new CustomRideItem(this, rides);
         customCourseItem.setMainPage(this);
         ListView listView = findViewById(R.id.ListRideToChoose);
         listView.setAdapter(customCourseItem);
 
-        showCourses = findViewById(R.id.showMyCourse);
+        Button showCourses = findViewById(R.id.showMyCourse);
         showCourses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,21 +62,18 @@ public class MainPage extends AppCompatActivity {
     }
 
     /**
-     * Inflates the menu and add items to the toolbar
-     *
+     * Inflate the menu and adds items to the action bar if it is present.
      * @param menu
      * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     /**
      * Manages the dropdown menu in the toolbar
-     *
      * @param item
      * @return
      */

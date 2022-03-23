@@ -19,7 +19,6 @@ public class CreateCourse extends AsyncTask<Course, Void, Void> {
         this.callback = callback;
     }
 
-
     @Override
     protected Void doInBackground(Course... courses) {
         try {

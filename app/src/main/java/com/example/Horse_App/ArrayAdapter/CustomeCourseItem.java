@@ -1,5 +1,6 @@
 package com.example.Horse_App.ArrayAdapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +22,8 @@ import java.util.List;
 
 public class CustomeCourseItem extends ArrayAdapter {
 
-    private Activity context;
-    private List<Course> courses;
-
-    private TextView courseInfo;
-    private Button cancelCourse;
+    private final Activity context;
+    private final List<Course> courses;
 
     private Date date;
     private int courseID;
@@ -38,6 +36,7 @@ public class CustomeCourseItem extends ArrayAdapter {
         this.courses = courses;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -46,11 +45,11 @@ public class CustomeCourseItem extends ArrayAdapter {
             row = inflater.inflate(R.layout.fragment_course_display, null, true);
         }
         courseID = courses.get(position).courseID;
-        courseInfo = row.findViewById(R.id.infoCourse);
-        cancelCourse = row.findViewById(R.id.cancelCourseButton);
+        TextView courseInfo = row.findViewById(R.id.infoCourse);
+        Button cancelCourse = row.findViewById(R.id.cancelCourseButton);
         LocalDateTime now = LocalDateTime.now();
         try {
-            Date courseDate = new SimpleDateFormat("dd/MM/yyyy").parse(courses.get(position).getDate());
+            @SuppressLint("SimpleDateFormat") Date courseDate = new SimpleDateFormat("dd/MM/yyyy").parse(courses.get(position).getDate());
             Date actualDate = new Date();
             System.out.println(courseDate.compareTo(actualDate));
             if (courseDate.compareTo(actualDate) < 0) {
@@ -73,7 +72,6 @@ public class CustomeCourseItem extends ArrayAdapter {
         courseInfo.setText("You choose ride number : " + courses.get(position).rideID + " will take place on " + courses.get(position).getDate());
         return row;
     }
-
 
     private void deleteCourse() {
         CourseRepository.getInstance().deleteByID(context.getApplication(), courseID);

@@ -9,9 +9,8 @@ import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 
 public class CreateUser extends AsyncTask<User, Void, Void> {
 
-
-    private Application application;
-    private OnAsyncEventListener callback;
+    private final Application application;
+    private final OnAsyncEventListener callback;
     private Exception exception;
 
     public CreateUser(Application application, OnAsyncEventListener callback) {

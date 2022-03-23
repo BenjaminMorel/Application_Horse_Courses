@@ -33,22 +33,7 @@ import java.util.GregorianCalendar;
 public class CreateNewCourse extends AppCompatActivity {
 
     private static final String TAG = "CreateNewCourseActivity";
-    private int rideID;
-    private int userID;
     private Ride ride;
-
-    private Button confirmCreation;
-    private CalendarView calendarView;
-    private MapsFragment mapsFragment;
-
-    private RideRepository rideRepository;
-    private CourseRepository courseRepository;
-
-    private TextView startHour;
-    private TextView finishHour;
-    private TextView titleLocation;
-    private TextView coursePrice;
-
     private Date selectedDate;
 
     @Override
@@ -62,10 +47,10 @@ public class CreateNewCourse extends AppCompatActivity {
 
     private void createPage(){
 
-        rideRepository = ((BaseApp) getApplication()).getRideRepository();
+        RideRepository rideRepository = ((BaseApp) getApplication()).getRideRepository();
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0);
 
-        rideID = preferences.getInt(BaseActivity.PREFS_USERID,1);
+        int rideID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
 
         // after using the shared pref we get rid of it to be sure that the variable is empty for the next use
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0).edit();
@@ -77,7 +62,7 @@ public class CreateNewCourse extends AppCompatActivity {
         setTextViewValue();
 
         initializeMapsFragment();
-        confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
+        Button confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
 
         confirmCreation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +72,7 @@ public class CreateNewCourse extends AppCompatActivity {
         });
 
         // Disable past days
-        calendarView = findViewById(R.id.calendarNewCourse);
+        CalendarView calendarView = findViewById(R.id.calendarNewCourse);
         long now = calendarView.getDate();
         calendarView.setMinDate(now);
         Calendar calendar = Calendar.getInstance();
@@ -106,14 +91,13 @@ public class CreateNewCourse extends AppCompatActivity {
 
         SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
 
-        userID = userPreferences.getInt(BaseActivity.PREFS_USERID,1);
+        int userID = userPreferences.getInt(BaseActivity.PREFS_USERID, 1);
 
 //        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String courseDate = sdf.format(selectedDate);
-     //   String courseDate = "22/03/2022";
 
-        Course newCourse = new Course(ride.rideID, userID , courseDate);
+        Course newCourse = new Course(ride.rideID, userID, courseDate);
 
         new CreateCourse(getApplication(), new OnAsyncEventListener() {
             @Override
@@ -134,8 +118,7 @@ public class CreateNewCourse extends AppCompatActivity {
 
         private void initializeMapsFragment() {
         FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
-        mapsFragment = new MapsFragment(ride.getPositions());
-        SupportMapFragment supportMapFragment = mapsFragment;
+            SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
         mTransaction.add(R.id.mapFragment, supportMapFragment);
         mTransaction.commit();
     }
@@ -143,9 +126,9 @@ public class CreateNewCourse extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setTextViewValue(){
 
-        startHour = findViewById(R.id.StartHour);
-        finishHour = findViewById(R.id.FinishHour);
-        coursePrice = findViewById(R.id.course_price);
+        TextView startHour = findViewById(R.id.StartHour);
+        TextView finishHour = findViewById(R.id.FinishHour);
+        TextView coursePrice = findViewById(R.id.course_price);
 
         String [] hours = ride.time.split("/");
 
