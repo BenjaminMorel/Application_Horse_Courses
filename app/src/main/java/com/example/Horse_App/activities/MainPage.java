@@ -59,6 +59,7 @@ public class MainPage extends AppCompatActivity {
                 generateAllCoursesPage();
             }
         });
+
     }
 
     /**
@@ -97,8 +98,8 @@ public class MainPage extends AppCompatActivity {
     public void generateCreateCoursePage(int rideID) {
 
         // We used the position of the button that was pressed to stored the ride ID in shared Preferences to retreive it later
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0).edit();
-        editor.putInt(BaseActivity.PREFS_USERID, rideID);
+        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDE, 0).edit();
+        editor.putInt(BaseActivity.PREFS_RIDEID, rideID);
         editor.apply();
         Intent intent = new Intent(this, CreateNewCourse.class);
         startActivity(intent);
@@ -110,8 +111,8 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void logout() {
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
-        editor.remove(BaseActivity.PREFS_USERID);
+        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
+        editor.putInt(BaseActivity.PREFS_USERID, -1);
         editor.apply();
 
         Intent intent = new Intent(this, Login.class);

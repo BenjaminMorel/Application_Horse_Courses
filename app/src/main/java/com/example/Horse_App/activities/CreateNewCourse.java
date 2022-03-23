@@ -33,7 +33,22 @@ import java.util.GregorianCalendar;
 public class CreateNewCourse extends AppCompatActivity {
 
     private static final String TAG = "CreateNewCourseActivity";
+    private int rideID;
+    private int userID;
     private Ride ride;
+
+    private Button confirmCreation;
+    private CalendarView calendarView;
+    private MapsFragment mapsFragment;
+
+    private RideRepository rideRepository;
+    private CourseRepository courseRepository;
+
+    private TextView startHour;
+    private TextView finishHour;
+    private TextView titleLocation;
+    private TextView coursePrice;
+
     private Date selectedDate;
 
     @Override
@@ -47,15 +62,15 @@ public class CreateNewCourse extends AppCompatActivity {
 
     private void createPage(){
 
-        RideRepository rideRepository = ((BaseApp) getApplication()).getRideRepository();
-        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0);
+        rideRepository = ((BaseApp) getApplication()).getRideRepository();
+        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDE, 0);
 
-        int rideID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+        rideID = preferences.getInt(BaseActivity.PREFS_RIDEID,1);
 
         // after using the shared pref we get rid of it to be sure that the variable is empty for the next use
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0).edit();
-        editor.remove(BaseActivity.PREFS_RIDEID);
-        editor.apply();
+//        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_NAME, 0).edit();
+//        editor.remove(BaseActivity.PREFS_RIDEID);
+//        editor.apply();
 
         ride = rideRepository.getRide(rideID,getApplication());
 
@@ -89,13 +104,14 @@ public class CreateNewCourse extends AppCompatActivity {
 
     private void createNewCourse(){
 
-        SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
+        SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
 
         int userID = userPreferences.getInt(BaseActivity.PREFS_USERID, 1);
 
 //        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String courseDate = sdf.format(selectedDate);
+     //   String courseDate = "22/03/2022";
 
         Course newCourse = new Course(ride.rideID, userID, courseDate);
 
@@ -107,7 +123,7 @@ public class CreateNewCourse extends AppCompatActivity {
 
             @Override
             public void onFailure(Exception e) {
-                Log.d(TAG, "Create new Course: failure", e);
+                Log.d(TAG, "Create new Course: failure" + rideID + " / " + userID, e);
             }
         }).execute(newCourse);
 

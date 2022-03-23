@@ -1,6 +1,5 @@
 package com.example.Horse_App.ArrayAdapter;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +16,7 @@ import com.example.Horse_App.activities.DisplayAllCourses;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class CustomeCourseItem extends ArrayAdapter {
         this.courses = courses;
     }
 
-    @SuppressLint("SetTextI18n")
+    //TODO regler probleme d'id
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -45,6 +45,8 @@ public class CustomeCourseItem extends ArrayAdapter {
             row = inflater.inflate(R.layout.fragment_course_display, null, true);
         }
         courseID = courses.get(position).courseID;
+        System.out.println(courses.get(position).getCourseID());
+
         TextView courseInfo = row.findViewById(R.id.infoCourse);
         Button cancelCourse = row.findViewById(R.id.cancelCourseButton);
         LocalDateTime now = LocalDateTime.now();
@@ -56,21 +58,25 @@ public class CustomeCourseItem extends ArrayAdapter {
                 cancelCourse.setText("super fun");
 
                 cancelCourse.setVisibility(View.INVISIBLE);
-            } else {
-                cancelCourse.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        deleteCourse();
-                    }
-                });
             }
-            Log.d("Get the courses date", "parse the date of the course: Succes");
+
         } catch (Exception e) {
             Log.d("Get the courses date", "parse the date of the course: Failed");
         }
 
+        cancelCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayAllCourses.deleteCourse(courseID);
+            }
+        });
+
         courseInfo.setText("You choose ride number : " + courses.get(position).rideID + " will take place on " + courses.get(position).getDate());
         return row;
+    }
+
+    public void setDisplayAllCourses(DisplayAllCourses displayAllCourses) {
+        this.displayAllCourses = displayAllCourses;
     }
 
     private void deleteCourse() {
