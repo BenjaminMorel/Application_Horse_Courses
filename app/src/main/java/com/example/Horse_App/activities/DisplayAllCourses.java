@@ -34,7 +34,7 @@ public class DisplayAllCourses extends AppCompatActivity {
 
         listView = findViewById(R.id.allCourses);
 
-        courses =  courseRepository.getCoursesByUser(getApplication(), userID);
+        List<Course> courses =  courseRepository.getCoursesByUser(getApplication(), userID);
         CustomeCourseItem customeCourseItem = new CustomeCourseItem(this, courses);
         listView.setAdapter(customeCourseItem);
         customeCourseItem.setDisplayAllCourses(this);

@@ -51,7 +51,7 @@ public class CustomeCourseItem extends ArrayAdapter {
         Button cancelCourse = row.findViewById(R.id.cancelCourseButton);
         LocalDateTime now = LocalDateTime.now();
         try {
-            @SuppressLint("SimpleDateFormat") Date courseDate = new SimpleDateFormat("dd/MM/yyyy").parse(courses.get(position).getDate());
+            Date courseDate = new SimpleDateFormat("dd/MM/yyyy").parse(courses.get(position).getDate());
             Date actualDate = new Date();
             System.out.println(courseDate.compareTo(actualDate));
             if (courseDate.compareTo(actualDate) < 0) {
