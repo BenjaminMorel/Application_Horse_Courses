@@ -16,7 +16,7 @@ public interface CourseDao {
     LiveData<List<Course>> getAllCourses();
 
     @Query("SELECT * FROM course WHERE userID= :id")
-    LiveData<List<Course>> getAllCoursesByUser(int id);
+    List<Course> getAllCoursesByUser(int id);
 
     @Query("DELETE FROM course")
     void deleteAll();

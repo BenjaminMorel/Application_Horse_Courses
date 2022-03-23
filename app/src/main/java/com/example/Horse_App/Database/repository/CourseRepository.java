@@ -34,7 +34,7 @@ public class CourseRepository {
         return ((BaseApp) application).getDatabase().courseDao().getAllCourses();
     }
 
-    public LiveData<List<Course>> getCoursesByUser(Application application, int id) {
+    public List<Course> getCoursesByUser(Application application, int id) {
         return ((BaseApp) application).getDatabase().courseDao().getAllCoursesByUser(id);
     }
 

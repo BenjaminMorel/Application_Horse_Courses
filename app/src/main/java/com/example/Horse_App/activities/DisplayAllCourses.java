@@ -37,9 +37,15 @@ public class DisplayAllCourses extends AppCompatActivity {
 
         listView = findViewById(R.id.allCourses);
 
-        courseRepository.getCoursesByUser(getApplication(), userID).observe(this, allCourse -> {
-            CustomeCourseItem customeCourseItem = new CustomeCourseItem(this, allCourse);
-            listView.setAdapter(customeCourseItem);
-        });
+        courses =  courseRepository.getCoursesByUser(getApplication(), userID);
+        CustomeCourseItem customeCourseItem = new CustomeCourseItem(this, courses);
+        listView.setAdapter(customeCourseItem);
+        customeCourseItem.setDisplayAllCourses(this);
+
+    }
+
+    public void deleteCourse(int idCourse) {
+        System.out.println("Trying to delete " + idCourse);
+        CourseRepository.getInstance().deleteByID(this.getApplication(), idCourse);
     }
 }

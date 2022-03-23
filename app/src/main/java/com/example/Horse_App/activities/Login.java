@@ -19,9 +19,6 @@ import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
 import com.example.Horse_App.encryption.Encrypt;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 public class Login extends AppCompatActivity {
 
     private EditText emailView, passwordView;
@@ -36,7 +33,14 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         logout();
-      //  reinitializeDatabase();
+        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
+        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+
+        System.out.println(userID);
+        if(userID > 0){
+            Intent intent = new Intent(this, MainPage.class);
+            startActivity(intent);
+        }
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
@@ -93,8 +97,10 @@ public class Login extends AppCompatActivity {
                     String encryptedPwd = Encrypt.md5(password);
 
                     if (user.getPassword().equals(encryptedPwd)) {
-                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
+
+                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
                         editor.putInt(BaseActivity.PREFS_USERID, user.userID);
+                        System.out.println(user.userID);
                         editor.apply();
                         Intent intent = new Intent(this, MainPage.class);
                         startActivity(intent);
@@ -123,8 +129,8 @@ public class Login extends AppCompatActivity {
      * Method to clear the prefs id of the user and redirect to login page
      */
     private void logout() {
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
-        editor.remove(BaseActivity.PREFS_USERID);
+        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
+        editor.putInt(BaseActivity.PREFS_USERID, -1);
         editor.apply();
     }
 
