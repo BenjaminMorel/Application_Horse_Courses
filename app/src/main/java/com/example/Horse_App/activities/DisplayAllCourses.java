@@ -1,11 +1,15 @@
 package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.Horse_App.ArrayAdapter.CourseAdapter;
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.ArrayAdapter.CustomeCourseItem;
 import com.example.Horse_App.Database.Entity.Course;
@@ -18,7 +22,7 @@ public class DisplayAllCourses extends AppCompatActivity {
 
     private CourseRepository courseRepository;
     private List<Course> courses;
-    private ListView listView;
+    private RecyclerView recyclerView;
     private int userID;
 
     @Override
@@ -35,17 +39,22 @@ public class DisplayAllCourses extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
         userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
 
-        listView = findViewById(R.id.allCourses);
+        recyclerView = findViewById(R.id.allCourses);
 
         courses =  courseRepository.getCoursesByUser(getApplication(), userID);
-        CustomeCourseItem customeCourseItem = new CustomeCourseItem(this, courses);
-        listView.setAdapter(customeCourseItem);
-        customeCourseItem.setDisplayAllCourses(this);
+
+        CourseAdapter courseAdapter = new CourseAdapter(courses);
+        courseAdapter.setDisplayAllCourses(this);
+        recyclerView.setAdapter(courseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 
-    public void deleteCourse(int idCourse) {
-        System.out.println("Trying to delete " + idCourse);
+    public void deleteCourse(int idCourse,int position) {
         CourseRepository.getInstance().deleteByID(this.getApplication(), idCourse);
+        Intent intent = new Intent(this, DisplayAllCourses.class);
+        startActivity(intent);
+        finish();
     }
 }

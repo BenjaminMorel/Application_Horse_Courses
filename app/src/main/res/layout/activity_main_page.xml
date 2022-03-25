@@ -16,12 +16,17 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingConstraints" />
 
-    <ListView
-        android:id="@+id/ListRideToChoose"
-        android:layout_width="411dp"
-        android:layout_height="731dp"
-        android:layout_marginTop="55dp"
-        android:dividerHeight="80dp"></ListView>
+<!--    <ListView-->
+<!--        android:id="@+id/ListRideToChoose"-->
+<!--        android:layout_width="411dp"-->
+<!--        android:layout_height="731dp"-->
+<!--        android:layout_marginTop="55dp"-->
+<!--        android:dividerHeight="80dp"></ListView>-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ListRideToChoose"/>
 
     <Button
         android:id="@+id/showMyCourse"

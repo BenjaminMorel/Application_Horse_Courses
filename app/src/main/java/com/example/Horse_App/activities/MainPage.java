@@ -3,6 +3,8 @@ package com.example.Horse_App.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.Horse_App.ArrayAdapter.RideAdapter;
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.ArrayAdapter.CustomRideItem;
 import com.example.Horse_App.Database.repository.RideRepository;
@@ -25,36 +28,34 @@ public class MainPage extends AppCompatActivity {
     private RideRepository repository;
     private List rides;
     private Button showCourses;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
-
         // Enable the Up button
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(false);
-
         startMainPage();
     }
 
     private void startMainPage() {
-
         repository = ((BaseApp) getApplication()).getRideRepository();
-
         rides = repository.getRides(getApplication());
-
-        CustomRideItem customCourseItem = new CustomRideItem(this, rides);
-        customCourseItem.setMainPage(this);
-        ListView listView = findViewById(R.id.ListRideToChoose);
-        listView.setAdapter(customCourseItem);
-
+        RideAdapter rideAdapter = new RideAdapter(rides);
+        rideAdapter.setMainPage(this);
+      //  CustomRideItem customCourseItem = new CustomRideItem(this, rides);
+    //    customCourseItem.setMainPage(this);
+     //   ListView listView = findViewById(R.id.ListRideToChoose);
+      //  listView.setAdapter(customCourseItem);
+        recyclerView = findViewById(R.id.ListRideToChoose);
+        recyclerView.setAdapter(rideAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         showCourses = findViewById(R.id.showMyCourse);
         showCourses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +63,6 @@ public class MainPage extends AppCompatActivity {
                 generateAllCoursesPage();
             }
         });
-
     }
 
     /**
@@ -97,12 +97,10 @@ public class MainPage extends AppCompatActivity {
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void generateCreateCoursePage(int rideID) {
-
         // We used the position of the button that was pressed to stored the ride ID in shared Preferences to retreive it later
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDE, 0).edit();
         editor.putInt(BaseActivity.PREFS_RIDEID, rideID);
@@ -120,7 +118,6 @@ public class MainPage extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
         editor.putInt(BaseActivity.PREFS_USERID, -1);
         editor.apply();
-
         Intent intent = new Intent(this, Login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

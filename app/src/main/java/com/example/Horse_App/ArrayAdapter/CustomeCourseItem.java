@@ -68,7 +68,7 @@ public class CustomeCourseItem extends ArrayAdapter {
         cancelCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayAllCourses.deleteCourse(courseID);
+            //    displayAllCourses.deleteCourse(courseID);
             }
         });
 

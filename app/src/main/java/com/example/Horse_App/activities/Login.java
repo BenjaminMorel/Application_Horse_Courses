@@ -40,6 +40,7 @@ public class Login extends AppCompatActivity {
         if(userID > 0){
             Intent intent = new Intent(this, MainPage.class);
             startActivity(intent);
+            finish();
         }
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
@@ -47,7 +48,6 @@ public class Login extends AppCompatActivity {
         emailView = findViewById(R.id.email_login);
         passwordView = findViewById(R.id.password_login);
 
-        // Add the register button with listener
         Button registerButton = findViewById(R.id.button_register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,7 +104,7 @@ public class Login extends AppCompatActivity {
                         editor.apply();
                         Intent intent = new Intent(this, MainPage.class);
                         startActivity(intent);
-
+                        finish();
                     }
                 } else {
                     emailView.setError(getString(R.string.error_login_message));
