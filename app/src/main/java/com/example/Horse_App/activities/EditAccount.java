@@ -25,14 +25,8 @@ public class EditAccount extends AppCompatActivity {
 
     private UserRepository userRepository;
 
-    EditText edFirstname;
-    EditText edLastname;
-    EditText edPhoneNumber;
-    EditText edEmail;
-
-    EditText edOldPassword;
-    EditText edPassword;
-    EditText edConfirmPassword;
+    EditText edFirstname, edLastname, edPhoneNumber, edEmail;
+    EditText edOldPassword, edPassword, edConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,10 +109,5 @@ public class EditAccount extends AppCompatActivity {
             });
 
         }
-    }
-
-    public void loadPage(View view) {
-        Intent intent = new Intent(this, EditAccount.class);
-        startActivity(intent);
     }
 }

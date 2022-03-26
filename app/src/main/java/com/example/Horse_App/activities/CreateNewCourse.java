@@ -77,7 +77,7 @@ public class CreateNewCourse extends AppCompatActivity {
         setTextViewValue();
 
         initializeMapsFragment();
-        confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
+        Button confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
 
         confirmCreation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class CreateNewCourse extends AppCompatActivity {
         });
 
         // Disable past days
-        calendarView = findViewById(R.id.calendarNewCourse);
+        CalendarView calendarView = findViewById(R.id.calendarNewCourse);
         long now = calendarView.getDate();
         calendarView.setMinDate(now);
         Calendar calendar = Calendar.getInstance();
@@ -106,12 +106,14 @@ public class CreateNewCourse extends AppCompatActivity {
 
         SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
 
-        userID = userPreferences.getInt(BaseActivity.PREFS_USERID,1);
+        int userID = userPreferences.getInt(BaseActivity.PREFS_USERID, 1);
 
+//        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String courseDate = sdf.format(selectedDate);
+     //   String courseDate = "22/03/2022";
 
-        Course newCourse = new Course(ride.rideID, userID , courseDate);
+        Course newCourse = new Course(ride.rideID, userID, courseDate);
 
         new CreateCourse(getApplication(), new OnAsyncEventListener() {
             @Override
@@ -131,8 +133,7 @@ public class CreateNewCourse extends AppCompatActivity {
 
         private void initializeMapsFragment() {
         FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
-        mapsFragment = new MapsFragment(ride.getPositions());
-        SupportMapFragment supportMapFragment = mapsFragment;
+            SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
         mTransaction.add(R.id.mapFragment, supportMapFragment);
         mTransaction.commit();
     }
@@ -140,9 +141,9 @@ public class CreateNewCourse extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setTextViewValue(){
 
-        startHour = findViewById(R.id.StartHour);
-        finishHour = findViewById(R.id.FinishHour);
-        coursePrice = findViewById(R.id.course_price);
+        TextView startHour = findViewById(R.id.StartHour);
+        TextView finishHour = findViewById(R.id.FinishHour);
+        TextView coursePrice = findViewById(R.id.course_price);
 
         String [] hours = ride.time.split("/");
 

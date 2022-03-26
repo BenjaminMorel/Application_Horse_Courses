@@ -22,11 +22,8 @@ import java.util.List;
 
 public class CustomeCourseItem extends ArrayAdapter {
 
-    private Activity context;
-    private List<Course> courses;
-
-    private TextView courseInfo;
-    private Button cancelCourse;
+    private final Activity context;
+    private final List<Course> courses;
 
     private Date date;
     private int courseID;
@@ -50,14 +47,16 @@ public class CustomeCourseItem extends ArrayAdapter {
         courseID = courses.get(position).courseID;
         System.out.println(courses.get(position).getCourseID());
 
-        courseInfo = row.findViewById(R.id.infoCourse);
-        cancelCourse = row.findViewById(R.id.cancelCourseButton);
+        TextView courseInfo = row.findViewById(R.id.infoCourse);
+        Button cancelCourse = row.findViewById(R.id.cancelCourseButton);
+        LocalDateTime now = LocalDateTime.now();
         try {
             Date courseDate = new SimpleDateFormat("dd/MM/yyyy").parse(courses.get(position).getDate());
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.DATE, +7);
-            Date actualDate = cal.getTime();
+            Date actualDate = new Date();
+            System.out.println(courseDate.compareTo(actualDate));
             if (courseDate.compareTo(actualDate) < 0) {
+                cancelCourse.setText("super fun");
+
                 cancelCourse.setVisibility(View.INVISIBLE);
             }
 
@@ -78,5 +77,9 @@ public class CustomeCourseItem extends ArrayAdapter {
 
     public void setDisplayAllCourses(DisplayAllCourses displayAllCourses) {
         this.displayAllCourses = displayAllCourses;
+    }
+
+    private void deleteCourse() {
+        CourseRepository.getInstance().deleteByID(context.getApplication(), courseID);
     }
 }

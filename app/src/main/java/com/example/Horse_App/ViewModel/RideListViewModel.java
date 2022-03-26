@@ -17,21 +17,12 @@ import java.util.List;
 
 public class RideListViewModel extends AndroidViewModel {
 
-    private Application application;
-    private RideRepository repository;
-
     private final MediatorLiveData<List<Ride>> observableRides;
 
     public RideListViewModel(@NonNull Application application, RideRepository rideRepository){
         super(application);
-        this.application = application;
-        repository = rideRepository;
         observableRides = new MediatorLiveData<>();
         observableRides.setValue(null);
-
-       // LiveData<List<Ride>> rideList = repository.getRides(application );
-      //observableRides.addSource(rideList, observableRides::setValue);
-
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {

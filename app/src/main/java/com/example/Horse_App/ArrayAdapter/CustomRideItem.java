@@ -24,11 +24,11 @@ import java.util.List;
 
 public class CustomRideItem extends ArrayAdapter {
 
-    private Activity context;
-    private List<Ride> rides;
+    private final Activity context;
+    private final List<Ride> rides;
     private MainPage mainPage;
     private int rideID;
-    private List<Drawable> allPictures = new ArrayList<>();
+    private final List<Drawable> allPictures = new ArrayList<>();
 
 
     public CustomRideItem(Activity context, List<Ride> rides) {
