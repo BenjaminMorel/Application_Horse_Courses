@@ -49,7 +49,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void redirect() {
-        Intent intent = new Intent(this, Login.class);
+        Intent intent = new Intent(this, MainPage.class);
         startActivity(intent);
         finish();
     }

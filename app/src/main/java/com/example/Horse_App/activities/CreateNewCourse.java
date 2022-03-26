@@ -125,8 +125,6 @@ public class CreateNewCourse extends AppCompatActivity {
             }
         }).execute(newCourse);
 
-        Intent intent = new Intent(this, MainPage.class);
-        startActivity(intent);
         finish();
 
     }

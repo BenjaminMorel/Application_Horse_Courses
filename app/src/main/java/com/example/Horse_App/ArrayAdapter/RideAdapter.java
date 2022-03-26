@@ -73,7 +73,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder>{
         holder.row_view.setBackground(holder.allPictures.get(position));
       //  holder.row_view.setBackground(picture);
 
-        holder.textRideLocation.setText(ride.location);
+        holder.textRideLocation.setText(ride.location + " : " + ride.description);
         holder.buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

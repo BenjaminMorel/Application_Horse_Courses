@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,15 @@ public class MainPage extends AppCompatActivity {
         // Enable the Up button
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(false);
+
+        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
+        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+
+        if(userID <= 0){
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+            finish();
+        }
         startMainPage();
     }
 
