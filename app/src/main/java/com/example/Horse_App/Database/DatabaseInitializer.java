@@ -35,8 +35,8 @@ public class DatabaseInitializer {
     private static void populateWithTestData(AppDatabase db) {
 
         db.userDao().deleteAll();
-        addUser(db, "admin", "123", "Hugo", "Vouillamoz", "075248621");
-        addUser(db, "admin2", "123", "Benjamin", "Morel", "078689289");
+        addUser(db, "hugo", "123", "Hugo", "Vouillamoz", "075248621");
+        addUser(db, "benjamin", "123", "Benjamin", "Morel", "078689289");
 
         try {
             Thread.sleep(1000);
@@ -48,7 +48,7 @@ public class DatabaseInitializer {
         addRide(db, "Walk near the Rhone with a beautiful view on the moutains around Martigny", 10.2, 2.4, 2, "Martigny", "46.109987/7.102460/46.122314/7.129649/46.119117/7.132502/46.107869/7.103133", "13:30/16:30", 45.50,"@drawable/paysage1.jpg");
         addRide(db, "Walk in the forest around the village ", 25.2, 4.8, 4, "Liddes", "45.981136/7.189659/45.972979/7.202241/45.973308/7.207658/45.987731/7.189178", "11:00/14:15", 32.50,"@drawable/paysage2");
         addRide(db, "Walk around the tower of Saillon and in the old village with a great view on the Rhone Valley", 7.8, 2.5, 1, "Saillon", "46.168166/7.177144/46.167106/7.171189/46.161594/7.165012/46.157026/7.155829/46.164446/7.180595", "12:00/15:00", 40.00,"@drawable/saillon");
-        addRide(db, "Walk following the Rhone with a long part in the forest, perfect for beginner", 7.6, 2.5, 2, "Sierre", "46.3011113/7.565139/46.304852/7.578500/46.307543/7.579149/46.304661/7.567815", "14:30/16:30", 25.60, "s");
+        addRide(db, "Walk following the Rhone with a long part in the forest,perfect for beginner", 7.6, 2.5, 2, "Sierre", "46.3011113/7.565139/46.304852/7.578500/46.307543/7.579149/46.304661/7.567815", "14:30/16:30", 25.60, "s");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

@@ -6,7 +6,6 @@
     android:background="@drawable/paysage5"
     tools:context=".Fragments.CourseDisplayFragment">
 
-
     <TextView
         android:id="@+id/course_location"
         android:layout_width="match_parent"
@@ -32,15 +31,16 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:textAllCaps="true"/>
-    
+
 
     <Button
         android:id="@+id/cancelCourseButton"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/buttonRed"
-        android:layout_marginTop="125dp"
         android:layout_marginLeft="225dp"
-        android:text="@string/action_cancel"/>
+        android:layout_marginTop="125dp"
+        android:backgroundTint="@color/buttonRed"
+        android:textColor="@color/textColor"
+        android:text="@string/action_cancel" />
 
 </RelativeLayout>

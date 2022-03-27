@@ -46,9 +46,9 @@ public class DisplayAllCourses extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.allCourses);
 
-        courses =  courseRepository.getCoursesByUser(getApplication(), userID);
+        courses = courseRepository.getCoursesByUser(getApplication(), userID);
         rides = rideRepository.getRides(getApplication());
-        CourseAdapter courseAdapter = new CourseAdapter(courses,rides);
+        CourseAdapter courseAdapter = new CourseAdapter(courses, rides);
         courseAdapter.setDisplayAllCourses(this);
         recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,13 +56,13 @@ public class DisplayAllCourses extends AppCompatActivity {
 
     }
 
-    public void deleteCourse(int idCourse,int position) {
+    public void deleteCourse(int idCourse, int position) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this,R.style.AlertDialogCustom).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
         alertDialog.setTitle("Delete Course");
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("Do you realy want to delete this course ?");
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Delete", (dialog, which) ->{
+        alertDialog.setMessage("Do you really want to delete this course ?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Delete", (dialog, which) -> {
             CourseRepository.getInstance().deleteByID(this.getApplication(), idCourse);
             Intent intent = new Intent(this, DisplayAllCourses.class);
             startActivity(intent);
@@ -70,7 +70,5 @@ public class DisplayAllCourses extends AppCompatActivity {
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
         alertDialog.show();
-
-
     }
 }

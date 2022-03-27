@@ -31,7 +31,7 @@
         android:layout_marginTop="300dp"
         android:background="@color/whiteT1"
         android:gravity="center_vertical|center_horizontal"
-    android:text="Walk around the tower of Saillon and in the old village with a great view on the Rhone Valley"
+        android:text="Walk around the tower of Saillon and in the old village with a great view on the Rhone Valley"
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold" />
@@ -41,16 +41,16 @@
         android:layout_width="125dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
-        android:layout_marginTop="300dp"
         android:layout_marginLeft="175dp"
-        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="300dp"
         android:background="@color/whiteT1"
+        android:gravity="center_vertical|center_horizontal"
         android:lineSpacingExtra="7dp"
+        android:text="Difficulty : 4/5\nLength: 10.2 km\nDuration : 3.5 hours"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="13sp"
-        android:textStyle="bold"
-        android:text="Difficulty : 4/5 \nLenght: 10.2 km\nDuration : 3.5 hours"
-        android:textAlignment="center"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonSelectCourse"
@@ -61,7 +61,7 @@
         android:background="@drawable/shape_round"
         android:onClick="purchaseCourse"
         android:text="Select"
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:textColor="@color/button2"
         android:textStyle="bold" />
 
