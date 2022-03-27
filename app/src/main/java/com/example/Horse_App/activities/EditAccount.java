@@ -16,6 +16,7 @@ import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.async.User.UpdateUser;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
+import com.example.Horse_App.encryption.Encrypt;
 
 public class EditAccount extends AppCompatActivity {
 
@@ -86,8 +87,8 @@ public class EditAccount extends AppCompatActivity {
         if (!cancel) {
             userRepository.getUserByID(userID, getApplication()).observe(EditAccount.this, user -> {
 
-                //TODO ajouter le edit seulement pour la partie Info user sans les credentials
-                if (user.getPassword().equals(oldPassword)) {
+                String encryptedPwd = Encrypt.md5(password);
+                if (user.getPassword().equals(encryptedPwd)) {
                     User editUser = new User(email, password, firstname, lastname, phonenumber);
                     editUser.setUserID(userID);
                     new UpdateUser(getApplication(), new OnAsyncEventListener() {

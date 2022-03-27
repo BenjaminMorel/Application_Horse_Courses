@@ -50,6 +50,10 @@ public class Ride {
         this.picturePath = picturePath;
     }
 
+    public Ride()   {
+
+    }
+
     public int getRideID() {
         return rideID;
     }

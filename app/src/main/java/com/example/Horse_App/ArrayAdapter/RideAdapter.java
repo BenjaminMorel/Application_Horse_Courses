@@ -2,13 +2,10 @@ package com.example.Horse_App.ArrayAdapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +15,6 @@ import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.R;
 import com.example.Horse_App.activities.MainPage;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +22,9 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView textRideLocation;
+        public TextView textRide_Description;
+        public TextView ride_specification;
+        public TextView ride_location;
         public Button buttonSelectCourse;
         public List<Drawable> allPictures = new ArrayList<>();
         public View row_view;
@@ -34,8 +32,10 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder>{
         public ViewHolder(View itemView) {
 
             super(itemView);
-            textRideLocation = itemView.findViewById(R.id.descriptionShowCourse);
+            textRide_Description = itemView.findViewById(R.id.descriptionShowCourse);
             buttonSelectCourse = itemView.findViewById(R.id.buttonSelectCourse);
+            ride_specification = itemView.findViewById(R.id.course_specification);
+            ride_location = itemView.findViewById(R.id.ride_location);
             row_view = itemView.findViewById(R.id.container_ride_info);
 
             Drawable martigny = itemView.getContext().getDrawable(R.drawable.paysage1);
@@ -73,7 +73,9 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder>{
         holder.row_view.setBackground(holder.allPictures.get(position));
       //  holder.row_view.setBackground(picture);
 
-        holder.textRideLocation.setText(ride.location + " : " + ride.description);
+        holder.ride_location.setText(ride.location);
+        holder.textRide_Description.setText(ride.description);
+        holder.ride_specification.setText("Difficulty :    " + ride.difficulty + "/5" + "     " + "Length :    " + ride.length + "\nDuration :    " + ride.duration);
         holder.buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

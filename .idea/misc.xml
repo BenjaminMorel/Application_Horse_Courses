@@ -15,6 +15,7 @@
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/drawable/shape_circle.xml" value="0.351" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/drawable/shape_round.xml" value="0.351" />
+        <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/drawable/shape_round_red.xml" value="0.2975" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/OLD_activity_admin_page.xml" value="0.3625" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/OLD_activity_edit_profile.xml" value="0.3625" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/OLD_fragment_login_page.xml" value="0.3625" />
@@ -34,7 +35,7 @@
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/activity_register_page.xml" value="0.33" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/activity_user_main_page.xml" value="0.25" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/app_bar_main.xml" value="0.2328125" />
-        <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_course_display.xml" value="0.184375" />
+        <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_course_display.xml" value="0.33" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_item.xml" value="0.75" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_item2.xml" value="0.19519927536231885" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_item_list.xml" value="0.17135416666666667" />
@@ -48,7 +49,7 @@
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_register__course_.xml" value="0.33" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_show__ride.xml" value="0.19166666666666668" />
-        <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_show_ride.xml" value="0.22" />
+        <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/fragment_show_ride.xml" value="0.33" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/old_activity_edit_profile.xml" value="0.1953125" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/layout/toolbar.xml" value="0.3625" />
         <entry key="..\:/WORKSPACES_4/AndroidStudio/Horse_Courses/LoginPage/app/src/main/res/menu/menu.xml" value="0.184375" />

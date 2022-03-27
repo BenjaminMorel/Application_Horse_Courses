@@ -7,11 +7,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.Course;
+import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.Database.repository.CourseRepository;
+import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 import com.example.Horse_App.activities.DisplayAllCourses;
 import com.google.android.gms.common.api.internal.StatusExceptionMapper;
@@ -26,7 +29,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
 
-        public TextView infoCourse;
+        public TextView course_date;
+        public TextView course_location;
         public Button cancelButton;
 
 
@@ -38,19 +42,24 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-             infoCourse = itemView.findViewById(R.id.infoCourse);
+             course_location = itemView.findViewById(R.id.course_location);
              cancelButton = itemView.findViewById(R.id.cancelCourseButton);
+             course_date = itemView.findViewById(R.id.course_date);
         }
     }
 
     private List<Course> courses;
+    private List<Ride> rides;
 
     public DisplayAllCourses displayAllCourses;
 
+    public RideRepository rideRepository;
+
 
     // Pass in the contact array into the constructor
-    public CourseAdapter(List<Course> courses) {
+    public CourseAdapter(List<Course> courses,List<Ride> rides) {
         this.courses = courses;
+        this.rides = rides;
     }
 
     @Override
@@ -71,8 +80,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     public void onBindViewHolder(CourseAdapter.ViewHolder holder, int position) {
 
         Course course = courses.get(position);
-
-        holder.infoCourse.setText(course.getCourseID() + " user id " + course.courseID);
+        Ride ride = new Ride();
+        for(Ride r : rides){
+            if(course.rideID == r.rideID){
+                ride = r;
+            }
+        }
+        holder.course_location.setText(ride.location);
+        holder.course_date.setText(course.date);
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
