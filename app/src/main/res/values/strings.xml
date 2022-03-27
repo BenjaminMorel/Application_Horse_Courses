@@ -5,7 +5,7 @@
     <string name="app_title">Horse Courses</string>
     <string name="info_course">Info course</string>
     <string name="about">About</string>
-    <string name="developped">App developped by Benjamin and Hugo</string>
+    <string name="developed">App developed by Benjamin and Hugo</string>
 
     <!-- Strings related to input text -->
     <string name="error_login_message">Wrong credentials</string>
@@ -25,7 +25,6 @@
     <string name="disconnect">Disconnect</string>
     <string name="my_courses">My courses</string>
 
-
     <!-- Actions -->
     <string name="action_create">Create</string>
     <string name="action_create_account">Create an account</string>
@@ -35,6 +34,9 @@
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
     <string name="confirm_new_course">Confirm course reservation</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="disable_darkMode">Disable Dark Mode</string>
+    <string name="enable_darkMode">Enable Dark Mode</string>
 
 
 </resources>

@@ -1,6 +1,7 @@
 package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.example.Horse_App.ArrayAdapter.RideAdapter;
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.AppDatabase;
 import com.example.Horse_App.Database.DatabaseInitializer;
+import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 
@@ -131,13 +133,23 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void logout() {
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
-        editor.putInt(BaseActivity.PREFS_USERID, -1);
-        editor.apply();
-        Intent intent = new Intent(this, Login.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
+        alertDialog.setTitle("Disconnect");
+        alertDialog.setCancelable(false);
+        alertDialog.setMessage("Do you really want to disconnect from your account?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Disconnect", (dialog, which) -> {
+            SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
+            editor.putInt(BaseActivity.PREFS_USERID, -1);
+            editor.apply();
+            Intent intent = new Intent(this, Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
+            finish();
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
+        alertDialog.show();
+
     }
 
     private void reinitializeDatabase() {

@@ -1,6 +1,8 @@
 package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,9 +23,7 @@ import com.example.Horse_App.encryption.Encrypt;
 public class EditAccount extends AppCompatActivity {
 
     private static final String TAG = "EditAccount activity";
-
     private int userID;
-
     private UserRepository userRepository;
 
     EditText edFirstname, edLastname, edPhoneNumber, edEmail;
@@ -34,10 +34,51 @@ public class EditAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        setDarkMode();
+
         userRepository = ((BaseApp) getApplicationContext()).getUserRepository();
         displayUserInfo();
     }
 
+    private void setDarkMode() {
+        Button btnToggleDark = findViewById(R.id.switchDarkMode);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs_For_DarkMode", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnToggleDark.setText(R.string.disable_darkMode);
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnToggleDark.setText(R.string.enable_darkMode);
+        }
+
+        btnToggleDark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isDarkModeOn) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.putBoolean("isDarkModeOn", false);
+                    editor.apply();
+                    btnToggleDark.setText(R.string.enable_darkMode);
+
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putBoolean("isDarkModeOn", true);
+                    editor.apply();
+                    btnToggleDark.setText(R.string.disable_darkMode);
+                }
+            }
+        });
+
+    }
 
     private void displayUserInfo() {
 
