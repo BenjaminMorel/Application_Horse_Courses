@@ -66,6 +66,7 @@ public class DisplayAllCourses extends AppCompatActivity {
             CourseRepository.getInstance().deleteByID(this.getApplication(), idCourse);
             Intent intent = new Intent(this, DisplayAllCourses.class);
             startActivity(intent);
+            Toast.makeText(DisplayAllCourses.this, "Course delete with success", Toast.LENGTH_SHORT).show();
             finish();
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
