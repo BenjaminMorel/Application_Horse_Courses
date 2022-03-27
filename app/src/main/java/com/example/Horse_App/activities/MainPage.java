@@ -16,6 +16,8 @@ import android.widget.Button;
 
 import com.example.Horse_App.ArrayAdapter.RideAdapter;
 import com.example.Horse_App.BaseApp;
+import com.example.Horse_App.Database.AppDatabase;
+import com.example.Horse_App.Database.DatabaseInitializer;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 
@@ -54,6 +56,13 @@ public class MainPage extends AppCompatActivity {
     private void startMainPage() {
         repository = ((BaseApp) getApplication()).getRideRepository();
         rides = repository.getRides(getApplication());
+        if(rides.isEmpty()){
+            logout();
+            reinitializeDatabase();
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+            finish();
+        }
         RideAdapter rideAdapter = new RideAdapter(rides);
         rideAdapter.setMainPage(this);
       //  CustomRideItem customCourseItem = new CustomRideItem(this, rides);
@@ -129,5 +138,9 @@ public class MainPage extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+    }
+
+    private void reinitializeDatabase() {
+        DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
     }
 }

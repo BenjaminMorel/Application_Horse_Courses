@@ -32,16 +32,14 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        logout();
-        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
-        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+//        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
+//        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
 
-        System.out.println(userID);
-        if(userID > 0){
-            Intent intent = new Intent(this, MainPage.class);
-            startActivity(intent);
-            finish();
-        }
+//        if(userID > 0){
+//            Intent intent = new Intent(this, MainPage.class);
+//            startActivity(intent);
+//            finish();
+//        }
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
@@ -52,9 +50,7 @@ public class Login extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reinitializeDatabase();
                 register();
-
             }
         });
 
@@ -92,11 +88,8 @@ public class Login extends AppCompatActivity {
         if (!cancel) {
             repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> {
                 if (user != null) {
-
                     String encryptedPwd = Encrypt.md5(password);
-
                     if (user.getPassword().equals(encryptedPwd)) {
-
                         SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
                         editor.putInt(BaseActivity.PREFS_USERID, user.userID);
                         System.out.println(user.userID);
@@ -113,24 +106,14 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private void reinitializeDatabase() {
-        DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
-    }
-
-    private void sendSMS() {
-        Intent intent = new Intent(getApplicationContext(), MainPage.class);
-        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage("000", null, "you access code is 4444", pi, null);
-    }
 
     /**
      * Method to clear the prefs id of the user and redirect to login page
      */
-    private void logout() {
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
-        editor.putInt(BaseActivity.PREFS_USERID, -1);
-        editor.apply();
-    }
+//    private void logout() {
+//        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
+//        editor.putInt(BaseActivity.PREFS_USERID, -1);
+//        editor.apply();
+//    }
 
 }

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.Course;
@@ -38,7 +39,6 @@ public class CreateNewCourse extends AppCompatActivity {
     private Ride ride;
 
     private Button confirmCreation;
-    private CalendarView calendarView;
     private MapsFragment mapsFragment;
 
     private RideRepository rideRepository;
@@ -83,6 +83,7 @@ public class CreateNewCourse extends AppCompatActivity {
         // Disable past days
         CalendarView calendarView = findViewById(R.id.calendarNewCourse);
         long now = calendarView.getDate();
+        calendarView.setDate(now + 1000L * 60 * 60 *24);
         calendarView.setMinDate(now);
         Calendar calendar = Calendar.getInstance();
         now += (60*1000L * 60 * 60 * 24);
@@ -110,6 +111,8 @@ public class CreateNewCourse extends AppCompatActivity {
         new CreateCourse(getApplication(), new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
+
+                Toast.makeText(CreateNewCourse.this, "Reservation successful", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "create new Course: success");
             }
 
