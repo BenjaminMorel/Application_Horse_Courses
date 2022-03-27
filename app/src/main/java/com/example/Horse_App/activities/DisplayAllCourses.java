@@ -44,7 +44,6 @@ public class DisplayAllCourses extends AppCompatActivity {
 
         List<Course> courses = courseRepository.getCoursesByUser(getApplication(), userID);
         List<Ride> rides = rideRepository.getRides(getApplication());
-        CourseAdapter courseAdapter = new CourseAdapter(courses, rides);
         courses =  courseRepository.getCoursesByUser(getApplication(), userID);
 
         if(courses.isEmpty()){
