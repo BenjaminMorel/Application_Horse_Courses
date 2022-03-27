@@ -85,7 +85,6 @@ public class CreateNewCourse extends AppCompatActivity {
         long now = calendarView.getDate();
         calendarView.setDate(now + 1000L * 60 * 60 *24);
         calendarView.setMinDate(now);
-        Calendar calendar = Calendar.getInstance();
         now += (60*1000L * 60 * 60 * 24);
         calendarView.setMaxDate(now);
 

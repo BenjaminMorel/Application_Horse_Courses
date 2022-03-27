@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Horse_App.ArrayAdapter.CourseAdapter;
@@ -24,6 +25,7 @@ public class DisplayAllCourses extends AppCompatActivity {
 
     private CourseRepository courseRepository;
     private RideRepository rideRepository;
+    private TextView noRegistration;
     private List<Course> courses;
     private List<Ride> rides;
     private RecyclerView recyclerView;
@@ -47,6 +49,11 @@ public class DisplayAllCourses extends AppCompatActivity {
         recyclerView = findViewById(R.id.allCourses);
 
         courses =  courseRepository.getCoursesByUser(getApplication(), userID);
+
+        if(courses.isEmpty()){
+            noRegistration = findViewById(R.id.noReservation);
+            noRegistration.setText("You currently have no registration");
+        }
         rides = rideRepository.getRides(getApplication());
         CourseAdapter courseAdapter = new CourseAdapter(courses,rides);
         courseAdapter.setDisplayAllCourses(this);
