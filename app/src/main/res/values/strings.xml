@@ -4,14 +4,17 @@
     <string name="app_name">Horse Courses</string>
     <string name="app_title">Horse Courses</string>
     <string name="info_course">Info course</string>
-    <string name="about">About</string>
     <string name="developed">App developed by Benjamin and Hugo</string>
+
+    <!-- menu -->
+    <string name="edit_profile">Edit profile</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="my_courses">My courses</string>
+    <string name="about">About</string>
 
     <!-- Strings related to input text -->
     <string name="error_login_message">Wrong credentials</string>
     <string name="field_required">This field is required</string>
-    <string name="sign_in">Sign in</string>
-    <string name="sign_up">Sign Up</string>
 
     <!-- Strings related to User -->
     <string name="firstname">First Name</string>
@@ -21,9 +24,11 @@
     <string name="old_password">Old Password</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="edit_profile">Edit profile</string>
-    <string name="disconnect">Disconnect</string>
-    <string name="my_courses">My courses</string>
+
+    <!-- toast & logs -->
+    <string name="toast_reservationSuccessful">Reservation successful</string>
+    <string name="log_createCourseSuccess">Create new Course: success</string>
+    <string name="log_createCourseFailure">Create new Course: failure</string>
 
     <!-- Actions -->
     <string name="action_create">Create</string>
@@ -37,6 +42,11 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="disable_darkMode">Disable Dark Mode</string>
     <string name="enable_darkMode">Enable Dark Mode</string>
-
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="startsAt">\"Starts at: \"</string>
+    <string name="endsAt">\"Ends at: \"</string>
+    <string name="chf">\" CHF\"</string>
+    <string name="deleteCourse">Delete Course</string>
 
 </resources>

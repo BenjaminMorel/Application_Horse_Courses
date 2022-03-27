@@ -1,5 +1,6 @@
 package com.example.Horse_App.ArrayAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,14 +27,12 @@ import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-
         public TextView course_date;
         public TextView course_location;
         public Button cancelButton;
-
 
 
         // We also create a constructor that accepts the entire item row
@@ -42,22 +42,21 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-             course_location = itemView.findViewById(R.id.course_location);
-             cancelButton = itemView.findViewById(R.id.cancelCourseButton);
-             course_date = itemView.findViewById(R.id.course_date);
+            course_location = itemView.findViewById(R.id.course_location);
+            cancelButton = itemView.findViewById(R.id.cancelCourseButton);
+            course_date = itemView.findViewById(R.id.course_date);
         }
     }
 
-    private List<Course> courses;
-    private List<Ride> rides;
+    private final List<Course> courses;
+    private final List<Ride> rides;
 
     public DisplayAllCourses displayAllCourses;
 
     public RideRepository rideRepository;
 
-
     // Pass in the contact array into the constructor
-    public CourseAdapter(List<Course> courses,List<Ride> rides) {
+    public CourseAdapter(List<Course> courses, List<Ride> rides) {
         this.courses = courses;
         this.rides = rides;
     }
@@ -71,18 +70,17 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         View contactView = inflater.inflate(R.layout.fragment_course_display, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
-        return viewHolder;
+        return new ViewHolder(contactView);
     }
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(CourseAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CourseAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         Course course = courses.get(position);
         Ride ride = new Ride();
-        for(Ride r : rides){
-            if(course.rideID == r.rideID){
+        for (Ride r : rides) {
+            if (course.rideID == r.rideID) {
                 ride = r;
             }
         }
@@ -91,7 +89,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayAllCourses.deleteCourse(course.courseID,position);
+                displayAllCourses.deleteCourse(course.courseID, position);
             }
         });
     }
@@ -101,7 +99,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return courses.size();
     }
 
-    public void setDisplayAllCourses(DisplayAllCourses displayAllCourses){
+    public void setDisplayAllCourses(DisplayAllCourses displayAllCourses) {
         this.displayAllCourses = displayAllCourses;
     }
 }

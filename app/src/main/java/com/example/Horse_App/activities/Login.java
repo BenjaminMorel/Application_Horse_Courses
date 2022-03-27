@@ -23,7 +23,6 @@ public class Login extends AppCompatActivity {
 
     private EditText emailView, passwordView;
     private UserRepository repository;
-    private User newUser;
 
     private static final int PERMISSION_REQUEST_CODE = 1;
 
@@ -31,15 +30,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-//        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
-//        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
-
-//        if(userID > 0){
-//            Intent intent = new Intent(this, MainPage.class);
-//            startActivity(intent);
-//            finish();
-//        }
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
@@ -105,15 +95,4 @@ public class Login extends AppCompatActivity {
             });
         }
     }
-
-
-    /**
-     * Method to clear the prefs id of the user and redirect to login page
-     */
-//    private void logout() {
-//        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
-//        editor.putInt(BaseActivity.PREFS_USERID, -1);
-//        editor.apply();
-//    }
-
 }

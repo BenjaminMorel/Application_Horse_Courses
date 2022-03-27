@@ -61,6 +61,7 @@
                 android:id="@+id/calendarNewCourse"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:weekDayTextAppearance="@color/textColor"
                 android:theme="@style/CalendarCustom"
                 android:layout_below="@id/mapFragment"
                 android:layout_marginTop="60dp" />

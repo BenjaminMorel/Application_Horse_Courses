@@ -3,6 +3,7 @@ package com.example.Horse_App.activities;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,17 +28,13 @@ import java.util.List;
 
 public class MainPage extends AppCompatActivity {
 
-    private RideRepository repository;
-    private List rides;
-    private Button showCourses;
-    private RecyclerView recyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
         // Enable the Up button
@@ -47,18 +44,21 @@ public class MainPage extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
         int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
 
-        if(userID <= 0){
+        if (userID <= 0) {
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
             finish();
         }
+
+        setDarkMode();
+
         startMainPage();
     }
 
     private void startMainPage() {
-        repository = ((BaseApp) getApplication()).getRideRepository();
-        rides = repository.getRides(getApplication());
-        if(rides.isEmpty()){
+        RideRepository repository = ((BaseApp) getApplication()).getRideRepository();
+        List rides = repository.getRides(getApplication());
+        if (rides.isEmpty()) {
             logout();
             reinitializeDatabase();
             Intent intent = new Intent(this, Login.class);
@@ -67,20 +67,21 @@ public class MainPage extends AppCompatActivity {
         }
         RideAdapter rideAdapter = new RideAdapter(rides);
         rideAdapter.setMainPage(this);
-      //  CustomRideItem customCourseItem = new CustomRideItem(this, rides);
-    //    customCourseItem.setMainPage(this);
-     //   ListView listView = findViewById(R.id.ListRideToChoose);
-      //  listView.setAdapter(customCourseItem);
-        recyclerView = findViewById(R.id.ListRideToChoose);
+        RecyclerView recyclerView = findViewById(R.id.ListRideToChoose);
         recyclerView.setAdapter(rideAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        showCourses = findViewById(R.id.showMyCourse);
-        showCourses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                generateAllCoursesPage();
-            }
-        });
+    }
+
+    private void setDarkMode() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs_For_DarkMode", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
     /**
@@ -107,6 +108,9 @@ public class MainPage extends AppCompatActivity {
         if (item.getItemId() == R.id.menu_edit_profile) {
             Intent intent = new Intent(this, EditAccount.class);
             startActivity(intent);
+        }
+        if (item.getItemId() == R.id.menu_mycourses) {
+            generateAllCoursesPage();
         }
         if (item.getItemId() == R.id.menu_disconnect) {
             logout();

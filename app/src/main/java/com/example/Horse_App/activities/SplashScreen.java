@@ -25,7 +25,6 @@ public class SplashScreen extends AppCompatActivity {
 
     /**
      * Manages the view and animations
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

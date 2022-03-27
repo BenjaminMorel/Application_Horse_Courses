@@ -53,8 +53,7 @@ public class EditAccount extends AppCompatActivity {
         if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             btnToggleDark.setText(R.string.disable_darkMode);
-        }
-        else {
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             btnToggleDark.setText(R.string.enable_darkMode);
         }

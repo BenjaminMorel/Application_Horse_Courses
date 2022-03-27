@@ -12,8 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:context=".RegisterFragment"
         tools:ignore="MissingConstraints">
 
@@ -157,17 +155,17 @@
             android:backgroundTint="@color/text_edit"
             android:text="@string/action_update" />
 
+        <Switch
+            android:id="@+id/switchDarkMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dark_mode"
+            android:theme="@style/SCBSwitch"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/textColor"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="672dp" />
     </LinearLayout>
-
-    <Switch
-        android:id="@+id/switchDarkMode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginBottom="30dp"
-        android:text="@string/dark_mode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

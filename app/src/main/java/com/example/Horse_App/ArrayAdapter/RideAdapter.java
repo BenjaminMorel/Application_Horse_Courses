@@ -18,13 +18,11 @@ import com.example.Horse_App.activities.MainPage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder>{
+public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder> {
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView textRide_Description;
-        public TextView ride_specification;
-        public TextView ride_location;
+        public TextView textRide_Description, ride_specification, ride_location;
         public Button buttonSelectCourse;
         public List<Drawable> allPictures = new ArrayList<>();
         public View row_view;
@@ -53,7 +51,10 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder>{
     private MainPage mainPage;
     private List<Ride> rides;
 
-    public RideAdapter(List<Ride> rides){this.rides = rides; }
+    public RideAdapter(List<Ride> rides) {
+        this.rides = rides;
+    }
+
     @Override
     public RideAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
@@ -71,11 +72,9 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder>{
         Ride ride = rides.get(position);
 
         holder.row_view.setBackground(holder.allPictures.get(position));
-      //  holder.row_view.setBackground(picture);
-
         holder.ride_location.setText(ride.location);
         holder.textRide_Description.setText(ride.description);
-        holder.ride_specification.setText("Difficulty :    " + ride.difficulty + "/5" + "     " + "Length :    " + ride.length + "\nDuration :    " + ride.duration);
+        holder.ride_specification.setText("Difficulty :    " + ride.difficulty + "/5" + "     " + "Length :    " + ride.length + " km" + "\nDuration :    " + ride.duration + " h.");
         holder.buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
