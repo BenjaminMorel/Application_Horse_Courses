@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class CreateNewCourse extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_course);
 
         createPage();
+
     }
 
     private void createPage() {

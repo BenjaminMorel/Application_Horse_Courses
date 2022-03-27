@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Horse_App.ArrayAdapter.CourseAdapter;
@@ -21,6 +22,8 @@ import com.example.Horse_App.R;
 import java.util.List;
 
 public class DisplayAllCourses extends AppCompatActivity {
+
+    private TextView noRegistration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +45,24 @@ public class DisplayAllCourses extends AppCompatActivity {
         List<Course> courses = courseRepository.getCoursesByUser(getApplication(), userID);
         List<Ride> rides = rideRepository.getRides(getApplication());
         CourseAdapter courseAdapter = new CourseAdapter(courses, rides);
+        courses =  courseRepository.getCoursesByUser(getApplication(), userID);
+
+        if(courses.isEmpty()){
+            noRegistration = findViewById(R.id.noReservation);
+            noRegistration.setText("You currently have no registration");
+        }
+        rides = rideRepository.getRides(getApplication());
+        CourseAdapter courseAdapter = new CourseAdapter(courses,rides);
         courseAdapter.setDisplayAllCourses(this);
         recyclerView.setAdapter(courseAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
     }
 
-    public void deleteCourse(int idCourse, int position) {
+    public void deleteCourse(int idCourse,int position) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(this,R.style.AlertDialogCustom).create();
         alertDialog.setTitle(getString(R.string.deleteCourse));
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Do you really want to delete this course ?");

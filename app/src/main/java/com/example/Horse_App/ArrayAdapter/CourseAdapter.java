@@ -23,6 +23,11 @@ import com.google.android.gms.common.api.internal.StatusExceptionMapper;
 
 import org.w3c.dom.Text;
 
+import java.sql.SQLOutput;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
@@ -86,6 +91,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         }
         holder.course_location.setText(ride.location);
         holder.course_date.setText(course.date);
+
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_MONTH, 7);
+            Date courseDate =new SimpleDateFormat("dd/MM/yyyy").parse(course.date);
+            if(courseDate.compareTo(calendar.getTime()) < 1){
+
+                holder.cancelButton.setVisibility(View.INVISIBLE);
+            }
+        } catch (ParseException e) {
+
+            e.printStackTrace();
+        }
+
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
