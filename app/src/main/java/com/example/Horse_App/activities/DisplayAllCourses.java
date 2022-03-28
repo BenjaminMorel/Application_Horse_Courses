@@ -45,8 +45,10 @@ public class DisplayAllCourses extends AppCompatActivity {
         CourseRepository courseRepository = ((BaseApp) getApplication()).getCourseRepository();
         RideRepository rideRepository = (((BaseApp) getApplication()).getRideRepository());
 
-        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
+        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
         int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+
+        System.out.println(userID + " id du user co");
 
         RecyclerView recyclerView = findViewById(R.id.allCourses);
 

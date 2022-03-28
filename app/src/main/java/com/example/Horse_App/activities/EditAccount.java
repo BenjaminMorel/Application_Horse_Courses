@@ -110,26 +110,41 @@ public class EditAccount extends AppCompatActivity {
     private void saveModification(String firstname, String lastname, String phonenumber, String email, String oldPassword, String password, String confirmPassword) {
 
         boolean cancel = false;
-
+        String newPassword ="";
         if (oldPassword.isEmpty()) {
             cancel = true;
             edOldPassword.setError(getString(R.string.field_required));
         }
-        if (password.isEmpty()) {
+
+        if (password.isEmpty() && !confirmPassword.isEmpty()) {
             cancel = true;
             edPassword.setError(getString(R.string.field_required));
         }
-        if (confirmPassword.isEmpty()) {
+        if (confirmPassword.isEmpty() && !password.isEmpty()) {
             cancel = true;
             edConfirmPassword.setError(getString(R.string.field_required));
         }
 
+        if(!confirmPassword.equals(password)){
+            cancel = true;
+            edPassword.setError(getString(R.string.no_matching_pwd));
+            edConfirmPassword.setError(getString(R.string.no_matching_pwd));
+        }
+        if(password.isEmpty() && confirmPassword.isEmpty()){
+            newPassword = oldPassword;
+        }else{
+            newPassword = password;
+        }
+
+
         if (!cancel) {
+            String finalNewPassword = newPassword;
             userRepository.getUserByID(userID, getApplication()).observe(EditAccount.this, user -> {
 
-                String encryptedPwd = Encrypt.md5(password);
+                String encryptedPwd = Encrypt.md5(oldPassword);
                 if (user.getPassword().equals(encryptedPwd)) {
-                    User editUser = new User(email, password, firstname, lastname, phonenumber);
+                    String newEncryptedPwd = Encrypt.md5(finalNewPassword);
+                    User editUser = new User(email, newEncryptedPwd, firstname, lastname, phonenumber);
                     editUser.setUserID(userID);
                     new UpdateUser(getApplication(), new OnAsyncEventListener() {
                         @Override
