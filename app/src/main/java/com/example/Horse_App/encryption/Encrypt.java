@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 public class Encrypt {
 
     /**
-     * Static method that will be called in the Database Initializer and Login method
+     * Static method that will be called in the Database Initializer, login and register method
      * in order to encrypt the passwords before putting them in the database
      * @param s Plain text String
      * @return Encrypted String
