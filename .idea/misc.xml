@@ -3,13 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/ic_account.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/ic_launcher_background.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/ic_lock.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/ic_lock_open_black_24dp.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/ic_logout.xml" value="0.195" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/my_btn_toggle.xml" value="0.166" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/shape_login.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/shape_mail.xml" value="0.1145" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/shape_round.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/shape_round_red.xml" value="0.195" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/drawable/shape_signup.xml" value="0.195" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_about.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_base.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_course_historique.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_create_new_course.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_edit_account.xml" value="0.25" />
-        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_login.xml" value="0.2501302761855133" />
+        <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_main_page.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/AndroidStudio Workspace/Application_Horse_Courses/app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />

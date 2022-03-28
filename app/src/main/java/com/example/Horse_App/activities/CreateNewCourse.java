@@ -148,8 +148,8 @@ public class CreateNewCourse extends AppCompatActivity {
 
         String[] hours = ride.time.split("/");
 
-        startHour.setText(getString(R.string.startsAt) + hours[0]);
-        finishHour.setText(getString(R.string.endsAt) + hours[1]);
-        coursePrice.setText(String.valueOf(ride.price) + getString(R.string.chf));
+        startHour.setText("Starts at " + hours[0]);
+        finishHour.setText("Ends at "+ hours[1]);
+        coursePrice.setText(String.valueOf(ride.price) + " CHF");
     }
 }

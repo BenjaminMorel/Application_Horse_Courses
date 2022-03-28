@@ -44,9 +44,6 @@
     <string name="enable_darkMode">Enable Dark Mode</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign Up</string>
-    <string name="startsAt">\"Starts at: \"</string>
-    <string name="endsAt">\"Ends at: \"</string>
-    <string name="chf">\" CHF\"</string>
     <string name="deleteCourse">Delete Course</string>
 
 </resources>

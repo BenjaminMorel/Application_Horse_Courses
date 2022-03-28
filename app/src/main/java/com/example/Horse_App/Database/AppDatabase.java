@@ -36,7 +36,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
-
     public static AppDatabase getAppDateBase(Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {

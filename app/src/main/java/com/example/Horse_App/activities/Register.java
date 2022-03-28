@@ -27,6 +27,10 @@ public class Register extends AppCompatActivity {
         startPage();
     }
 
+    /**
+     * Method to load all the different parts of the page, with edit texts and button
+     * and to create the references between variables and buttons
+     */
     private void startPage() {
         etFirstname = findViewById(R.id.first_name_register);
         etLastname = findViewById(R.id.last_name_register);
@@ -40,11 +44,16 @@ public class Register extends AppCompatActivity {
                 etPhoneNumber.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
     }
 
+    /**
+     * Method that will create a new user in our database, by getting all the elements,details that the user has given
+     */
     private void registerNewUser(String firstname, String lastname, String phoneNumber, String email, String password) {
 
+        //Encrypt the password by calling the md5 method in the Encrypt class
         String encryptedPwd = Encrypt.md5(password);
         User newUser = new User(email, encryptedPwd, firstname, lastname, phoneNumber);
 
+        //Tries to create a new user
         new CreateUser(getApplication(), new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
@@ -56,6 +65,8 @@ public class Register extends AppCompatActivity {
                 Log.d(TAG, "createUserWithEmail: failure", e);
             }
         }).execute(newUser);
+
+        //And finally launch a new activity with the Intent to return on the Login page
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
