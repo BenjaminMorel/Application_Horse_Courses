@@ -33,18 +33,14 @@ import java.util.List;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        // Your holder should contain a member variable
-        // for any view that will be set as you render a row
+
+        // List of variable that will be used for each row
         public TextView course_date;
         public TextView course_location;
         public Button cancelButton;
 
-
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
+        // the constructor will find the right variable for the textView and the button
         public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
             super(itemView);
 
             course_location = itemView.findViewById(R.id.course_location);
@@ -53,9 +49,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         }
     }
 
+    // List of courses and rides that will be used to display informations
+
     private final List<Course> courses;
     private final List<Ride> rides;
 
+    // reference to the activity to be able to access the delete methode
     public DisplayAllCourses displayAllCourses;
 
     public RideRepository rideRepository;
@@ -78,7 +77,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return new ViewHolder(contactView);
     }
 
-    // Involves populating data into the item through holder
+
+    /**
+     *
+     * For each row we will set the text accordingly with the database and we calcutate if
+     * the cancel button should by display or not ( if the course is in less than 7 day it will
+     * be disable), if it's enable we create an OnClickListener link to the deleteCourse on the display page
+     *
+     */
     @Override
     public void onBindViewHolder(@NonNull CourseAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
@@ -108,7 +114,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayAllCourses.deleteCourse(course.courseID, position);
+                displayAllCourses.deleteCourse(course.courseID);
             }
         });
     }
@@ -118,6 +124,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         return courses.size();
     }
 
+    /**
+     *
+     * Setter for the reference of the activity that hold the recyclerView
+     */
     public void setDisplayAllCourses(DisplayAllCourses displayAllCourses) {
         this.displayAllCourses = displayAllCourses;
     }

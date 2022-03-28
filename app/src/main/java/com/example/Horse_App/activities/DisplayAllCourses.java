@@ -29,10 +29,18 @@ public class DisplayAllCourses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_historique);
-
         generatePage();
     }
 
+    /**
+     * Method to load all different part of the page
+     * It will create a repository object for the ride and the course
+     * then it will ask for all courses with the right user ID and all rides
+     * If they are no courses a message will be display on the page to advert you
+     * than you currently have made no reservation
+     * If you already have made reservation we create a courseAdapter to use on the
+     * recycler view
+     */
     private void generatePage() {
         CourseRepository courseRepository = ((BaseApp) getApplication()).getCourseRepository();
         RideRepository rideRepository = (((BaseApp) getApplication()).getRideRepository());
@@ -59,7 +67,16 @@ public class DisplayAllCourses extends AppCompatActivity {
 
     }
 
-    public void deleteCourse(int idCourse,int position) {
+
+    /**
+     *
+     * @param idCourse ID of the course you want to delete
+     * If the button delete is pressed this method is called
+     * It will create an AlertDialog to ask you if your realy want
+     * to delete this reservation if yes it will then ask the real method on the repository to
+     * delete it from de Database
+     */
+    public void deleteCourse(int idCourse) {
 
         AlertDialog alertDialog = new AlertDialog.Builder(this,R.style.AlertDialogCustom).create();
         alertDialog.setTitle(getString(R.string.deleteCourse));

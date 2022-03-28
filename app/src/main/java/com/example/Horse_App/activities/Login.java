@@ -24,8 +24,12 @@ public class Login extends AppCompatActivity {
     private EditText emailView, passwordView;
     private UserRepository repository;
 
-    private static final int PERMISSION_REQUEST_CODE = 1;
 
+    /**
+     *
+     * method to display the page and get the reference of the textView
+     * we also create the onClickListener on the register button
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +51,6 @@ public class Login extends AppCompatActivity {
         // Add the login button with listener
         Button logInButton = findViewById(R.id.button_login);
         logInButton.setOnClickListener(view -> attemptLogin());
-
     }
 
     /**
@@ -58,6 +61,11 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method to verify the credentails that have been given
+     * If the are correct the main page will be load and the user id stocked on
+     * the shared preference, if not the errorMessage is display and the page stay the same
+     */
     private void attemptLogin() {
 
         boolean cancel = false;

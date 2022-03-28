@@ -35,23 +35,27 @@ public class CreateNewCourse extends AppCompatActivity {
     private static final String TAG = "CreateNewCourseActivity";
     private int rideID;
     private Ride ride;
-
     private Date selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_course);
-
         createPage();
-
     }
 
-    private void createPage() {
 
+    /**
+     * Method use to create all information on the page
+     * We first get back the Ride ID to display the write Ride
+     * Then we set all TextView with the rigth information
+     * The maps si load with the location point stored in the data based
+     * And final the calendar is set on the date of the next day
+     * and date are blocked for the past and after 3 month in the future
+     */
+    private void createPage() {
         RideRepository rideRepository = ((BaseApp) getApplication()).getRideRepository();
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDE, 0);
-
         rideID = preferences.getInt(BaseActivity.PREFS_RIDEID, 1);
         ride = rideRepository.getRide(rideID, getApplication());
 
@@ -84,6 +88,14 @@ public class CreateNewCourse extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to handle the reservation of the new course
+     * We get back the date that was selected by the user
+     * and we used the ride ID and User ID as foreign key
+     * for the newly created course
+     * If the creation is a success we display a toast for
+     * the user
+     */
     private void createNewCourse() {
 
         SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
@@ -112,6 +124,11 @@ public class CreateNewCourse extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Method that will wait for the fragment map to be loaded
+     * And after that it call the Callback method on the fragment class
+     * to position the cart at the rigth place and set the view correctly
+     */
     private void initializeMapsFragment() {
         FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
         SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
@@ -119,7 +136,10 @@ public class CreateNewCourse extends AppCompatActivity {
         mTransaction.commit();
     }
 
-    @SuppressLint("SetTextI18n")
+
+    /**
+     * Method to set all TextView with the right value depending on the ride you choose
+     */
     private void setTextViewValue() {
 
         TextView startHour = findViewById(R.id.StartHour);
