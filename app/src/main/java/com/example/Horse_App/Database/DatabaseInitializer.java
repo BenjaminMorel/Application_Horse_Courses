@@ -3,8 +3,10 @@ package com.example.Horse_App.Database;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.Horse_App.Database.Entity.Course;
 import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.Database.Entity.User;
+import com.example.Horse_App.encryption.Encrypt;
 
 public class DatabaseInitializer {
 
@@ -18,39 +20,58 @@ public class DatabaseInitializer {
 
     private static void addUser(final AppDatabase db, final String email, final String password, final String firstname,
                                 final String lastname, final String phoneNumber) {
-        User user = new User(email, password, firstname, lastname, phoneNumber);
+
+        String encryptedPwd = Encrypt.md5(password);
+        User user = new User(email, encryptedPwd, firstname, lastname, phoneNumber);
         db.userDao().insert(user);
     }
 
     private static void addRide(final AppDatabase db, final String description, final double length, final double duration, final int difficulty,
-                                final String location, final String positions, final String time, final double price,final String path) {
-        Ride ride = new Ride(description, length, duration, difficulty, location, positions, time, price,path);
+                                final String location, final String positions, final String time, final double price, final String path) {
+        Ride ride = new Ride(description, length, duration, difficulty, location, positions, time, price, path);
         db.rideDao().insert(ride);
+    }
+
+    private static void addCourse(final AppDatabase db, final int rideID, final int userID, final String date) {
+        Course course = new Course(rideID, userID, date);
+        db.courseDao().insert(course);
     }
 
 
     private static void populateWithTestData(AppDatabase db) {
 
+        // Adding users
         db.userDao().deleteAll();
-        addUser(db, "admin", "123", "Hugo", "Vouillamoz", "075248621");
-        addUser(db, "admin2", "123", "Benjamin", "Morel", "078689289");
-
+        addUser(db, "hugo.v@hes.ch", "password123", "Hugo", "Vouillamoz", "075248621");
+        addUser(db, "benjamin.m@hes.ch", "letmein123", "Benjamin", "Morel", "078689289");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        // Adding rides
         db.rideDao().deleteAll();
-        addRide(db, "Super balade", 10.2, 3.5, 4, "Martigny", "46.109987/7.102460/46.122314/7.129649/46.119117/7.132502/46.107869/7.103133", "13:30/16:30", 45.50,"@drawable/martigny");
-        addRide(db, "Super promenade", 9.8, 4.8, 3, "Liddes", "45.981136/7.189659/45.972979/7.202241/45.973308/7.207658/45.987731/7.189178", "11:00/14:15", 32.50,"@drawable/liddes");
-        addRide(db, "Super excursion", 7.8, 2.5, 1, "Saillon", "46.168166/7.177144/46.167106/7.171189/46.161594/7.165012/46.157026/7.155829/46.164446/7.180595", "12:00/15:00", 40.00,"@drawable/saillon");
-        addRide(db, "Balade au bord du Rhone", 7.6, 2.5, 2, "Sierre", "46.3011113/7.565139/46.304852/7.578500/46.307543/7.579149/46.304661/7.567815", "14:30/16:30", 25.60, "");
+        addRide(db, "Walk near the Rhone with a beautiful view on the moutains around Martigny", 10.2, 2.4, 2, "Martigny", "46.109987/7.102460/46.122314/7.129649/46.119117/7.132502/46.107869/7.103133", "13:30/16:30", 45.50, "@drawable/paysage1.jpg");
+        addRide(db, "Walk in the forest around the village ", 25.2, 4.8, 4, "Liddes", "45.981136/7.189659/45.972979/7.202241/45.973308/7.207658/45.987731/7.189178", "11:00/14:15", 32.50, "@drawable/paysage2");
+        addRide(db, "Walk around the tower of Saillon and in the old village with a great view on the Rhone Valley", 7.8, 2.5, 1, "Saillon", "46.168166/7.177144/46.167106/7.171189/46.161594/7.165012/46.157026/7.155829/46.164446/7.180595", "12:00/15:00", 40.00, "@drawable/saillon");
+        addRide(db, "Walk following the Rhone with a long part in the forest,perfect for beginner", 7.6, 2.5, 2, "Sierre", "46.3011113/7.565139/46.304852/7.578500/46.307543/7.579149/46.304661/7.567815", "14:30/16:30", 25.60, "s");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        // Adding courses
+        db.courseDao().deleteAll();
+        addCourse(db, 1, 2, "10.02.2022");
+        addCourse(db, 2, 2, "27.02.2022");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
@@ -66,7 +87,5 @@ public class DatabaseInitializer {
             populateWithTestData(database);
             return null;
         }
-
     }
-
 }

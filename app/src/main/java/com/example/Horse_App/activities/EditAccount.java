@@ -1,6 +1,8 @@
 package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,33 +18,66 @@ import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.async.User.UpdateUser;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
+import com.example.Horse_App.encryption.Encrypt;
 
 public class EditAccount extends AppCompatActivity {
 
     private static final String TAG = "EditAccount activity";
-
     private int userID;
-
     private UserRepository userRepository;
 
-    EditText edFirstname;
-    EditText edLastname;
-    EditText edPhoneNumber;
-    EditText edEmail;
-
-    EditText edOldPassword;
-    EditText edPassword;
-    EditText edConfirmPassword;
+    EditText edFirstname, edLastname, edPhoneNumber, edEmail;
+    EditText edOldPassword, edPassword, edConfirmPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        setDarkMode();
+
         userRepository = ((BaseApp) getApplicationContext()).getUserRepository();
         displayUserInfo();
     }
 
+    private void setDarkMode() {
+        Button btnToggleDark = findViewById(R.id.switchDarkMode);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs_For_DarkMode", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            btnToggleDark.setText(R.string.disable_darkMode);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            btnToggleDark.setText(R.string.enable_darkMode);
+        }
+
+        btnToggleDark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isDarkModeOn) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    editor.putBoolean("isDarkModeOn", false);
+                    editor.apply();
+                    btnToggleDark.setText(R.string.enable_darkMode);
+
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    editor.putBoolean("isDarkModeOn", true);
+                    editor.apply();
+                    btnToggleDark.setText(R.string.disable_darkMode);
+                }
+            }
+        });
+
+    }
 
     private void displayUserInfo() {
 
@@ -75,26 +110,41 @@ public class EditAccount extends AppCompatActivity {
     private void saveModification(String firstname, String lastname, String phonenumber, String email, String oldPassword, String password, String confirmPassword) {
 
         boolean cancel = false;
-
+        String newPassword ="";
         if (oldPassword.isEmpty()) {
             cancel = true;
             edOldPassword.setError(getString(R.string.field_required));
         }
-        if (password.isEmpty()) {
+
+        if (password.isEmpty() && !confirmPassword.isEmpty()) {
             cancel = true;
             edPassword.setError(getString(R.string.field_required));
         }
-        if (confirmPassword.isEmpty()) {
+        if (confirmPassword.isEmpty() && !password.isEmpty()) {
             cancel = true;
             edConfirmPassword.setError(getString(R.string.field_required));
         }
 
+        if(!confirmPassword.equals(password)){
+            cancel = true;
+            edPassword.setError(getString(R.string.no_matching_pwd));
+            edConfirmPassword.setError(getString(R.string.no_matching_pwd));
+        }
+        if(password.isEmpty() && confirmPassword.isEmpty()){
+            newPassword = oldPassword;
+        }else{
+            newPassword = password;
+        }
+
+
         if (!cancel) {
+            String finalNewPassword = newPassword;
             userRepository.getUserByID(userID, getApplication()).observe(EditAccount.this, user -> {
 
-                //TODO ajouter le edit seulement pour la partie Info user sans les credentials
-                if (user.getPassword().equals(oldPassword)) {
-                    User editUser = new User(email, password, firstname, lastname, phonenumber);
+                String encryptedPwd = Encrypt.md5(oldPassword);
+                if (user.getPassword().equals(encryptedPwd)) {
+                    String newEncryptedPwd = Encrypt.md5(finalNewPassword);
+                    User editUser = new User(email, newEncryptedPwd, firstname, lastname, phonenumber);
                     editUser.setUserID(userID);
                     new UpdateUser(getApplication(), new OnAsyncEventListener() {
                         @Override
@@ -115,10 +165,5 @@ public class EditAccount extends AppCompatActivity {
             });
 
         }
-    }
-
-    public void loadPage(View view) {
-        Intent intent = new Intent(this, EditAccount.class);
-        startActivity(intent);
     }
 }

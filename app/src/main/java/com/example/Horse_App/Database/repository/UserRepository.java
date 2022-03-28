@@ -28,7 +28,6 @@ public class UserRepository {
         return instance;
     }
 
-
     public LiveData<List<User>> getUsers(Application application) {
         return ((BaseApp) application).getDatabase().userDao().getAll();
     }
@@ -40,6 +39,5 @@ public class UserRepository {
     public LiveData<User> getUserByEmail(final String email, Application application) {
         return ((BaseApp) application).getDatabase().userDao().getByEmail(email);
     }
-
 
 }

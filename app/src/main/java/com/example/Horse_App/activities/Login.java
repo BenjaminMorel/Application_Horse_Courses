@@ -17,46 +17,40 @@ import com.example.Horse_App.Database.DatabaseInitializer;
 import com.example.Horse_App.Database.Entity.User;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.example.Horse_App.encryption.Encrypt;
 
 public class Login extends AppCompatActivity {
 
     private EditText emailView, passwordView;
     private UserRepository repository;
-    private User newUser;
 
-    private static final int PERMISSION_REQUEST_CODE = 1;
 
+    /**
+     *
+     * method to display the page and get the reference of the textView
+     * we also create the onClickListener on the register button
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        logout();
-      //  reinitializeDatabase();
 
         repository = ((BaseApp) getApplicationContext()).getUserRepository();
 
         emailView = findViewById(R.id.email_login);
         passwordView = findViewById(R.id.password_login);
 
-        // Add the register button with listener
         Button registerButton = findViewById(R.id.button_register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reinitializeDatabase();
                 register();
-
             }
         });
 
         // Add the login button with listener
         Button logInButton = findViewById(R.id.button_login);
         logInButton.setOnClickListener(view -> attemptLogin());
-
     }
 
     /**
@@ -67,6 +61,11 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method to verify the credentails that have been given
+     * If the are correct the main page will be load and the user id stocked on
+     * the shared preference, if not the errorMessage is display and the page stay the same
+     */
     private void attemptLogin() {
 
         boolean cancel = false;
@@ -76,25 +75,24 @@ public class Login extends AppCompatActivity {
         String email = emailView.getText().toString();
         String password = passwordView.getText().toString();
 
-        if (email.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) {
             emailView.setError(getString(R.string.field_required));
-            cancel = true;
-        } else if (password.isEmpty()) {
             passwordView.setError(getString(R.string.field_required));
             cancel = true;
         }
 
         if (!cancel) {
-            //    repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> setUserValue(user));
             repository.getUserByEmail(email, getApplication()).observe(Login.this, user -> {
                 if (user != null) {
-                    if (user.getPassword().equals(password)) {
-                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
+                    String encryptedPwd = Encrypt.md5(password);
+                    if (user.getPassword().equals(encryptedPwd)) {
+                        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
                         editor.putInt(BaseActivity.PREFS_USERID, user.userID);
+                        System.out.println(user.userID);
                         editor.apply();
                         Intent intent = new Intent(this, MainPage.class);
                         startActivity(intent);
-
+                        finish();
                     }
                 } else {
                     emailView.setError(getString(R.string.error_login_message));
@@ -102,49 +100,5 @@ public class Login extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    private void reinitializeDatabase() {
-        DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
-    }
-
-    private void sendSMS() {
-        Intent intent = new Intent(getApplicationContext(), MainPage.class);
-        PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, intent, 0);
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage("000", null, "you access code is 4444", pi, null);
-    }
-
-    /**
-     * Method to clear the prefs id of the user and redirect to login page
-     */
-    private void logout() {
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_USERID, 0).edit();
-        editor.remove(BaseActivity.PREFS_USERID);
-        editor.apply();
-    }
-
-    public static final String md5(final String s) {
-        final String MD5 = "MD5";
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = java.security.MessageDigest
-                    .getInstance(MD5);
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuilder hexString = new StringBuilder();
-            for (byte aMessageDigest : messageDigest) {
-                String h = Integer.toHexString(0xFF & aMessageDigest);
-                while (h.length() < 2)
-                    h = "0" + h;
-                hexString.append(h);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 }

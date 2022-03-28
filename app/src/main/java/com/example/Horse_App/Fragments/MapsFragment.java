@@ -22,7 +22,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
     private View fragmentView;
     private GoogleMap mMap;
-    private String positions;
+    private final String positions;
     private String newPoints;
     private String[] pointLocation;
 
@@ -33,12 +33,11 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private void initGoogleMap() {
         getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap googleMap) {
+            public void onMapReady(@NonNull GoogleMap googleMap) {
                 pointLocation = null;
                 mMap = googleMap;
                 List<LatLng> path = new ArrayList<LatLng>();
                 pointLocation = positions.split("/");
-
 
                 for (int i = 0; i < pointLocation.length - 1; i += 2) {
                     LatLng newPoint = new LatLng(Double.parseDouble(pointLocation[i]), Double.parseDouble(pointLocation[i + 1]));
@@ -67,6 +66,4 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     public void onMapReady(@NonNull GoogleMap googleMap) {
     }
 
-    public void stringParser() {
-    }
 }

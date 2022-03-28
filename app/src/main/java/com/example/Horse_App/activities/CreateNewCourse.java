@@ -13,13 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.Course;
 import com.example.Horse_App.Database.Entity.Ride;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.async.Course.CreateCourse;
-import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.Fragments.MapsFragment;
 import com.example.Horse_App.R;
@@ -34,50 +34,35 @@ public class CreateNewCourse extends AppCompatActivity {
 
     private static final String TAG = "CreateNewCourseActivity";
     private int rideID;
-    private int userID;
     private Ride ride;
-
-    private Button confirmCreation;
-    private CalendarView calendarView;
-    private MapsFragment mapsFragment;
-
-    private RideRepository rideRepository;
-    private CourseRepository courseRepository;
-
-    private TextView startHour;
-    private TextView finishHour;
-    private TextView titleLocation;
-    private TextView coursePrice;
-
     private Date selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_course);
-
         createPage();
-
     }
 
-    private void createPage(){
 
-        rideRepository = ((BaseApp) getApplication()).getRideRepository();
-        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0);
-
-        rideID = preferences.getInt(BaseActivity.PREFS_USERID,1);
-
-        // after using the shared pref we get rid of it to be sure that the variable is empty for the next use
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDEID, 0).edit();
-        editor.remove(BaseActivity.PREFS_RIDEID);
-        editor.apply();
-
-        ride = rideRepository.getRide(rideID,getApplication());
+    /**
+     * Method use to create all information on the page
+     * We first get back the Ride ID to display the write Ride
+     * Then we set all TextView with the rigth information
+     * The maps si load with the location point stored in the data based
+     * And final the calendar is set on the date of the next day
+     * and date are blocked for the past and after 3 month in the future
+     */
+    private void createPage() {
+        RideRepository rideRepository = ((BaseApp) getApplication()).getRideRepository();
+        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDE, 0);
+        rideID = preferences.getInt(BaseActivity.PREFS_RIDEID, 1);
+        ride = rideRepository.getRide(rideID, getApplication());
 
         setTextViewValue();
 
         initializeMapsFragment();
-        confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
+        Button confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
 
         confirmCreation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,70 +72,84 @@ public class CreateNewCourse extends AppCompatActivity {
         });
 
         // Disable past days
-        calendarView = findViewById(R.id.calendarNewCourse);
+        CalendarView calendarView = findViewById(R.id.calendarNewCourse);
         long now = calendarView.getDate();
+        calendarView.setDate(now + 1000L * 60 * 60 * 24);
         calendarView.setMinDate(now);
         Calendar calendar = Calendar.getInstance();
-        now += (60*1000L * 60 * 60 * 24);
+        now += (60 * 1000L * 60 * 60 * 24);
         calendarView.setMaxDate(now);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                selectedDate = new GregorianCalendar(year,month,day).getTime();
+                selectedDate = new GregorianCalendar(year, month, day).getTime();
             }
         });
     }
 
-    private void createNewCourse(){
+    /**
+     * Method to handle the reservation of the new course
+     * We get back the date that was selected by the user
+     * and we used the ride ID and User ID as foreign key
+     * for the newly created course
+     * If the creation is a success we display a toast for
+     * the user
+     */
+    private void createNewCourse() {
 
-        SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
+        SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
 
-        userID = userPreferences.getInt(BaseActivity.PREFS_USERID,1);
+        int userID = userPreferences.getInt(BaseActivity.PREFS_USERID, 1);
 
-//        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String courseDate = sdf.format(selectedDate);
-     //   String courseDate = "22/03/2022";
 
-        Course newCourse = new Course(ride.rideID, userID , courseDate);
+        Course newCourse = new Course(ride.rideID, userID, courseDate);
 
         new CreateCourse(getApplication(), new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
-                Log.d(TAG, "create new Course: success");
+                Toast.makeText(CreateNewCourse.this, R.string.toast_reservationSuccessful, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, getString(R.string.log_createCourseSuccess));
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.d(TAG, "Create new Course: failure", e);
+                Log.d(TAG, getString(R.string.log_createCourseFailure) + rideID + " / " + userID, e);
             }
+
         }).execute(newCourse);
 
-        Intent intent = new Intent(this, MainPage.class);
-        startActivity(intent);
-
+        finish();
     }
 
-        private void initializeMapsFragment() {
+    /**
+     * Method that will wait for the fragment map to be loaded
+     * And after that it call the Callback method on the fragment class
+     * to position the cart at the rigth place and set the view correctly
+     */
+    private void initializeMapsFragment() {
         FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
-        mapsFragment = new MapsFragment(ride.getPositions());
-        SupportMapFragment supportMapFragment = mapsFragment;
+        SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
         mTransaction.add(R.id.mapFragment, supportMapFragment);
         mTransaction.commit();
     }
 
-    @SuppressLint("SetTextI18n")
-    private void setTextViewValue(){
 
-        startHour = findViewById(R.id.StartHour);
-        finishHour = findViewById(R.id.FinishHour);
-        coursePrice = findViewById(R.id.course_price);
+    /**
+     * Method to set all TextView with the right value depending on the ride you choose
+     */
+    private void setTextViewValue() {
 
-        String [] hours = ride.time.split("/");
+        TextView startHour = findViewById(R.id.StartHour);
+        TextView finishHour = findViewById(R.id.FinishHour);
+        TextView coursePrice = findViewById(R.id.course_price);
 
-        startHour.setText("Starts at: " + hours[0]);
-        finishHour.setText("Ends at: " + hours[1]);
+        String[] hours = ride.time.split("/");
+
+        startHour.setText("Starts at " + hours[0]);
+        finishHour.setText("Ends at "+ hours[1]);
         coursePrice.setText(String.valueOf(ride.price) + " CHF");
     }
 }

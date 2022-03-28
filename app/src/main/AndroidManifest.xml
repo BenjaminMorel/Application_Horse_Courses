@@ -10,10 +10,10 @@
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LoginPage"
+        android:theme="@style/Theme.LightTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".splash_screen"
+            android:name=".activities.Login"
             android:exported="false" />
         <activity
             android:name=".activities.About"
@@ -39,9 +39,10 @@
             android:exported="false" />
         <activity
             android:name=".activities.EditAccount"
+            android:label="Edit your account"
             android:exported="false" />
         <activity
-            android:name=".activities.Login"
+            android:name=".activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

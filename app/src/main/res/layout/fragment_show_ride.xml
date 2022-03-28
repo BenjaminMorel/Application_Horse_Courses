@@ -4,35 +4,66 @@
     android:layout_width="400dp"
     android:layout_height="400dp"
     android:layout_gravity="center"
-    android:background="@drawable/liddes"
+    android:layout_marginTop="50dp"
+    android:background="@drawable/paysage1"
+    android:id="@+id/container_ride_info"
     tools:context=".Fragments.Show_Ride">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/ride_location"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textAllCaps="true"
+        android:text="Martigny"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/descriptionShowCourse"
-        android:layout_width="match_parent"
+        android:layout_width="175dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
         android:layout_marginTop="300dp"
         android:background="@color/whiteT1"
-        android:text="@string/info_course"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Walk around the tower of Saillon and in the old village with a great view on the Rhone Valley"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/course_specification"
+        android:layout_width="125dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="300dp"
+        android:background="@color/whiteT1"
+        android:gravity="center_vertical|center_horizontal"
+        android:lineSpacingExtra="7dp"
+        android:text="Difficulty : 4/5\nLength: 10.2 km\nDuration : 3.5 hours"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/buttonSelectCourse"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="305dp"
+        android:layout_marginTop="290dp"
         android:background="@drawable/shape_round"
         android:onClick="purchaseCourse"
         android:text="Select"
+        android:textSize="12sp"
         android:textColor="@color/button2"
-        android:textStyle="bold
-" />
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
