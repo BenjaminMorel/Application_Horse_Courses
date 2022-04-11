@@ -40,7 +40,7 @@
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_logout">Logout</string>
-    <string name="confirm_new_course">Confirm courseEntity reservation</string>
+    <string name="confirm_new_course">Confirm course reservation</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="disable_darkMode">Disable Dark Mode</string>
     <string name="enable_darkMode">Enable Dark Mode</string>

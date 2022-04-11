@@ -22,6 +22,7 @@ import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.firebase.RideListLiveData;
 import com.example.Horse_App.Database.repository.RideRepository;
+import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,6 +31,7 @@ import java.util.List;
 public class MainPage extends AppCompatActivity {
 
     private RideRepository rideRepository;
+    private UserRepository userRepository;
 
     /**
      * When the page is create we first check if the SharedPreference link to the user id is null
@@ -44,6 +46,7 @@ public class MainPage extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         rideRepository = ((BaseApp) getApplication()).getRideRepository();
+        userRepository = ((BaseApp) getApplication()).getUserRepository();
 
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
@@ -51,10 +54,15 @@ public class MainPage extends AppCompatActivity {
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(false);
 
-        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
-        String userID = String.valueOf(preferences.getInt(BaseActivity.PREFS_USERID, 1));
+        // Get user Id
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        setDarkMode();
+        // Get the preference for dark mode
+        userRepository.getUserByID(userID).observe(this, userEntity -> {
+            setDarkMode(userEntity.isDarkMode());
+        });
+
+        // Load main page
         startMainPage();
     }
 
@@ -78,10 +86,7 @@ public class MainPage extends AppCompatActivity {
     /**
      * Method to check if we need to use light or dark mode
      */
-    private void setDarkMode() {
-        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs_For_DarkMode", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+    private void setDarkMode(boolean isDarkModeOn) {
 
         if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

@@ -71,9 +71,11 @@ public class Register extends AppCompatActivity {
             etEmail.requestFocus();
             return;
         }
-
-        //Encrypt the password by calling the md5 method in the Encrypt class
-//        String encryptedPwd = Encrypt.md5(password);
+        if (!Patterns.PHONE.matcher(phoneNumber).matches()) {
+            etPhoneNumber.setError("Invalid phone number");
+            etPhoneNumber.requestFocus();
+            return;
+        }
 
         UserEntity newUserEntity = new UserEntity(email, password, firstname, lastname, phoneNumber, false);
 

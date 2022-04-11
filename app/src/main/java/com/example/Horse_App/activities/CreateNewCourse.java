@@ -12,14 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.*;
 import com.example.Horse_App.Database.Entity.CourseEntity;
 import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
-import com.example.Horse_App.Database.async.Course.CreateCourse;
 import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.Fragments.MapsFragment;
@@ -36,9 +33,7 @@ public class CreateNewCourse extends AppCompatActivity {
 
     private static final String TAG = "CreateNewCourseActivity";
     private String rideID;
-    private LiveData<RideEntity> ride;
     private CourseRepository courseRepository;
-    private RideRepository rideRepository;
     private Date selectedDate;
 
     @Override
@@ -48,7 +43,6 @@ public class CreateNewCourse extends AppCompatActivity {
         courseRepository = ((BaseApp) getApplication()).getCourseRepository();
         createPage();
     }
-
 
     /**
      * Method use to create all information on the page
@@ -70,8 +64,6 @@ public class CreateNewCourse extends AppCompatActivity {
                 setTextViewValue(ride);
         });
 
-
-
         Button confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
 
         confirmCreation.setOnClickListener(new View.OnClickListener() {
@@ -84,11 +76,18 @@ public class CreateNewCourse extends AppCompatActivity {
         // Disable past days
         CalendarView calendarView = findViewById(R.id.calendarNewCourse);
         long now = calendarView.getDate();
-      //  calendarView.setDate(now + 1000L * 60 * 60 * 24);
-        calendarView.setMinDate(now);
+        calendarView.setDate(now + 1000L * 60 * 60 * 24);
+
+        // Set min date
+        calendarView.setMinDate(now + 1000L * 60 * 60 * 24);
         Calendar calendar = Calendar.getInstance();
         now += (60 * 1000L * 60 * 60 * 24);
+
+        // Set max date
         calendarView.setMaxDate(now);
+
+        // Set default value for selectedDate
+        selectedDate = calendar.getTime();
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -134,8 +133,6 @@ public class CreateNewCourse extends AppCompatActivity {
      * to position the cart at the rigth place and set the view correctly
      */
 
-
-
     /**
      * Method to set all TextView with the right value depending on the ride you choose
      */
@@ -148,6 +145,6 @@ public class CreateNewCourse extends AppCompatActivity {
 
         startHour.setText("Starts at " + hours[0]);
         finishHour.setText("Ends at "+ hours[1]);
-        coursePrice.setText(String.valueOf(ride.getPrice()) + " CHF");
+        coursePrice.setText(ride.getPrice() + " CHF");
     }
 }

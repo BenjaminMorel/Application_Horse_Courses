@@ -48,7 +48,6 @@ public class UserEntity implements Comparable {
         this.email = email;
     }
 
-
     @Exclude
     public String getPassword() {
         return password;
@@ -102,6 +101,7 @@ public class UserEntity implements Comparable {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("email", email);
         result.put("firstName", firstName);
         result.put("lastName", lastName);
         result.put("phoneNumber", phoneNumber);
