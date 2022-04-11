@@ -1,12 +1,14 @@
 package com.example.Horse_App.Database.Entity;
 
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserEntity {
+public class UserEntity implements Comparable {
 
     public String userID;
     public String email;
@@ -15,7 +17,7 @@ public class UserEntity {
     public String lastName;
     public String phoneNumber;
 
-    public UserEntity(String email, String password, String firstName, String lastName, String phoneNumber) {
+    public UserEntity(@NonNull String email, String password, String firstName, String lastName, String phoneNumber) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -43,6 +45,7 @@ public class UserEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Exclude
     public String getPassword() {
@@ -93,5 +96,10 @@ public class UserEntity {
         result.put("lastName", lastName);
         result.put("phoneNumber", phoneNumber);
         return result;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return toString().compareTo(o.toString());
     }
 }

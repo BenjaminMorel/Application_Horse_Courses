@@ -9,7 +9,6 @@ import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.repository.UserRepository;

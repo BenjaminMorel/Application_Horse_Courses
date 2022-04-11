@@ -76,7 +76,7 @@ public class UserRepository {
         FirebaseDatabase.getInstance()
                 .getReference("users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .setValue(user, (databaseError, databaseReference) -> {
+                .setValue(user.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                         FirebaseAuth.getInstance().getCurrentUser().delete()
