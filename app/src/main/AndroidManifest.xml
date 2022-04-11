@@ -13,6 +13,9 @@
         android:theme="@style/Theme.LightTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.testActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.Login"
             android:exported="false" />
         <activity
@@ -32,17 +35,17 @@
             android:name=".activities.CreateNewCourse"
             android:exported="false" />
         <activity
-            android:name=".activities.MainPage"
+            android:name=".activities.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".activities.Register"
             android:exported="false" />
         <activity
             android:name=".activities.EditAccount"
-            android:label="Edit your account"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Edit your account" />
         <activity
-            android:name=".activities.SplashScreen"
+            android:name=".activities.MainPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

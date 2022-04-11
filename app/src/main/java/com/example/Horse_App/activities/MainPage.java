@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,14 +14,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.Horse_App.ArrayAdapter.RideAdapter;
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.AppDatabase;
-import com.example.Horse_App.Database.DatabaseInitializer;
-import com.example.Horse_App.Database.repository.CourseRepository;
+import com.example.Horse_App.Database.Entity.RideEntity;
+import com.example.Horse_App.Database.firebase.RideListLiveData;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 
@@ -28,9 +26,9 @@ import java.util.List;
 
 public class MainPage extends AppCompatActivity {
 
+    private RideRepository rideRepository;
 
     /**
-     *
      * When the page is create we first check if the SharedPreference link to the user id is null
      * if yes we close this activity and load the login page
      * if not we continue to load the main page
@@ -42,6 +40,8 @@ public class MainPage extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        rideRepository = ((BaseApp) getApplication()).getRideRepository();
+
         // Get a support ActionBar corresponding to this toolbar
         ActionBar ab = getSupportActionBar();
         // Enable the Up button
@@ -49,13 +49,13 @@ public class MainPage extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(false);
 
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
-        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+        String userID = String.valueOf(preferences.getInt(BaseActivity.PREFS_USERID, 1));
 
-        if (userID <= 0) {
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-            finish();
-        }
+//        if (userID <= 0) {
+//            Intent intent = new Intent(this, Login.class);
+//            startActivity(intent);
+//            finish();
+//        }
         setDarkMode();
         startMainPage();
     }
@@ -68,11 +68,9 @@ public class MainPage extends AppCompatActivity {
      * If the list is not empty we created a RideAdapter to put it on the recyclerView
      */
     private void startMainPage() {
-        RideRepository repository = ((BaseApp) getApplication()).getRideRepository();
-        List rides = repository.getRides(getApplication());
+        RideListLiveData rides = rideRepository.getAllRides();
         if (rides.isEmpty()) {
             logout();
-            reinitializeDatabase();
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
             finish();
@@ -108,6 +106,12 @@ public class MainPage extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+//        menu.add(0, 1, Menu.NONE, getString(R.string.action_edit))
+//                .setIcon(R.drawable.ic_account)
+//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+//        menu.add(0, 2, Menu.NONE, getString(R.string.action_edit))
+//                .setIcon(R.drawable.ic_account)
+//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -121,16 +125,20 @@ public class MainPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_edit_profile) {
+            item.setIcon(R.drawable.ic_account);
             Intent intent = new Intent(this, EditAccount.class);
             startActivity(intent);
         }
         if (item.getItemId() == R.id.menu_mycourses) {
-            generateAllCoursesPage();
+            item.setIcon(R.drawable.ic_account);
+//            generateAllCoursesPage();
         }
         if (item.getItemId() == R.id.menu_disconnect) {
+            item.setIcon(R.drawable.ic_account);
             logout();
         }
         if (item.getItemId() == R.id.menu_about) {
+            item.setIcon(R.drawable.ic_account);
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
         }
@@ -147,20 +155,20 @@ public class MainPage extends AppCompatActivity {
      */
     public void generateCreateCoursePage(int rideID) {
         // We used the position of the button that was pressed to stored the ride ID in shared Preferences to retreive it later
-        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDE, 0).edit();
-        editor.putInt(BaseActivity.PREFS_RIDEID, rideID);
-        editor.apply();
-        Intent intent = new Intent(this, CreateNewCourse.class);
-        startActivity(intent);
+//        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDE, 0).edit();
+//        editor.putInt(BaseActivity.PREFS_RIDEID, rideID);
+//        editor.apply();
+//        Intent intent = new Intent(this, CreateNewCourse.class);
+//        startActivity(intent);
     }
 
     /**
      * Load the page with all courses link to your user
      */
-    public void generateAllCoursesPage() {
-        Intent intent = new Intent(this, DisplayAllCourses.class);
-        startActivity(intent);
-    }
+//    public void generateAllCoursesPage() {
+//        Intent intent = new Intent(this, DisplayAllCourses.class);
+//        startActivity(intent);
+//    }
 
     /**
      * Method to logout
@@ -169,29 +177,30 @@ public class MainPage extends AppCompatActivity {
      * if not the alertdialog is just close
      */
     public void logout() {
-        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
-        alertDialog.setTitle("Disconnect");
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(getString(R.string.action_logout));
         alertDialog.setCancelable(false);
-        alertDialog.setMessage("Do you really want to disconnect from your account?");
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Disconnect", (dialog, which) -> {
-            SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
-            editor.putInt(BaseActivity.PREFS_USERID, -1);
-            editor.apply();
-            Intent intent = new Intent(this, Login.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
-            finish();
-        });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_logout), (dialog, which) -> logout());
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
         alertDialog.show();
+//        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
+//        alertDialog.setTitle("Disconnect");
+//        alertDialog.setCancelable(false);
+//        alertDialog.setMessage("Do you really want to disconnect from your account?");
+//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Disconnect", (dialog, which) -> {
+//            SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
+//            editor.putInt(BaseActivity.PREFS_USERID, -1);
+//            editor.apply();
+//            Intent intent = new Intent(this, Login.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            startActivity(intent);
+//            finish();
+//        });
+//        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
+//        alertDialog.show();
 
-    }
+//        FirebaseAuth.getInstance().signOut();
 
-    /**
-     * Method to reinitialize the database
-     */
-    private void reinitializeDatabase() {
-        DatabaseInitializer.populateDatabase(AppDatabase.getAppDateBase(this));
     }
 }

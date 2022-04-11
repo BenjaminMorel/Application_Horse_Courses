@@ -3,11 +3,10 @@ package com.example.Horse_App.Database.async.User;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.User;
+import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 
-public class CreateUser extends AsyncTask<User, Void, Void> {
+public class CreateUser extends AsyncTask<UserEntity, Void, Void> {
 
     private final Application application;
     private final OnAsyncEventListener callback;
@@ -19,11 +18,11 @@ public class CreateUser extends AsyncTask<User, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(User... params) {
+    protected Void doInBackground(UserEntity... params) {
         try {
-            for (User user : params)
-                ((BaseApp) application).getDatabase().userDao()
-                        .insert(user);
+//            for (User user : params)
+//                ((BaseApp) application).getDatabase().userDao()
+//                        .insert(user);
         } catch (Exception e) {
             exception = e;
         }

@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.Horse_App.Database.Entity.User;
+import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
-import com.example.Horse_App.Database.async.User.CreateUser;
+import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
 import com.example.Horse_App.encryption.Encrypt;
 
@@ -18,7 +19,9 @@ public class Register extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
 
-    private EditText etFirstname, etLastname, etPhoneNumber, etEmail, etPassword;
+    private UserRepository repository;
+
+    private EditText etFirstname, etLastname, etPhoneNumber, etEmail, etPassword, etPassword2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +40,44 @@ public class Register extends AppCompatActivity {
         etPhoneNumber = findViewById(R.id.phone_number_register);
         etEmail = findViewById(R.id.email_register);
         etPassword = findViewById(R.id.password_register);
+        etPassword2 = findViewById(R.id.confirm_password_register);
 
         Button registerButton = findViewById(R.id.register_button);
 
-        registerButton.setOnClickListener(view -> registerNewUser(etFirstname.getText().toString(), etLastname.getText().toString(),
-                etPhoneNumber.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString()));
+        registerButton.setOnClickListener(view -> registerNewUser(
+                etFirstname.getText().toString(),
+                etLastname.getText().toString(),
+                etPhoneNumber.getText().toString(),
+                etEmail.getText().toString(),
+                etPassword.getText().toString(),
+                etPassword2.getText().toString()
+        ));
     }
 
     /**
      * Method that will create a new user in our database, by getting all the elements,details that the user has given
      */
-    private void registerNewUser(String firstname, String lastname, String phoneNumber, String email, String password) {
+    private void registerNewUser(String firstname, String lastname, String phoneNumber, String email, String password, String password2) {
+        if (!password.equals(password2) || password.length() < 5) {
+            etPassword.setError(getString(R.string.no_matching_pwd));
+            etPassword.requestFocus();
+            etPassword.setText("");
+            etPassword2.setText("");
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Invalid login credentials");
+            etEmail.requestFocus();
+            return;
+        }
 
         //Encrypt the password by calling the md5 method in the Encrypt class
-        String encryptedPwd = Encrypt.md5(password);
-        User newUser = new User(email, encryptedPwd, firstname, lastname, phoneNumber);
+//        String encryptedPwd = Encrypt.md5(password);
+
+        UserEntity newUserEntity = new UserEntity(email, password, firstname, lastname, phoneNumber);
 
         //Tries to create a new user
-        new CreateUser(getApplication(), new OnAsyncEventListener() {
+        repository.register(newUserEntity, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createUserWithEmail: success");
@@ -64,7 +87,7 @@ public class Register extends AppCompatActivity {
             public void onFailure(Exception e) {
                 Log.d(TAG, "createUserWithEmail: failure", e);
             }
-        }).execute(newUser);
+        });
 
         //And finally launch a new activity with the Intent to return on the Login page
         Intent intent = new Intent(this, Login.class);

@@ -1,13 +1,12 @@
 package com.example.Horse_App.Database.repository;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 
-import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.Ride;
-
-import java.util.List;
+import com.example.Horse_App.Database.Entity.RideEntity;
+import com.example.Horse_App.Database.firebase.RideListLiveData;
+import com.example.Horse_App.Database.firebase.RideLiveData;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RideRepository {
 
@@ -27,11 +26,16 @@ public class RideRepository {
         return instance;
     }
 
-    public List<Ride> getRides(Application application) {
-        return ((BaseApp) application).getDatabase().rideDao().getAll();
+    public RideListLiveData getAllRides() {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("rides");
+        return new RideListLiveData(reference);
     }
 
-    public Ride getRide(final int id, Application application) {
-        return ((BaseApp) application).getDatabase().rideDao().getByID(id);
+    public LiveData<RideEntity> getRide(final String id) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("rides")
+                .child(id);
+        return new RideLiveData(reference);
     }
 }

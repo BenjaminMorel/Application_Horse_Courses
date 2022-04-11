@@ -3,12 +3,10 @@ package com.example.Horse_App.Database.async.Course;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.Course;
-import com.example.Horse_App.Database.Entity.User;
+import com.example.Horse_App.Database.Entity.CourseEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 
-public class DeleteCourse extends AsyncTask<Course, Void, Void> {
+public class DeleteCourse extends AsyncTask<CourseEntity, Void, Void> {
 
     private final Application application;
     private final OnAsyncEventListener callback;
@@ -20,13 +18,13 @@ public class DeleteCourse extends AsyncTask<Course, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Course... params) {
+    protected Void doInBackground(CourseEntity... params) {
         try {
-            for (Course course : params) {
-                ((BaseApp) application).getDatabase().courseDao()
-                        .deleteByID(course.courseID);
-                System.out.println("Delete course " + course.courseID + " succes");
-            }
+//            for (Course course : params) {
+//                ((BaseApp) application).getDatabase().courseDao()
+//                        .deleteByID(course.courseID);
+//                System.out.println("Delete course " + course.courseID + " succes");
+//            }
         } catch (Exception e) {
             exception = e;
         }

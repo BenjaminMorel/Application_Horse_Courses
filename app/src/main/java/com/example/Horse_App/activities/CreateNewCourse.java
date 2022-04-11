@@ -3,9 +3,8 @@ package com.example.Horse_App.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.Course;
-import com.example.Horse_App.Database.Entity.Ride;
+import com.example.Horse_App.Database.*;
+import com.example.Horse_App.Database.Entity.CourseEntity;
+import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.async.Course.CreateCourse;
 import com.example.Horse_App.Database.repository.RideRepository;
@@ -33,8 +33,8 @@ import java.util.GregorianCalendar;
 public class CreateNewCourse extends AppCompatActivity {
 
     private static final String TAG = "CreateNewCourseActivity";
-    private int rideID;
-    private Ride ride;
+    private String rideID;
+    private LiveData<RideEntity> ride;
     private Date selectedDate;
 
     @Override
@@ -56,8 +56,8 @@ public class CreateNewCourse extends AppCompatActivity {
     private void createPage() {
         RideRepository rideRepository = ((BaseApp) getApplication()).getRideRepository();
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDE, 0);
-        rideID = preferences.getInt(BaseActivity.PREFS_RIDEID, 1);
-        ride = rideRepository.getRide(rideID, getApplication());
+        rideID = String.valueOf(preferences.getInt(BaseActivity.PREFS_RIDEID, 1));
+        ride = rideRepository.getRide(rideID);
 
         setTextViewValue();
 
@@ -100,12 +100,12 @@ public class CreateNewCourse extends AppCompatActivity {
 
         SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
 
-        int userID = userPreferences.getInt(BaseActivity.PREFS_USERID, 1);
+        String userID = String.valueOf(userPreferences.getInt(BaseActivity.PREFS_USERID, 1));
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String courseDate = sdf.format(selectedDate);
 
-        Course newCourse = new Course(ride.rideID, userID, courseDate);
+        CourseEntity newCourse = new CourseEntity(rideID, userID, courseDate);
 
         new CreateCourse(getApplication(), new OnAsyncEventListener() {
             @Override
@@ -131,8 +131,8 @@ public class CreateNewCourse extends AppCompatActivity {
      */
     private void initializeMapsFragment() {
         FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
-        SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
-        mTransaction.add(R.id.mapFragment, supportMapFragment);
+//        SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
+//        mTransaction.add(R.id.mapFragment, supportMapFragment);
         mTransaction.commit();
     }
 
@@ -146,10 +146,10 @@ public class CreateNewCourse extends AppCompatActivity {
         TextView finishHour = findViewById(R.id.FinishHour);
         TextView coursePrice = findViewById(R.id.course_price);
 
-        String[] hours = ride.time.split("/");
+//        String[] hours = ride.time.split("/");
 
-        startHour.setText("Starts at " + hours[0]);
-        finishHour.setText("Ends at "+ hours[1]);
-        coursePrice.setText(String.valueOf(ride.price) + " CHF");
+//        startHour.setText("Starts at " + hours[0]);
+//        finishHour.setText("Ends at "+ hours[1]);
+//        coursePrice.setText(String.valueOf(ride.price) + " CHF");
     }
 }

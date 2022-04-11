@@ -31,7 +31,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
-            android:text="This application was developed by Benjamin and Hugo as part of the 644-1_Mobile and Cloud Computing course with our teachers Michael Ignaz Schumacher and Yvan Pannatier.\n\nOur topic is about horse lessons and the goal is to be able to book horse riding. We have several walks available, and the user can choose a place and a date to go for a ride."
+            android:text="This application was developed by Benjamin and Hugo as part of the 644-1_Mobile and Cloud Computing courseEntity with our teachers Michael Ignaz Schumacher and Yvan Pannatier.\n\nOur topic is about horse lessons and the goal is to be able to book horse riding. We have several walks available, and the userEntity can choose a place and a date to go for a ride."
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"

@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.Horse_App.ArrayAdapter.CourseAdapter;
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.Course;
-import com.example.Horse_App.Database.Entity.Ride;
+import com.example.Horse_App.Database.Entity.CourseEntity;
+import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
@@ -46,21 +46,21 @@ public class DisplayAllCourses extends AppCompatActivity {
         RideRepository rideRepository = (((BaseApp) getApplication()).getRideRepository());
 
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
-        int userID = preferences.getInt(BaseActivity.PREFS_USERID, 1);
+        String userID = String.valueOf(preferences.getInt(BaseActivity.PREFS_USERID, 1));
 
         System.out.println(userID + " id du user co");
 
         RecyclerView recyclerView = findViewById(R.id.allCourses);
 
-        List<Course> courses = courseRepository.getCoursesByUser(getApplication(), userID);
-        List<Ride> rides = rideRepository.getRides(getApplication());
-        courses =  courseRepository.getCoursesByUser(getApplication(), userID);
+        List<CourseEntity> courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
+        List<RideEntity> rides = (List<RideEntity>) rideRepository.getAllRides();
+        courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
 
         if(courses.isEmpty()){
             noRegistration = findViewById(R.id.noReservation);
             noRegistration.setText("You currently have no registration");
         }
-        rides = rideRepository.getRides(getApplication());
+        rides = (List<RideEntity>) rideRepository.getAllRides();
         CourseAdapter courseAdapter = new CourseAdapter(courses,rides);
         courseAdapter.setDisplayAllCourses(this);
         recyclerView.setAdapter(courseAdapter);
@@ -85,7 +85,7 @@ public class DisplayAllCourses extends AppCompatActivity {
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Do you really want to delete this course ?");
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_delete), (dialog, which) -> {
-            CourseRepository.getInstance().deleteByID(this.getApplication(), idCourse);
+//            CourseRepository.getInstance().delete();
             Intent intent = new Intent(this, DisplayAllCourses.class);
             startActivity(intent);
             Toast.makeText(DisplayAllCourses.this, "Course delete with success", Toast.LENGTH_SHORT).show();

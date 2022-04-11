@@ -1,31 +1,21 @@
 package com.example.Horse_App.Database.Entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
-@Entity(tableName = "user")
-public class User {
+import com.google.firebase.database.Exclude;
 
-    @PrimaryKey(autoGenerate = true)
-    public int userID;
+import java.util.HashMap;
+import java.util.Map;
 
-    @ColumnInfo(name = "email")
+public class UserEntity {
+
+    public String userID;
     public String email;
-
-    @ColumnInfo(name = "password")
     public String password;
-
-    @ColumnInfo(name = "first_name")
     public String firstName;
-
-    @ColumnInfo(name = "last_name")
     public String lastName;
-
-    @ColumnInfo(name = "phoneNumber")
     public String phoneNumber;
 
-    public User(String email, String password, String firstName, String lastName, String phoneNumber) {
+    public UserEntity(String email, String password, String firstName, String lastName, String phoneNumber) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -33,14 +23,19 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getUserID() {
+    public UserEntity() {
+    }
+
+    @Exclude
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    @Exclude
     public String getEmail() {
         return email;
     }
@@ -49,6 +44,7 @@ public class User {
         this.email = email;
     }
 
+    @Exclude
     public String getPassword() {
         return password;
     }
@@ -79,5 +75,23 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public boolean equals( Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (!(obj instanceof UserEntity)) return false;
+        UserEntity o = (UserEntity) obj;
+        return o.getEmail().equals(this.getEmail());
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("firstName", firstName);
+        result.put("lastName", lastName);
+        result.put("phoneNumber", phoneNumber);
+        return result;
     }
 }
