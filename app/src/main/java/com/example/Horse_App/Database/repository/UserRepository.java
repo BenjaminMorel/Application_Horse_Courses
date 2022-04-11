@@ -96,6 +96,7 @@ public class UserRepository {
                 });
     }
 
+
     public void update(final UserEntity user, final OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("users")

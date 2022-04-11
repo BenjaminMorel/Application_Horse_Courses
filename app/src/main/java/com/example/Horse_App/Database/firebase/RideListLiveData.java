@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RideListLiveData extends LiveData<RideEntity> {
+public class RideListLiveData extends LiveData<List<RideEntity>> {
 
     private static final String TAG = "RideLiveData";
     private final DatabaseReference reference;
@@ -39,8 +39,8 @@ public class RideListLiveData extends LiveData<RideEntity> {
     class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            setValue((RideEntity) toRideList(dataSnapshot));
-        }
+            setValue(toRideList(dataSnapshot));
+       }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {

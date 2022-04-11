@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.Horse_App.ArrayAdapter.RideAdapter;
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.RideEntity;
+import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.firebase.RideListLiveData;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
@@ -68,18 +70,14 @@ public class MainPage extends AppCompatActivity {
      * If the list is not empty we created a RideAdapter to put it on the recyclerView
      */
     private void startMainPage() {
-        RideListLiveData rides = rideRepository.getAllRides();
-        if (rides.isEmpty()) {
-            logout();
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-            finish();
-        }
-        RideAdapter rideAdapter = new RideAdapter(rides);
-        rideAdapter.setMainPage(this);
-        RecyclerView recyclerView = findViewById(R.id.ListRideToChoose);
-        recyclerView.setAdapter(rideAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        rideRepository.getAllRides().observe(this, rides ->{
+
+            RideAdapter rideAdapter = new RideAdapter(rides);
+            rideAdapter.setMainPage(this);
+            RecyclerView recyclerView = findViewById(R.id.ListRideToChoose);
+            recyclerView.setAdapter(rideAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        });
     }
 
     /**

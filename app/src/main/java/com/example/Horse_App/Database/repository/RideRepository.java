@@ -1,12 +1,19 @@
 package com.example.Horse_App.Database.repository;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import com.example.Horse_App.Database.Entity.RideEntity;
+import com.example.Horse_App.Database.Entity.UserEntity;
+import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.firebase.RideListLiveData;
 import com.example.Horse_App.Database.firebase.RideLiveData;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class RideRepository {
 
@@ -26,7 +33,13 @@ public class RideRepository {
         return instance;
     }
 
-    public RideListLiveData getAllRides() {
+//    public RideListLiveData getAllRides() {
+//        DatabaseReference reference = FirebaseDatabase.getInstance()
+//                .getReference("rides");
+//        return new RideListLiveData(reference);
+//    }
+
+    public LiveData<List<RideEntity>> getAllRides(){
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("rides");
         return new RideListLiveData(reference);
@@ -37,5 +50,21 @@ public class RideRepository {
                 .getReference("rides")
                 .child(id);
         return new RideLiveData(reference);
+    }
+
+    public void insertRide(final RideEntity ride, final OnAsyncEventListener callback) {
+
+        String id = FirebaseDatabase.getInstance()
+                .getReference("rides").push().getKey();
+        FirebaseDatabase.getInstance()
+                .getReference("rides")
+                .child(id)
+                .setValue(ride, (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 }
