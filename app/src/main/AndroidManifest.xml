@@ -16,6 +16,7 @@
             android:name=".activities.testActivity"
             android:exported="false" />
         <activity
+
             android:name=".activities.MainPage"
             android:exported="false" />
         <activity

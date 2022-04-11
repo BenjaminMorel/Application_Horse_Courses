@@ -75,7 +75,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder> {
         holder.buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainPage.generateCreateCoursePage(Integer.parseInt(ride.getRideID()));
+                mainPage.generateCreateCoursePage(ride.getRideID());
             }
         });
     }

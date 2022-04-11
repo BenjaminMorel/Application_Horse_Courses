@@ -130,7 +130,7 @@ public class MainPage extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.menu_mycourses) {
             item.setIcon(R.drawable.ic_account);
-//            generateAllCoursesPage();
+            generateAllCoursesPage();
         }
         if (item.getItemId() == R.id.menu_disconnect) {
             item.setIcon(R.drawable.ic_account);
@@ -152,22 +152,22 @@ public class MainPage extends AppCompatActivity {
      *               We don't finish the main page activity to let the user
      *               go back with the back button if it wanted to
      */
-    public void generateCreateCoursePage(int rideID) {
+    public void generateCreateCoursePage(String rideID) {
         // We used the position of the button that was pressed to stored the ride ID in shared Preferences to retreive it later
-//        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDE, 0).edit();
-//        editor.putInt(BaseActivity.PREFS_RIDEID, rideID);
-//        editor.apply();
-//        Intent intent = new Intent(this, CreateNewCourse.class);
-//        startActivity(intent);
+        SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_RIDE, 0).edit();
+        editor.putString(BaseActivity.PREFS_RIDEID, rideID);
+        editor.apply();
+        Intent intent = new Intent(this, CreateNewCourse.class);
+        startActivity(intent);
     }
 
     /**
      * Load the page with all courses link to your user
      */
-//    public void generateAllCoursesPage() {
-//        Intent intent = new Intent(this, DisplayAllCourses.class);
-//        startActivity(intent);
-//    }
+    public void generateAllCoursesPage() {
+        Intent intent = new Intent(this, DisplayAllCourses.class);
+        startActivity(intent);
+    }
 
     /**
      * Method to logout

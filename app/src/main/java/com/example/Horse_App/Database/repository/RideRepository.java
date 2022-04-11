@@ -52,19 +52,19 @@ public class RideRepository {
         return new RideLiveData(reference);
     }
 
-    public void insertRide(final RideEntity ride, final OnAsyncEventListener callback) {
-
-        String id = FirebaseDatabase.getInstance()
-                .getReference("rides").push().getKey();
-        FirebaseDatabase.getInstance()
-                .getReference("rides")
-                .child(id)
-                .setValue(ride, (databaseError, databaseReference) -> {
-                    if (databaseError != null) {
-                        callback.onFailure(databaseError.toException());
-                    } else {
-                        callback.onSuccess();
-                    }
-                });
-    }
+//    public void insertRide(final RideEntity ride, final OnAsyncEventListener callback) {
+//
+//        String id = FirebaseDatabase.getInstance()
+//                .getReference("rides").push().getKey();
+//        FirebaseDatabase.getInstance()
+//                .getReference("rides")
+//                .child(id)
+//                .setValue(ride, (databaseError, databaseReference) -> {
+//                    if (databaseError != null) {
+//                        callback.onFailure(databaseError.toException());
+//                    } else {
+//                        callback.onSuccess();
+//                    }
+//                });
+//    }
 }

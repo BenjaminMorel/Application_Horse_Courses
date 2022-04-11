@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,20 +16,24 @@ import com.example.Horse_App.ArrayAdapter.CourseAdapter;
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.CourseEntity;
 import com.example.Horse_App.Database.Entity.RideEntity;
+import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class DisplayAllCourses extends AppCompatActivity {
 
     private TextView noRegistration;
+    private CourseRepository courseRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_historique);
+        courseRepository = ((BaseApp) getApplication()).getCourseRepository();
         generatePage();
     }
 
@@ -45,26 +50,29 @@ public class DisplayAllCourses extends AppCompatActivity {
         CourseRepository courseRepository = ((BaseApp) getApplication()).getCourseRepository();
         RideRepository rideRepository = (((BaseApp) getApplication()).getRideRepository());
 
-        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
-        String userID = String.valueOf(preferences.getInt(BaseActivity.PREFS_USERID, 1));
-
-        System.out.println(userID + " id du user co");
-
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         RecyclerView recyclerView = findViewById(R.id.allCourses);
 
-        List<CourseEntity> courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
-        List<RideEntity> rides = (List<RideEntity>) rideRepository.getAllRides();
-        courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
+        courseRepository.getCoursesByUserId(userID).observe(this, courses -> {
+            if(courses.isEmpty()){
+                noRegistration = findViewById(R.id.noReservation);
+                noRegistration.setText("You currently have no registration");
+            }
+            rideRepository.getAllRides().observe(this, rides -> {
+                CourseAdapter courseAdapter = new CourseAdapter(courses,rides);
+                courseAdapter.setDisplayAllCourses(this);
+                recyclerView.setAdapter(courseAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            });
+        });
 
-        if(courses.isEmpty()){
-            noRegistration = findViewById(R.id.noReservation);
-            noRegistration.setText("You currently have no registration");
-        }
-        rides = (List<RideEntity>) rideRepository.getAllRides();
-        CourseAdapter courseAdapter = new CourseAdapter(courses,rides);
-        courseAdapter.setDisplayAllCourses(this);
-        recyclerView.setAdapter(courseAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        List<CourseEntity> courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
+//        List<RideEntity> rides = (List<RideEntity>) rideRepository.getAllRides();
+//        courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
+//
+//
+//        rides = (List<RideEntity>) rideRepository.getAllRides();
+
 
 
     }
@@ -78,14 +86,24 @@ public class DisplayAllCourses extends AppCompatActivity {
      * to delete this reservation if yes it will then ask the real method on the repository to
      * delete it from de Database
      */
-    public void deleteCourse(int idCourse) {
+    public void deleteCourse(String idCourse) {
 
         AlertDialog alertDialog = new AlertDialog.Builder(this,R.style.AlertDialogCustom).create();
         alertDialog.setTitle(getString(R.string.deleteCourse));
         alertDialog.setCancelable(false);
         alertDialog.setMessage("Do you really want to delete this course ?");
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_delete), (dialog, which) -> {
-//            CourseRepository.getInstance().delete();
+            courseRepository.delete(idCourse,new OnAsyncEventListener() {
+                //            @Override
+                public void onSuccess() {
+                    Log.d("1", "createUserWithEmail: success");
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d("1", "createUserWithEmail: failure", e);
+                }
+            });
             Intent intent = new Intent(this, DisplayAllCourses.class);
             startActivity(intent);
             Toast.makeText(DisplayAllCourses.this, "Course delete with success", Toast.LENGTH_SHORT).show();

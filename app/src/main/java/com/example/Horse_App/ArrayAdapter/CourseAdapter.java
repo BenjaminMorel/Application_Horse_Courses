@@ -107,7 +107,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayAllCourses.deleteCourse(Integer.parseInt(course.getCourseID()));
+                displayAllCourses.deleteCourse(course.getCourseID());
             }
         });
     }

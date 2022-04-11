@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseListLiveData extends LiveData<CourseEntity> {
+public class CourseListLiveData extends LiveData<List<CourseEntity>> {
 
     private static final String TAG = "CourseListLiveData";
     private final DatabaseReference reference;
@@ -39,7 +39,7 @@ public class CourseListLiveData extends LiveData<CourseEntity> {
     class MyValueEventListener implements ValueEventListener {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            setValue((CourseEntity) toCourseList(dataSnapshot));
+            setValue( toCourseList(dataSnapshot));
         }
 
         @Override

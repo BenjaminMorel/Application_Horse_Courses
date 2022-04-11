@@ -20,10 +20,12 @@ import com.example.Horse_App.Database.Entity.CourseEntity;
 import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.async.Course.CreateCourse;
+import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.Fragments.MapsFragment;
 import com.example.Horse_App.R;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,12 +37,15 @@ public class CreateNewCourse extends AppCompatActivity {
     private static final String TAG = "CreateNewCourseActivity";
     private String rideID;
     private LiveData<RideEntity> ride;
+    private CourseRepository courseRepository;
+    private RideRepository rideRepository;
     private Date selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_course);
+        courseRepository = ((BaseApp) getApplication()).getCourseRepository();
         createPage();
     }
 
@@ -56,12 +61,17 @@ public class CreateNewCourse extends AppCompatActivity {
     private void createPage() {
         RideRepository rideRepository = ((BaseApp) getApplication()).getRideRepository();
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_RIDE, 0);
-        rideID = String.valueOf(preferences.getInt(BaseActivity.PREFS_RIDEID, 1));
-        ride = rideRepository.getRide(rideID);
+        rideID = preferences.getString(BaseActivity.PREFS_RIDEID, "");
+        rideRepository.getRide(rideID).observe(this, ride -> {
+                FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
+                SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
+                mTransaction.add(R.id.mapFragment, supportMapFragment);
+                mTransaction.commit();
+                setTextViewValue(ride);
+        });
 
-        setTextViewValue();
 
-        initializeMapsFragment();
+
         Button confirmCreation = findViewById(R.id.ButtonConfirmNewCourse);
 
         confirmCreation.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +84,7 @@ public class CreateNewCourse extends AppCompatActivity {
         // Disable past days
         CalendarView calendarView = findViewById(R.id.calendarNewCourse);
         long now = calendarView.getDate();
-        calendarView.setDate(now + 1000L * 60 * 60 * 24);
+      //  calendarView.setDate(now + 1000L * 60 * 60 * 24);
         calendarView.setMinDate(now);
         Calendar calendar = Calendar.getInstance();
         now += (60 * 1000L * 60 * 60 * 24);
@@ -98,29 +108,23 @@ public class CreateNewCourse extends AppCompatActivity {
      */
     private void createNewCourse() {
 
-        SharedPreferences userPreferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
-
-        String userID = String.valueOf(userPreferences.getInt(BaseActivity.PREFS_USERID, 1));
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String courseDate = sdf.format(selectedDate);
 
         CourseEntity newCourse = new CourseEntity(rideID, userID, courseDate);
-
-        new CreateCourse(getApplication(), new OnAsyncEventListener() {
-            @Override
+        courseRepository.insert(newCourse,new OnAsyncEventListener() {
+                    //            @Override
             public void onSuccess() {
-                Toast.makeText(CreateNewCourse.this, R.string.toast_reservationSuccessful, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, getString(R.string.log_createCourseSuccess));
+                Log.d("1", "createUserWithEmail: success");
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.d(TAG, getString(R.string.log_createCourseFailure) + rideID + " / " + userID, e);
+                Log.d("1", "createUserWithEmail: failure", e);
             }
-
-        }).execute(newCourse);
-
+        });
         finish();
     }
 
@@ -129,27 +133,21 @@ public class CreateNewCourse extends AppCompatActivity {
      * And after that it call the Callback method on the fragment class
      * to position the cart at the rigth place and set the view correctly
      */
-    private void initializeMapsFragment() {
-        FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
-//        SupportMapFragment supportMapFragment = new MapsFragment(ride.getPositions());
-//        mTransaction.add(R.id.mapFragment, supportMapFragment);
-        mTransaction.commit();
-    }
+
 
 
     /**
      * Method to set all TextView with the right value depending on the ride you choose
      */
-    private void setTextViewValue() {
+    private void setTextViewValue(RideEntity ride) {
 
         TextView startHour = findViewById(R.id.StartHour);
         TextView finishHour = findViewById(R.id.FinishHour);
         TextView coursePrice = findViewById(R.id.course_price);
+        String[] hours = ride.getTime().split("/");
 
-//        String[] hours = ride.time.split("/");
-
-//        startHour.setText("Starts at " + hours[0]);
-//        finishHour.setText("Ends at "+ hours[1]);
-//        coursePrice.setText(String.valueOf(ride.price) + " CHF");
+        startHour.setText("Starts at " + hours[0]);
+        finishHour.setText("Ends at "+ hours[1]);
+        coursePrice.setText(String.valueOf(ride.getPrice()) + " CHF");
     }
 }

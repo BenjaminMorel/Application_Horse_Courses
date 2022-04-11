@@ -15,7 +15,6 @@ public class BaseApp extends Application {
 
     public UserRepository getUserRepository(){ return UserRepository.getInstance(); }
 
-    public RideRepository getRideRepository(){ return RideRepository.getInstance();
-    }
+    public RideRepository getRideRepository(){ return RideRepository.getInstance(); }
     public CourseRepository getCourseRepository(){return CourseRepository.getInstance();}
 }
