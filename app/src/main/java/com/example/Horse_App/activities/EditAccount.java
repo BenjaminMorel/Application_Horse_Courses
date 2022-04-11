@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.Horse_App.BaseApp;
+import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,23 +30,26 @@ public class EditAccount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
 
+        userRepository = ((BaseApp) getApplication()).getUserRepository();
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        setDarkMode();
-
+        // Get the user ID
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // Get the preference for dark mode
+        userRepository.getUserByID(userID).observe(this, userEntity -> {
+            setDarkMode(userEntity.isDarkMode());
+        });
+
         displayUserInfo();
     }
 
-    private void setDarkMode() {
+    private void setDarkMode(boolean isDarkMode) {
         Button btnToggleDark = findViewById(R.id.switchDarkMode);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("SharedPrefs_For_DarkMode", MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
-
-        if (isDarkModeOn) {
+        if (isDarkMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             btnToggleDark.setText(R.string.disable_darkMode);
         } else {
@@ -56,16 +61,12 @@ public class EditAccount extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (isDarkModeOn) {
+                if (isDarkMode) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    editor.putBoolean("isDarkModeOn", false);
-                    editor.apply();
                     btnToggleDark.setText(R.string.enable_darkMode);
 
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                    editor.putBoolean("isDarkModeOn", true);
-                    editor.apply();
                     btnToggleDark.setText(R.string.disable_darkMode);
                 }
             }
@@ -84,16 +85,16 @@ public class EditAccount extends AppCompatActivity {
         edPassword = findViewById(R.id.password_edit);
         edConfirmPassword = findViewById(R.id.confirm_password_edit);
 
-        SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_USERID, 0);
+        // Get the user ID
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        userID = String.valueOf(preferences.getInt(BaseActivity.PREFS_USERID, 1));
-
-//        userRepository.getUserByID(userID).observe(EditAccount.this, user -> {
-//            edFirstname.setText(user.firstName);
-//            edLastname.setText(user.lastName);
-//            edPhoneNumber.setText(user.phoneNumber);
-//            edEmail.setText(user.email);
-//        });
+        userRepository.getUserByID(userID).observe(EditAccount.this, user -> {
+            edFirstname.setText(user.firstName);
+            edLastname.setText(user.lastName);
+            edPhoneNumber.setText(user.phoneNumber);
+            //TODO pouvoir afficher email dans edit
+            edEmail.setText(user.email);
+        });
 
         Button saveModificationButton = findViewById(R.id.button_save_changes);
         saveModificationButton.setOnClickListener(view -> saveModification(edFirstname.getText().toString(), edLastname.getText().toString(),

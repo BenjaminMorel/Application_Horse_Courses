@@ -54,11 +54,6 @@ public class MainPage extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0);
         String userID = String.valueOf(preferences.getInt(BaseActivity.PREFS_USERID, 1));
 
-//        if (userID <= 0) {
-//            Intent intent = new Intent(this, Login.class);
-//            startActivity(intent);
-//            finish();
-//        }
         setDarkMode();
         startMainPage();
     }
@@ -72,7 +67,6 @@ public class MainPage extends AppCompatActivity {
      */
     private void startMainPage() {
         rideRepository.getAllRides().observe(this, rides ->{
-
             RideAdapter rideAdapter = new RideAdapter(rides);
             rideAdapter.setMainPage(this);
             RecyclerView recyclerView = findViewById(R.id.ListRideToChoose);

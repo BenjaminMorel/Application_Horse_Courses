@@ -16,13 +16,15 @@ public class UserEntity implements Comparable {
     public String firstName;
     public String lastName;
     public String phoneNumber;
+    private boolean darkMode;
 
-    public UserEntity(@NonNull String email, String password, String firstName, String lastName, String phoneNumber) {
+    public UserEntity(@NonNull String email, String password, String firstName, String lastName, String phoneNumber, boolean darkMode) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.darkMode = darkMode;
     }
 
     public UserEntity() {
@@ -80,6 +82,14 @@ public class UserEntity implements Comparable {
         this.phoneNumber = phoneNumber;
     }
 
+    public boolean isDarkMode() {
+        return darkMode;
+    }
+
+    public void setDarkMode(boolean darkMode) {
+        this.darkMode = darkMode;
+    }
+
     @Override
     public boolean equals( Object obj) {
         if (obj == null) return false;
@@ -95,6 +105,7 @@ public class UserEntity implements Comparable {
         result.put("firstName", firstName);
         result.put("lastName", lastName);
         result.put("phoneNumber", phoneNumber);
+        result.put("darkMode", darkMode);
         return result;
     }
 

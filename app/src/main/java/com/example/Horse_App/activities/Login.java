@@ -20,8 +20,7 @@ import com.example.Horse_App.R;
 public class Login extends AppCompatActivity {
 
     private EditText emailView, passwordView;
-    private UserRepository repository;
-
+    private UserRepository userRepository;
     private RideRepository rideRepository;
 
     /**
@@ -34,7 +33,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        repository = ((BaseApp) getApplicationContext()).getUserRepository();
+        userRepository = ((BaseApp) getApplicationContext()).getUserRepository();
 
         // Set up login form
         emailView = findViewById(R.id.email_login);
@@ -44,11 +43,10 @@ public class Login extends AppCompatActivity {
         Button logInButton = findViewById(R.id.button_login);
         logInButton.setOnClickListener(view -> attemptLogin());
 
-
         // Add the register button with listener
         Button registerButton = findViewById(R.id.button_register);
-    //    registerButton.setOnClickListener(view -> startActivity(new Intent(Login.this, Register.class)));
-        registerButton.setOnClickListener(view -> DataInitializser());
+        registerButton.setOnClickListener(view -> startActivity(new Intent(Login.this, Register.class)));
+//        registerButton.setOnClickListener(view -> DataInitializser());
     }
 
 
@@ -84,7 +82,7 @@ public class Login extends AppCompatActivity {
             focusView.requestFocus();
 
         } else {
-            repository.signIn(email, password, task -> {
+            userRepository.signIn(email, password, task -> {
                 if (task.isSuccessful()) {
                     Intent intent = new Intent(Login.this, MainPage.class);
                     startActivity(intent);
