@@ -16,7 +16,7 @@
             android:name=".activities.testActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.Login"
+            android:name=".activities.MainPage"
             android:exported="false" />
         <activity
             android:name=".activities.About"
@@ -45,7 +45,7 @@
             android:exported="false"
             android:label="Edit your account" />
         <activity
-            android:name=".activities.MainPage"
+            android:name=".activities.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

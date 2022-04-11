@@ -21,6 +21,7 @@ import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.firebase.RideListLiveData;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -68,18 +69,14 @@ public class MainPage extends AppCompatActivity {
      * If the list is not empty we created a RideAdapter to put it on the recyclerView
      */
     private void startMainPage() {
-        RideListLiveData rides = rideRepository.getAllRides();
-        if (rides.isEmpty()) {
-            logout();
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
-            finish();
-        }
-        RideAdapter rideAdapter = new RideAdapter(rides);
-        rideAdapter.setMainPage(this);
-        RecyclerView recyclerView = findViewById(R.id.ListRideToChoose);
-        recyclerView.setAdapter(rideAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        rideRepository.getAllRides().observe(this, rides -> {
+            RideAdapter rideAdapter = new RideAdapter(rides);
+            rideAdapter.setMainPage(this);
+            RecyclerView recyclerView = findViewById(R.id.ListRideToChoose);
+            recyclerView.setAdapter(rideAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        });
+
     }
 
     /**
@@ -177,30 +174,26 @@ public class MainPage extends AppCompatActivity {
      * if not the alertdialog is just close
      */
     public void logout() {
-        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(getString(R.string.action_logout));
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
+        alertDialog.setTitle("Disconnect");
         alertDialog.setCancelable(false);
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getString(R.string.action_logout), (dialog, which) -> logout());
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.action_cancel), (dialog, which) -> alertDialog.dismiss());
-        alertDialog.show();
-//        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
-//        alertDialog.setTitle("Disconnect");
-//        alertDialog.setCancelable(false);
-//        alertDialog.setMessage("Do you really want to disconnect from your account?");
-//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Disconnect", (dialog, which) -> {
-//            SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
-//            editor.putInt(BaseActivity.PREFS_USERID, -1);
-//            editor.apply();
-//            Intent intent = new Intent(this, Login.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//            startActivity(intent);
-//            finish();
-//        });
-//        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
-//        alertDialog.show();
+        alertDialog.setMessage("Do you really want to disconnect from your account?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Disconnect", (dialog, which) -> {
+            SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
+            editor.putInt(BaseActivity.PREFS_USERID, -1);
+            editor.apply();
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
+            finish();
 
-//        FirebaseAuth.getInstance().signOut();
+        });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
+        alertDialog.show();
+
 
     }
+
 }
