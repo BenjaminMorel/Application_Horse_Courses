@@ -17,6 +17,7 @@ import java.util.List;
 
 public class RideRepository {
 
+    private static final String TAG = "RideRepository";
     private static RideRepository instance;
 
     private RideRepository() {

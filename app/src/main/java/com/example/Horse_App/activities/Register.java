@@ -9,17 +9,17 @@ import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
-import com.google.firebase.firestore.auth.User;
 
 public class Register extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity";
 
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     private EditText etFirstname, etLastname, etPhoneNumber, etEmail, etPassword, etPassword2;
 
@@ -27,6 +27,7 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        userRepository = ((BaseApp) getApplication()).getUserRepository();
         startPage();
     }
 
@@ -74,10 +75,10 @@ public class Register extends AppCompatActivity {
         //Encrypt the password by calling the md5 method in the Encrypt class
 //        String encryptedPwd = Encrypt.md5(password);
 
-        UserEntity newUserEntity = new UserEntity(email, password, firstname, lastname, phoneNumber);
+        UserEntity newUserEntity = new UserEntity(email, password, firstname, lastname, phoneNumber, false);
 
         //Tries to create a new user
-        repository.register(newUserEntity, new OnAsyncEventListener() {
+        userRepository.register(newUserEntity, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createUserWithEmail: success");

@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        repository = ((BaseApp) getApplicationContext()).getUserRepository();
+        userRepository = ((BaseApp) getApplicationContext()).getUserRepository();
 
         // Set up login form
         emailView = findViewById(R.id.email_login);
@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
         // Add the register button with listener
         Button registerButton = findViewById(R.id.button_register);
         registerButton.setOnClickListener(view -> startActivity(new Intent(Login.this, Register.class)));
-
+//        registerButton.setOnClickListener(view -> DataInitializser());
     }
 
 
