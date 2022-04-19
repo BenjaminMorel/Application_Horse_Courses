@@ -1,10 +1,8 @@
 package com.example.Horse_App.Database.firebase;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-
 import com.example.Horse_App.Database.Entity.UserEntity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

@@ -3,8 +3,6 @@ package com.example.Horse_App.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
-
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.CourseEntity;
 import com.example.Horse_App.Database.Entity.RideEntity;
@@ -23,7 +20,6 @@ import com.example.Horse_App.Fragments.MapsFragment;
 import com.example.Horse_App.R;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,7 +27,6 @@ import java.util.GregorianCalendar;
 
 public class CreateNewCourse extends AppCompatActivity {
 
-    private static final String TAG = "CreateNewCourseActivity";
     private String rideID;
     private CourseRepository courseRepository;
     private Date selectedDate;

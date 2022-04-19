@@ -7,16 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.Horse_App.Database.Entity.CourseEntity;
 import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 import com.example.Horse_App.activities.DisplayAllCourses;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -72,7 +69,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
 
     /**
-     *
      * For each row we will set the text accordingly with the database and we calcutate if
      * the cancel button should by display or not ( if the course is in less than 7 day it will
      * be disable), if it's enable we create an OnClickListener link to the deleteCourse on the display page

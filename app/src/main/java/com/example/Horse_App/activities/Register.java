@@ -1,14 +1,12 @@
 package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;

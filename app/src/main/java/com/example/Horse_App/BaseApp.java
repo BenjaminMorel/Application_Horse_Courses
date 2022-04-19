@@ -1,7 +1,6 @@
 package com.example.Horse_App;
 
 import android.app.Application;
-
 import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.Database.repository.UserRepository;

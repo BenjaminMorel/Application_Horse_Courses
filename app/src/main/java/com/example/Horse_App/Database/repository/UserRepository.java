@@ -83,7 +83,7 @@ public class UserRepository {
     public void update(final UserEntity user, final OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(user.getUserID())
                 .updateChildren(user.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());

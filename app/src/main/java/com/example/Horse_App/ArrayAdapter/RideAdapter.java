@@ -4,14 +4,11 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.*;
 import android.widget.*;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.R;
 import com.example.Horse_App.activities.MainPage;
-
 import java.util.ArrayList;
 import java.util.List;
 

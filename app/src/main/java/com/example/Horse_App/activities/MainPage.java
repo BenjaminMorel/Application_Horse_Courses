@@ -5,28 +5,19 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.example.Horse_App.ArrayAdapter.RideAdapter;
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.RideEntity;
-import com.example.Horse_App.Database.Util.OnAsyncEventListener;
-import com.example.Horse_App.Database.firebase.RideListLiveData;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.Database.repository.UserRepository;
 import com.example.Horse_App.R;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
 
 public class MainPage extends AppCompatActivity {
 
@@ -55,7 +46,15 @@ public class MainPage extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(false);
 
         // Get user Id
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userID = "";
+        try {
+            userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        } catch (Exception e){
+            e.printStackTrace();
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+            finish();
+        }
 
         // Get the preference for dark mode
         userRepository.getUserByID(userID).observe(this, userEntity -> {
@@ -87,7 +86,6 @@ public class MainPage extends AppCompatActivity {
      * Method to check if we need to use light or dark mode
      */
     private void setDarkMode(boolean isDarkModeOn) {
-
         if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -97,46 +95,36 @@ public class MainPage extends AppCompatActivity {
 
     /**
      * Inflates the menu and add items to the toolbar
-     *
      * @param menu
      * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-//        menu.add(0, 1, Menu.NONE, getString(R.string.action_edit))
-//                .setIcon(R.drawable.ic_account)
-//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-//        menu.add(0, 2, Menu.NONE, getString(R.string.action_edit))
-//                .setIcon(R.drawable.ic_account)
-//                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     /**
      * Manages the dropdown menu in the toolbar
-     *
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_edit_profile) {
-            item.setIcon(R.drawable.ic_account);
+            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            System.out.println("--------------------" + userID);
             Intent intent = new Intent(this, EditAccount.class);
             startActivity(intent);
         }
         if (item.getItemId() == R.id.menu_mycourses) {
-            item.setIcon(R.drawable.ic_account);
             generateAllCoursesPage();
         }
         if (item.getItemId() == R.id.menu_disconnect) {
-            item.setIcon(R.drawable.ic_account);
             logout();
         }
         if (item.getItemId() == R.id.menu_about) {
-            item.setIcon(R.drawable.ic_account);
             Intent intent = new Intent(this, About.class);
             startActivity(intent);
         }
@@ -145,7 +133,6 @@ public class MainPage extends AppCompatActivity {
 
 
     /**
-     *
      * @param rideID id of the ride you chossed
      *               The page to create a new reservation is then loaded
      *               We don't finish the main page activity to let the user
@@ -189,29 +176,9 @@ public class MainPage extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
             finish();
-
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
         alertDialog.show();
-//        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
-//        alertDialog.setTitle("Disconnect");
-//        alertDialog.setCancelable(false);
-//        alertDialog.setMessage("Do you really want to disconnect from your account?");
-//        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Disconnect", (dialog, which) -> {
-//            SharedPreferences.Editor editor = getSharedPreferences(BaseActivity.PREFS_LOGGED, 0).edit();
-//            editor.putInt(BaseActivity.PREFS_USERID, -1);
-//            editor.apply();
-//            Intent intent = new Intent(this, Login.class);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-//            startActivity(intent);
-//            finish();
-//        });
-//        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", (dialog, which) -> alertDialog.dismiss());
-//        alertDialog.show();
-
-//        FirebaseAuth.getInstance().signOut();
-
     }
 
 }

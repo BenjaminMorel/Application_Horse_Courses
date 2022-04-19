@@ -4,25 +4,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.Horse_App.ArrayAdapter.CourseAdapter;
 import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.CourseEntity;
-import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.repository.CourseRepository;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
 
 public class DisplayAllCourses extends AppCompatActivity {
 
@@ -65,21 +58,9 @@ public class DisplayAllCourses extends AppCompatActivity {
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
             });
         });
-
-//        List<CourseEntity> courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
-//        List<RideEntity> rides = (List<RideEntity>) rideRepository.getAllRides();
-//        courses = (List<CourseEntity>) courseRepository.getCoursesByUserId(userID);
-//
-//
-//        rides = (List<RideEntity>) rideRepository.getAllRides();
-
-
-
     }
 
-
     /**
-     *
      * @param idCourse ID of the course you want to delete
      * If the button delete is pressed this method is called
      * It will create an AlertDialog to ask you if your realy want
@@ -87,7 +68,6 @@ public class DisplayAllCourses extends AppCompatActivity {
      * delete it from de Database
      */
     public void deleteCourse(String idCourse) {
-
         AlertDialog alertDialog = new AlertDialog.Builder(this,R.style.AlertDialogCustom).create();
         alertDialog.setTitle(getString(R.string.deleteCourse));
         alertDialog.setCancelable(false);

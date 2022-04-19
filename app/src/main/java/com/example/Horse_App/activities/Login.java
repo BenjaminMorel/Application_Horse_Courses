@@ -1,7 +1,6 @@
 package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
@@ -21,13 +19,11 @@ public class Login extends AppCompatActivity {
 
     private EditText emailView, passwordView;
     private UserRepository userRepository;
-
     private RideRepository rideRepository;
 
     /**
-     *
-     * method to display the page and get the reference of the textView
-     * we also create the onClickListener on the register button
+     * Method to display the page and get the reference of the textView
+     * We also create the onClickListener on the register button
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +39,6 @@ public class Login extends AppCompatActivity {
         // Add the login button with listener
         Button logInButton = findViewById(R.id.button_login);
         logInButton.setOnClickListener(view -> attemptLogin());
-
 
         // Add the register button with listener
         Button registerButton = findViewById(R.id.button_register);
@@ -102,6 +97,9 @@ public class Login extends AppCompatActivity {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    /**
+     * Method used to initialise our 4 rides. Used only once at the implementation of firebase
+     */
     public void DataInitializer(){
         rideRepository = ((BaseApp) getApplication()).getRideRepository();
         RideEntity ride = new RideEntity("Walk in the forest around the village ", 25.2, 4.8, 4, "Liddes", "45.981136/7.189659/45.972979/7.202241/45.973308/7.207658/45.987731/7.189178", "11:00/14:15", 32.50, "@drawable/paysage2");
@@ -153,6 +151,5 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
 
 }

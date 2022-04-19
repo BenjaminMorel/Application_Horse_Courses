@@ -3,18 +3,13 @@ package com.example.Horse_App.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.ToggleButton;
-
 import com.example.Horse_App.BaseApp;
 import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
@@ -104,6 +99,7 @@ public class EditAccount extends AppCompatActivity {
         }
 
         if (password.isEmpty() && !confirmPassword.isEmpty()) {
+            newPassword = oldPassword;
             cancel = true;
             edPassword.setError(getString(R.string.field_required));
         }
@@ -112,19 +108,15 @@ public class EditAccount extends AppCompatActivity {
             edConfirmPassword.setError(getString(R.string.field_required));
         }
 
-        if(!confirmPassword.equals(password)){
+        if (!confirmPassword.equals(password)){
             cancel = true;
             edPassword.setError(getString(R.string.no_matching_pwd));
             edConfirmPassword.setError(getString(R.string.no_matching_pwd));
         }
 
-        if(password.isEmpty() && confirmPassword.isEmpty()){
-            newPassword = oldPassword;
-
-        } else {
+        else {
             newPassword = password;
         }
-
 
         if (!cancel) {
             String finalNewPassword = newPassword;
@@ -146,8 +138,5 @@ public class EditAccount extends AppCompatActivity {
                     startActivity(intent);
             });
         }
-
-
-
     }
 }
