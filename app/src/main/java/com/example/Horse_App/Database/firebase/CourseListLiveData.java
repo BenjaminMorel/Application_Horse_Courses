@@ -14,7 +14,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CourseListLiveData extends LiveData<List<CourseEntity>> {
 
     private static final String TAG = "CourseListLiveData";
@@ -49,12 +48,12 @@ public class CourseListLiveData extends LiveData<List<CourseEntity>> {
     }
 
     private List<CourseEntity> toCourseList(DataSnapshot snapshot) {
-        List<CourseEntity> cours = new ArrayList<>();
+        List<CourseEntity> courses = new ArrayList<>();
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             CourseEntity entity = childSnapshot.getValue(CourseEntity.class);
             entity.setCourseID(childSnapshot.getKey());
-            cours.add(entity);
+            courses.add(entity);
         }
-        return cours;
+        return courses;
     }
 }

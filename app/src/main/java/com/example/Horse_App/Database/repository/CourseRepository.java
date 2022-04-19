@@ -1,14 +1,10 @@
 package com.example.Horse_App.Database.repository;
 
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
-
 import com.example.Horse_App.Database.Entity.CourseEntity;
-import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.firebase.CourseListLiveData;
-import com.example.Horse_App.Database.firebase.CourseLiveData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -17,7 +13,6 @@ import java.util.List;
 
 public class CourseRepository {
 
-    private static final String TAG = "CourseRepository";
     private static CourseRepository instance;
 
     private CourseRepository() {
@@ -35,28 +30,21 @@ public class CourseRepository {
         return instance;
     }
 
-    public CourseListLiveData getAllCourses() {
-        DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("courses");
-        return new CourseListLiveData(reference);
-    }
-
     public LiveData<List<CourseEntity>> getCoursesByUserId(final String userId) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("courses")
-                .child(userId);
+                .child(userId)
+                .orderByChild("date").getRef();
         return new CourseListLiveData(reference);
     }
 
     public void insert(final CourseEntity course, final OnAsyncEventListener callback) {
-
-        String id = FirebaseDatabase.getInstance()
-                .getReference("courses").push().getKey();
+        String id = FirebaseDatabase.getInstance().getReference("courses").push().getKey();
         FirebaseDatabase.getInstance()
                 .getReference("courses")
                 .child(FirebaseAuth.getInstance().getUid())
                 .child(id)
-                .setValue(course, (databaseError, databaseReference) -> {
+                .setValue(course.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                     } else {
@@ -78,5 +66,4 @@ public class CourseRepository {
                     }
                 });
     }
-
 }

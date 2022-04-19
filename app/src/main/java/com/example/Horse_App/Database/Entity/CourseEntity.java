@@ -20,6 +20,7 @@ public class CourseEntity {
     public CourseEntity() {
     }
 
+    @Exclude
     public String getCourseID() {
         return courseID;
     }
@@ -36,6 +37,7 @@ public class CourseEntity {
         this.rideID = rideID;
     }
 
+    @Exclude
     public String getUserID() {
         return userID;
     }
@@ -55,7 +57,6 @@ public class CourseEntity {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("userID", userID);
         result.put("rideID", rideID);
         result.put("date", date);
         return result;

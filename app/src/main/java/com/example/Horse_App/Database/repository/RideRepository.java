@@ -1,23 +1,19 @@
 package com.example.Horse_App.Database.repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
-
 import com.example.Horse_App.Database.Entity.RideEntity;
-import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
 import com.example.Horse_App.Database.firebase.RideListLiveData;
 import com.example.Horse_App.Database.firebase.RideLiveData;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.Query;
+import com.google.firestore.admin.v1.Index;
 
 import java.util.List;
 
 public class RideRepository {
 
-    private static final String TAG = "RideRepository";
     private static RideRepository instance;
 
     private RideRepository() {
@@ -48,13 +44,11 @@ public class RideRepository {
     }
 
     public void insertRide(final RideEntity ride, final OnAsyncEventListener callback) {
-
-        String id = FirebaseDatabase.getInstance()
-                .getReference("rides").push().getKey();
+        String id = FirebaseDatabase.getInstance().getReference("rides").push().getKey();
         FirebaseDatabase.getInstance()
                 .getReference("rides")
                 .child(id)
-                .setValue(ride, (databaseError, databaseReference) -> {
+                .setValue(ride.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
                     } else {

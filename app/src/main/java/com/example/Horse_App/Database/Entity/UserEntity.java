@@ -39,12 +39,11 @@ public class UserEntity implements Comparable {
         this.userID = userID;
     }
 
-    @Exclude
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NonNull String email) {
         this.email = email;
     }
 

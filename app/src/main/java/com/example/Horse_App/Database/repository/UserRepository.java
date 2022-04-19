@@ -1,12 +1,9 @@
 package com.example.Horse_App.Database.repository;
 
 import android.util.Log;
-
 import androidx.lifecycle.LiveData;
-
 import com.example.Horse_App.Database.Entity.UserEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
-import com.example.Horse_App.Database.firebase.UserListLiveData;
 import com.example.Horse_App.Database.firebase.UserLiveData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
@@ -33,23 +30,10 @@ public class UserRepository {
         return instance;
     }
 
-    public UserListLiveData getAllUsers() {
-        DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("users");
-        return new UserListLiveData(reference);
-    }
-
     public LiveData<UserEntity> getUserByID(final String userID) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
                 .getReference("users")
                 .child(userID);
-        return new UserLiveData(reference);
-    }
-
-    public LiveData<UserEntity> getUserByEmail(final String email) {
-        DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("users")
-                .child(email);
         return new UserLiveData(reference);
     }
 
@@ -112,5 +96,4 @@ public class UserRepository {
                         e -> Log.d(TAG, "updatePassword failure!", e)
                 );
     }
-
 }
