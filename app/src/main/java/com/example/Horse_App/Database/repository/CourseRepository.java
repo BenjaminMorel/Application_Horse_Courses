@@ -1,14 +1,13 @@
 package com.example.Horse_App.Database.repository;
 
-import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-
-import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.Course;
+import com.example.Horse_App.Database.Entity.CourseEntity;
 import com.example.Horse_App.Database.Util.OnAsyncEventListener;
-import com.example.Horse_App.Database.async.Course.CreateCourse;
-
+import com.example.Horse_App.Database.firebase.CourseListLiveData;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 public class CourseRepository {
@@ -30,21 +29,40 @@ public class CourseRepository {
         return instance;
     }
 
-    public LiveData<List<Course>> getAllCourses(Application application) {
-        return ((BaseApp) application).getDatabase().courseDao().getAllCourses();
+    public LiveData<List<CourseEntity>> getCoursesByUserId(final String userId) {
+        DatabaseReference reference = FirebaseDatabase.getInstance()
+                .getReference("courses")
+                .child(userId)
+                .orderByChild("date").getRef();
+        return new CourseListLiveData(reference);
     }
 
-    public List<Course> getCoursesByUser(Application application, int id) {
-        return ((BaseApp) application).getDatabase().courseDao().getAllCoursesByUser(id);
+    public void insert(final CourseEntity course, final OnAsyncEventListener callback) {
+        String id = FirebaseDatabase.getInstance().getReference("courses").push().getKey();
+        FirebaseDatabase.getInstance()
+                .getReference("courses")
+                .child(FirebaseAuth.getInstance().getUid())
+                .child(id)
+                .setValue(course.toMap(), (databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
 
-    public void insert(final Course course, OnAsyncEventListener callback,
-                       Application application) {
-        new CreateCourse(application, callback).execute(course);
+    public void delete(final String courseID, OnAsyncEventListener callback) {
+        FirebaseDatabase.getInstance()
+                .getReference("courses")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(courseID)
+                .removeValue((databaseError, databaseReference) -> {
+                    if (databaseError != null) {
+                        callback.onFailure(databaseError.toException());
+                    } else {
+                        callback.onSuccess();
+                    }
+                });
     }
-
-    public void deleteByID(Application application, int id) {
-        ((BaseApp) application).getDatabase().courseDao().deleteByID(id);
-    }
-
 }

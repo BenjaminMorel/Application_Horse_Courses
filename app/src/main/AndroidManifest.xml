@@ -13,7 +13,7 @@
         android:theme="@style/Theme.LightTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activities.Login"
+            android:name=".activities.MainPage"
             android:exported="false" />
         <activity
             android:name=".activities.About"
@@ -23,33 +23,29 @@
         <activity
             android:name=".activities.DisplayAllCourses"
             android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
-
         <activity
             android:name=".activities.CreateNewCourse"
             android:exported="false" />
         <activity
-            android:name=".activities.MainPage"
+            android:name=".activities.Login"
             android:exported="false" />
         <activity
             android:name=".activities.Register"
             android:exported="false" />
         <activity
             android:name=".activities.EditAccount"
-            android:label="Edit your account"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Edit your account" />
         <activity
             android:name=".activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

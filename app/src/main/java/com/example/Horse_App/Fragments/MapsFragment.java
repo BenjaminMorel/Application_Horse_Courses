@@ -1,12 +1,9 @@
 package com.example.Horse_App.Fragments;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -14,16 +11,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback {
 
-    private View fragmentView;
     private GoogleMap mMap;
     private final String positions;
-    private String newPoints;
     private String[] pointLocation;
 
     public MapsFragment(String positions) {

@@ -7,23 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.Horse_App.BaseApp;
-import com.example.Horse_App.Database.Entity.Course;
-import com.example.Horse_App.Database.Entity.Ride;
-import com.example.Horse_App.Database.repository.CourseRepository;
+import com.example.Horse_App.Database.Entity.CourseEntity;
+import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.Database.repository.RideRepository;
 import com.example.Horse_App.R;
 import com.example.Horse_App.activities.DisplayAllCourses;
-import com.google.android.gms.common.api.internal.StatusExceptionMapper;
-
-import org.w3c.dom.Text;
-
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,8 +41,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
     // List of courses and rides that will be used to display informations
 
-    private final List<Course> courses;
-    private final List<Ride> rides;
+    private final List<CourseEntity> courses;
+    private final List<RideEntity> rides;
 
     // reference to the activity to be able to access the delete methode
     public DisplayAllCourses displayAllCourses;
@@ -60,7 +50,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     public RideRepository rideRepository;
 
     // Pass in the contact array into the constructor
-    public CourseAdapter(List<Course> courses, List<Ride> rides) {
+    public CourseAdapter(List<CourseEntity> courses, List<RideEntity> rides) {
         this.courses = courses;
         this.rides = rides;
     }
@@ -79,7 +69,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
 
     /**
-     *
      * For each row we will set the text accordingly with the database and we calcutate if
      * the cancel button should by display or not ( if the course is in less than 7 day it will
      * be disable), if it's enable we create an OnClickListener link to the deleteCourse on the display page
@@ -88,20 +77,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull CourseAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        Course course = courses.get(position);
-        Ride ride = new Ride();
-        for (Ride r : rides) {
-            if (course.rideID == r.rideID) {
+        CourseEntity course = courses.get(position);
+        RideEntity ride = new RideEntity();
+        for (RideEntity r : rides) {
+            if (course.getRideID() == r.getRideID()) {
                 ride = r;
             }
         }
-        holder.course_location.setText(ride.location);
-        holder.course_date.setText(course.date);
+        holder.course_location.setText(ride.getLocation());
+        holder.course_date.setText(course.getDate());
 
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DAY_OF_MONTH, 7);
-            Date courseDate =new SimpleDateFormat("dd/MM/yyyy").parse(course.date);
+            Date courseDate =new SimpleDateFormat("dd/MM/yyyy").parse(course.getDate());
             if(courseDate.compareTo(calendar.getTime()) < 1){
 
                 holder.cancelButton.setVisibility(View.INVISIBLE);
@@ -114,7 +103,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                displayAllCourses.deleteCourse(course.courseID);
+                displayAllCourses.deleteCourse(course.getCourseID());
             }
         });
     }

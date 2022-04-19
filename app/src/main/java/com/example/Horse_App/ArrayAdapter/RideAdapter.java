@@ -2,19 +2,13 @@ package com.example.Horse_App.ArrayAdapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-
+import android.view.*;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.Horse_App.Database.Entity.Ride;
+import com.example.Horse_App.Database.Entity.RideEntity;
 import com.example.Horse_App.R;
 import com.example.Horse_App.activities.MainPage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,9 +43,9 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder> {
     }
 
     private MainPage mainPage;
-    private List<Ride> rides;
+    private List<RideEntity> rides;
 
-    public RideAdapter(List<Ride> rides) {
+    public RideAdapter(List<RideEntity> rides) {
         this.rides = rides;
     }
 
@@ -69,16 +63,16 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RideAdapter.ViewHolder holder, int position) {
-        Ride ride = rides.get(position);
+        RideEntity ride = rides.get(position);
 
         holder.row_view.setBackground(holder.allPictures.get(position));
-        holder.ride_location.setText(ride.location);
-        holder.textRide_Description.setText(ride.description);
-        holder.ride_specification.setText("Difficulty :    " + ride.difficulty + "/5" + "     " + "Length :    " + ride.length + " km" + "\nDuration :    " + ride.duration + " h.");
+        holder.ride_location.setText(ride.getLocation());
+        holder.textRide_Description.setText(ride.getDescription());
+        holder.ride_specification.setText("Difficulty :    " + ride.getDifficulty() + "/5" + "     " + "Length :    " + ride.getLength() + " km" + "\nDuration :    " + ride.getDuration() + " h.");
         holder.buttonSelectCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainPage.generateCreateCoursePage(ride.rideID);
+                mainPage.generateCreateCoursePage(ride.getRideID());
             }
         });
     }

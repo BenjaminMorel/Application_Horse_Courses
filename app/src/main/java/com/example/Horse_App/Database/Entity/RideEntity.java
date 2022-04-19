@@ -1,44 +1,24 @@
 package com.example.Horse_App.Database.Entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import com.google.firebase.database.Exclude;
 
-@Entity(tableName = "ride")
-public class Ride {
+import java.util.HashMap;
+import java.util.Map;
 
-    @PrimaryKey(autoGenerate = true)
-    public int rideID;
+public class RideEntity {
 
-    @ColumnInfo(name = "description")
-    public String description;
+    private String rideID;
+    private String description;
+    private double length;
+    private double duration;
+    private int difficulty;
+    private String location;
+    private String positions;
+    private String time;
+    private double price;
+    private String picturePath;
 
-    @ColumnInfo(name = "length")
-    public double length;
-
-    @ColumnInfo(name = "duration")
-    public double duration;
-
-    @ColumnInfo(name = "difficulty")
-    public int difficulty;
-
-    @ColumnInfo(name = "location")
-    public String location;
-
-    @ColumnInfo(name = "positions")
-    public String positions;
-
-    @ColumnInfo(name = "time")
-    public String time;
-
-    @ColumnInfo(name = "price")
-    public double price;
-
-    @ColumnInfo(name = "picturePath")
-    public String picturePath;
-
-
-    public Ride(String description, double length, double duration, int difficulty, String location, String positions, String time, double price,String picturePath) {
+    public RideEntity(String description, double length, double duration, int difficulty, String location, String positions, String time, double price, String picturePath) {
         this.description = description;
         this.length = length;
         this.duration = duration;
@@ -50,15 +30,14 @@ public class Ride {
         this.picturePath = picturePath;
     }
 
-    public Ride()   {
-
+    public RideEntity() {
     }
 
-    public int getRideID() {
+    public String getRideID() {
         return rideID;
     }
 
-    public void setRideID(int rideID) {
+    public void setRideID(String rideID) {
         this.rideID = rideID;
     }
 
@@ -132,5 +111,20 @@ public class Ride {
 
     public void setPicturePath(String picturePath) {
         this.picturePath = picturePath;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("description", description);
+        result.put("length", length);
+        result.put("duration", duration);
+        result.put("difficulty", difficulty);
+        result.put("location", location);
+        result.put("positions", positions);
+        result.put("time", time);
+        result.put("price", price);
+        result.put("picturePath", picturePath);
+        return result;
     }
 }

@@ -2,9 +2,7 @@ package com.example.Horse_App.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
-
 import com.example.Horse_App.R;
 
 /**

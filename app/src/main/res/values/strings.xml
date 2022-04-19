@@ -3,17 +3,17 @@
     <!-- Strings related to the app -->
     <string name="app_name">Horse Courses</string>
     <string name="app_title">Horse Courses</string>
-    <string name="info_course">Info course</string>
+    <string name="info_course">Info courseEntity</string>
     <string name="developed">App developed by Benjamin and Hugo</string>
 
     <!-- menu -->
     <string name="edit_profile">Edit profile</string>
     <string name="disconnect">Disconnect</string>
-    <string name="my_courses">My courses</string>
+    <string name="my_courses">My course</string>
     <string name="about">About</string>
 
     <!-- Strings related to input text -->
-    <string name="error_login_message">Wrong credentials</string>
+    <string name="wrong_credentials">Wrong credentials</string>
     <string name="no_matching_pwd">Password must be the same</string>
     <string name="field_required">This field is required</string>
 
@@ -39,6 +39,7 @@
     <string name="action_edit">Edit</string>
     <string name="action_delete">Delete</string>
     <string name="action_cancel">Cancel</string>
+    <string name="action_logout">Logout</string>
     <string name="confirm_new_course">Confirm course reservation</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="disable_darkMode">Disable Dark Mode</string>
